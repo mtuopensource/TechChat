@@ -1,2 +1,2 @@
 # TechChat
-Anonymous Chat App
+Anonymous Chat App.
