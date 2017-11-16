@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-
+from rest_framework_mongoengine import viewsets
 from .models import Board
+from .serializers import BoardSerializer
 
-def index(request):
-    board_list = Board.objects.order_by('-title')[:5]
-    output = ', '.join([b.title for b in board_list])
-    return HttpResponse(output)
+class BoardViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    serializer_class = BoardSerializer
+    
+    def get_queryset(self):
+        return Board.objects.all()

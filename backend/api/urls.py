@@ -1,7 +1,13 @@
 from django.conf.urls import url, include
-from . import views
+from rest_framework import routers
+from .views import BoardViewSet
+
+# DRF router for REST API viewsets
+router = routers.DefaultRouter()
+
+# Register endpoints with DRF router
+router.register(r'board', BoardViewSet, r"board")
 
 urlpatterns = [
-    # ex: /boards/
-    url(r'^$', views.index, name='index'),
+    url(r'^', include(router.urls, namespace='api')),
 ]

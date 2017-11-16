@@ -1,6 +1,5 @@
-from django.db import models
-import mongoengine # this is to make sure you have mongo engine
+from mongoengine import Document, EmbeddedDocument, fields
 
-class Board(models.Model):
-    title = models.CharField(max_length=32)
-    description = models.CharField(max_length=128)
+class Board(Document):
+    title = fields.StringField(max_length=32, required=True)
+    description = fields.StringField(max_length=128, required=True, null=True)
