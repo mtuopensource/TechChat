@@ -1,3 +1,7 @@
 __pycache__/
 
-tech_chat_api/.idea
+backend/tech_chat_api/.idea/
+
+backend/.idea/
+
+backend/tech_chat_api/db.sqlite3
