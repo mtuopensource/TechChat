@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread
 from .serializers import BoardSerializer, ThreadSerializer
+from .permissions import IsAdminOrReadOnly
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = BoardSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAdminOrReadOnly,)
     # Set of all Boards
     def get_queryset(self):
         return Board.objects.all()
