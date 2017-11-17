@@ -11,5 +11,5 @@ router.register(r'threads', ThreadViewSet, r"thread")
 
 urlpatterns = [
     url(r'^', include(router.urls, namespace='api')),
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('rest_framework.urls', namespace='rest_framework')), # Login/Logout URLs
 ]
