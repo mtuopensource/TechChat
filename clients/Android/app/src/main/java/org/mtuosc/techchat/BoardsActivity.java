@@ -16,13 +16,13 @@ import android.view.MenuItem;
 /**
  * This class will handle the boards view. The nav bar will contain some quick settings
  */
-public class Main2Activity extends AppCompatActivity
+public class BoardsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.board_activity_base);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

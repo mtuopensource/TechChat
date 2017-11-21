@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.mtuosc.techchat.BoardsActivity"
-    tools:showIn="@layout/app_bar_main2">
+    tools:showIn="@layout/board_activity_main">
 
 </android.support.constraint.ConstraintLayout>

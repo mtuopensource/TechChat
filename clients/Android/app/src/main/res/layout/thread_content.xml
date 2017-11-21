@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="org.mtuosc.techchat.ThreadsActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/thread_activity_main">
 
     <TextView
         android:layout_width="wrap_content"

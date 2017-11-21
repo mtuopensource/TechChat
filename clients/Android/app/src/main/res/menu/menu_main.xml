@@ -1,10 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.mtuosc.techchat.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    tools:context="org.mtuosc.techchat.ThreadsActivity">
+
+    <item android:title="Sort"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_sort_white_24dp">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:title="Recent"
+                    android:id="@+id/menu_sort_recent"/>
+                <item android:title="Oldest"
+                    android:id="@+id/menu_sort_oldest"/>
+                <item android:title="Trending"
+                    android:id="@+id/menu_sort_trending"/>
+            </group>
+        </menu>
+    </item>
 </menu>
