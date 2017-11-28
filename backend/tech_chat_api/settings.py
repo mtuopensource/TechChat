@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import mongoengine
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'rest_framework',
-	'api',
+    'rest_framework',
+    'rest_framework_mongoengine',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -71,10 +73,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tech_chat_api.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -82,6 +82,9 @@ DATABASES = {
     }
 }
 
+# Setup MongoEngine
+# TODO: Add an environment variable for host, so the ip is not public.
+mongoengine.connect(db="techchat", host="localhost")
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

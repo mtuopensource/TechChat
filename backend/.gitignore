@@ -1,0 +1,6 @@
+# Django creates these for superusers.
+*.sqlite3
+
+# Temporary directories
+__pycache__/
+.idea/
