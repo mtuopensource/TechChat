@@ -1,7 +1,7 @@
 from mongoengine import Document, EmbeddedDocument, fields
 from mongoengine.queryset.base import DO_NOTHING
 
-#http://docs.mongoengine.org/guide/defining-documents.html
+# http://docs.mongoengine.org/guide/defining-documents.html
 
 class Board(Document):
     title = fields.StringField(max_length=32, required=True)
