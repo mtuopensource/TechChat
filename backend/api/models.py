@@ -10,3 +10,9 @@ class Board(Document):
 class Thread(Document):
     board = fields.LazyReferenceField(Board)
     content = fields.StringField(max_length=512, required=True)
+
+class User(Document):
+    email = fields.EmailField(domain_whitelist = "mtu.edu", required = True)
+    password = fields.StringField(required = True)
+    #salt = fields.StringField(required = True)
+    #hidden = fields.BooleanField(required = True, default = False)

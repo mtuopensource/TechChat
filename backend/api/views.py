@@ -4,7 +4,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread
-from .serializers import BoardSerializer, ThreadSerializer
+from .serializers import BoardSerializer, ThreadSerializer, UserSerializer
 from .permissions import IsAdminOrReadOnly
 
 class BoardViewSet(viewsets.ModelViewSet):
@@ -37,3 +37,11 @@ class ThreadViewSet(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView,
         content = {'detail': 'Method "GET" not allowed.'}
         code = status.HTTP_405_METHOD_NOT_ALLOWED
         return Response(content, status=code)
+
+class UserViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    # Set of all Boards
+    def get_queryset(self):
+        return User.objects.all()
