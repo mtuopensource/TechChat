@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-from .views import BoardViewSet, ThreadViewSet
+from .views import BoardViewSet, ThreadViewSet, UserViewSet
 
 # DRF router for REST API viewsets
 router = routers.DefaultRouter()
@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 # Register endpoints with DRF router
 router.register(r'boards', BoardViewSet, r"board")
 router.register(r'threads', ThreadViewSet, r"thread")
+router.register(r'Users', UserViewSet, r"User")
 
 urlpatterns = [
     url(r'^', include(router.urls, namespace='api')),
