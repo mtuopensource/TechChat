@@ -1,4 +1,4 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.mtuosc.techchat.R;
 
 public class ThreadsActivity extends AppCompatActivity {
 
