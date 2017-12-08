@@ -1,13 +1,20 @@
 # Contributing To Tech Chat
 
 ## How to start contributing.
- To start contributing, fork this project. You can fork this project by clicking the fork button at the top right of this web page.
+ ### There are **two** ways to start contributing.
+  #### 1. fork this project. 
+ You can fork this project by clicking the fork button at the top right of this web page.
  
-  ### After Forking the Repo, type in these commands to clone the code
+  #### After Forking the Repo, type in these commands to clone the code
  
 ```` 
   git clone https://github.com/@YOUR USER NAME/TechChat.git  
 ````
+---
+
+ #### 2. Make a new Branch
+  Take a look at the current issues on this github repo. Make a branch to complete/solve that issue.
+  Then make a merge request into master
  
  ## Some simple rules when contributing.
  * Always make pull requests to master, not to branches marked as stable
