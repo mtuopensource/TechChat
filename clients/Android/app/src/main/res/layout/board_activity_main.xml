@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.mtuosc.techchat.Main2Activity">
+    tools:context="org.mtuosc.techchat.activity.BoardsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main2" />
+    <include
+        layout="@layout/boards_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
