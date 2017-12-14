@@ -18,14 +18,13 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Styles for the text input layouts-->
-    <style name="LoginTextLabel" parent="@android:style/TextAppearance">
-        <item name="android:colorControlNormal">@android:color/white</item>
+    <style name="LoginTextLabel" parent="Theme.Design.Light">
+        <item name="android:colorControlNormal">@color/colorAccent</item>
         <item name="android:colorControlActivated">@color/colorAccent</item>
-        <item name="android:colorAccent">@android:color/white</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColorHighlight">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textColorHighlight">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
     <style name="SignUpSignInButtons" parent="Base.Widget.AppCompat.Button">
@@ -36,5 +35,10 @@
         <item name ="android:layout_marginTop">16dp</item>
         <item name="android:layout_gravity">center</item>
 
+    </style>
+
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>
