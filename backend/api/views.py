@@ -14,7 +14,7 @@ class BoardViewSet(viewsets.ModelViewSet):
     # Set of all Boards
     def get_queryset(self):
         return Board.objects.all()
-        
+
     # List of Threads related to the specified Board.
     @detail_route(methods=['get'], suffix='Threads')
     def threads(self, request, id=None):
@@ -41,11 +41,17 @@ class ThreadViewSet(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView,
 class UserViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = UserSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
 
     # Set of all Boards
     def get_queryset(self):
         return User.objects.all()
+
+    # Disable list of all Users for security reasons.
+    def list(self, request):
+        content = {'detail': 'Method "GET" not allowed.'}
+        code = status.HTTP_405_METHOD_NOT_ALLOWED
+        return Response(content, status=code)
 
     @list_route(methods=['get', 'post'], permission_classes = ())
     def login(self, request):
