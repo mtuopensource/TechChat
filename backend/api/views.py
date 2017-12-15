@@ -1,5 +1,5 @@
 from rest_framework import status, permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread, User, Post, Participant
@@ -41,9 +41,46 @@ class UserViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = UserSerializer
     permission_classes = (IsAdminOrReadOnly,)
+
     # Set of all Boards
     def get_queryset(self):
         return User.objects.all()
+        
+    @list_route(methods=['get', 'post'], permission_classes = ())
+    def login(self, request):
+        username = None
+        password = None
+
+        # Location of the username and password depends on the method
+        if request.method == 'GET':
+            if 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
+                username = request.GET['email']
+                password = request.GET['password']
+            else:
+                content = {'detail': 'Insufficient information'} # TODO Constant Response
+                code = status.HTTP_400_BAD_REQUEST
+                return Response(content, status=code)
+        elif request.method == 'POST':
+            if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
+                username = request.POST['email']
+                password = request.POST['password']
+            else:
+                content = {'detail': 'Insufficient information'} # TODO Constant Response
+                code = status.HTTP_400_BAD_REQUEST
+                return Response(content, status=code)
+
+        queryset = User.objects.filter(email=username).filter(password=password) # Set of User objects with the given email and password
+        serializer = UserSerializer(queryset, context={'request': request}, many=True)
+
+        # Does not exist
+        if not serializer.data:
+            content = {'detail': 'The credentials you provided cannot be determined to be authentic.'} # TODO Constant Response
+            code = status.HTTP_401_UNAUTHORIZED
+            return Response(content, status=code)
+        else:
+            content = {'detail': 'Success'} # TODO Constant Response
+            code = status.HTTP_200_OK
+            return Response(content, status=code)
 
 class PostViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
