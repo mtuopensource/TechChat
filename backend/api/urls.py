@@ -8,9 +8,9 @@ router = routers.DefaultRouter()
 # Register endpoints with DRF router
 router.register(r'boards', BoardViewSet, r"board")
 router.register(r'threads', ThreadViewSet, r"thread")
-router.register(r'Users', UserViewSet, r"User")
-router.register(r'Posts', PostViewSet, r"Post")
-router.register(r'Participants', ParticipantViewSet, r"Participant")
+router.register(r'users', UserViewSet, r"user")
+router.register(r'posts', PostViewSet, r"post")
+router.register(r'participants', ParticipantViewSet, r"participant")
 
 urlpatterns = [
     url(r'^', include(router.urls, namespace='api')),
