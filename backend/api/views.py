@@ -1,10 +1,9 @@
-from django.contrib.auth.models import User
 from rest_framework import status, permissions
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
-from .models import Board, Thread
-from .serializers import BoardSerializer, ThreadSerializer, UserSerializer
+from .models import Board, Thread, User, Post, Participant
+from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
 from .permissions import IsAdminOrReadOnly
 
 class BoardViewSet(viewsets.ModelViewSet):
@@ -45,3 +44,19 @@ class UserViewSet(viewsets.ModelViewSet):
     # Set of all Boards
     def get_queryset(self):
         return User.objects.all()
+
+class PostViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    serializer_class = PostSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    # Set of all Boards
+    def get_queryset(self):
+        return Post.objects.all()
+
+class ParticipantViewSet(viewsets.ModelViewSet):
+    lookup_field = 'id'
+    serializer_class = ParticipantSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    #Set of all Boards
+    def get_queryset(self):
+        return Participant.objects.all()

@@ -1,8 +1,13 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,24 +18,36 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.HttpGet;
+
+import org.mtuosc.techchat.ApiUrl;
+import org.mtuosc.techchat.R;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import cz.msebera.android.httpclient.Header;
+
+
+/**
+ * This class will handle the boards view. The nav bar will contain some quick settings
+ */
+public class BoardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private RecyclerView boardRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.board_activity_base);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +57,28 @@ public class Main2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // this gets data from the backend
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setBasicAuth("demo", "1234abcd");
+        client.get("http://141.219.197.116:8000/"+ ApiUrl.GET_BOARDS.getName(), null, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String json = new String(responseBody); // This is the json.
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("API", "" + statusCode);
+            }
+        });
+
+
+        boardRecyclerView = findViewById(R.id.board_list);
+        boardRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager boardLayoutManager = new LinearLayoutManager(this);
+        boardRecyclerView.setLayoutManager(boardLayoutManager);
+
     }
 
     @Override
@@ -98,4 +137,6 @@ public class Main2Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
