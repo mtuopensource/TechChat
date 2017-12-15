@@ -5,6 +5,7 @@ from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread, User, Post, Participant
 from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
 from .permissions import IsAdminOrReadOnly
+from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -13,7 +14,7 @@ class BoardViewSet(viewsets.ModelViewSet):
     # Set of all Boards
     def get_queryset(self):
         return Board.objects.all()
-
+        
     # List of Threads related to the specified Board.
     @detail_route(methods=['get'], suffix='Threads')
     def threads(self, request, id=None):
@@ -45,7 +46,7 @@ class UserViewSet(viewsets.ModelViewSet):
     # Set of all Boards
     def get_queryset(self):
         return User.objects.all()
-        
+
     @list_route(methods=['get', 'post'], permission_classes = ())
     def login(self, request):
         username = None
@@ -57,30 +58,22 @@ class UserViewSet(viewsets.ModelViewSet):
                 username = request.GET['email']
                 password = request.GET['password']
             else:
-                content = {'detail': 'Insufficient information'} # TODO Constant Response
-                code = status.HTTP_400_BAD_REQUEST
-                return Response(content, status=code)
+                return INSUFFICIENT_INFORMATION.as_response()
         elif request.method == 'POST':
             if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
                 username = request.POST['email']
                 password = request.POST['password']
             else:
-                content = {'detail': 'Insufficient information'} # TODO Constant Response
-                code = status.HTTP_400_BAD_REQUEST
-                return Response(content, status=code)
+                return INSUFFICIENT_INFORMATION.as_response()
 
         queryset = User.objects.filter(email=username).filter(password=password) # Set of User objects with the given email and password
         serializer = UserSerializer(queryset, context={'request': request}, many=True)
 
         # Does not exist
         if not serializer.data:
-            content = {'detail': 'The credentials you provided cannot be determined to be authentic.'} # TODO Constant Response
-            code = status.HTTP_401_UNAUTHORIZED
-            return Response(content, status=code)
+            return INVALID_CREDENTIALS.as_response()
         else:
-            content = {'detail': 'Success'} # TODO Constant Response
-            code = status.HTTP_200_OK
-            return Response(content, status=code)
+            return SUCCESS.as_response()
 
 class PostViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
