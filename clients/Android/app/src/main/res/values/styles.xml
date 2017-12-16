@@ -41,4 +41,8 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="LoginProgressCircle" parent="Theme.Design.Light">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
 </resources>

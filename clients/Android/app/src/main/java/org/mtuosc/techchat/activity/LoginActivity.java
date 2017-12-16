@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,17 +33,20 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout emailTextWrapper;
     private TextInputLayout passwordTextWrapper;
     private ProgressBar loginProgress;
+    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_base);
+
 
         // check the shared preference for user data, auto login
 
         emailTextWrapper = findViewById(R.id.email_login_wrapper);
         passwordTextWrapper = findViewById(R.id.password_login_wrapper);
         loginProgress = findViewById(R.id.login_progress);
+        submitButton = findViewById(R.id.email_sign_in_button);
     }
 
     /**
@@ -63,11 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         // send the form to backend
         UserAuthenticator authenticator = new UserAuthenticator("141.219.197.116:8000");
         loginProgress.setVisibility(View.VISIBLE);
+        submitButton.setText("");
         if (authenticator.logUserIn(email, password)){
             // save data to the shared preference
 
         }
         loginProgress.setVisibility(View.INVISIBLE);
+        submitButton.setText(R.string.action_sign_in);
         Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
     }
 
