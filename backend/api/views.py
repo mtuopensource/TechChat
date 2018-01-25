@@ -1,10 +1,11 @@
 from rest_framework import status, permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread, User, Post, Participant
 from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
 from .permissions import IsAdminOrReadOnly
+from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -40,10 +41,45 @@ class ThreadViewSet(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView,
 class UserViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = UserSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
+
     # Set of all Boards
     def get_queryset(self):
         return User.objects.all()
+
+    # Disable list of all Users for security reasons.
+    def list(self, request):
+        content = {'detail': 'Method "GET" not allowed.'}
+        code = status.HTTP_405_METHOD_NOT_ALLOWED
+        return Response(content, status=code)
+
+    @list_route(methods=['get', 'post'], permission_classes = ())
+    def login(self, request):
+        username = None
+        password = None
+
+        # Location of the username and password depends on the method
+        if request.method == 'GET':
+            if 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
+                username = request.GET['email']
+                password = request.GET['password']
+            else:
+                return INSUFFICIENT_INFORMATION.as_response()
+        elif request.method == 'POST':
+            if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
+                username = request.POST['email']
+                password = request.POST['password']
+            else:
+                return INSUFFICIENT_INFORMATION.as_response()
+
+        queryset = User.objects.filter(email=username).filter(password=password) # Set of User objects with the given email and password
+        serializer = UserSerializer(queryset, context={'request': request}, many=True)
+
+        # Does not exist
+        if not serializer.data:
+            return INVALID_CREDENTIALS.as_response()
+        else:
+            return SUCCESS.as_response()
 
 class PostViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
