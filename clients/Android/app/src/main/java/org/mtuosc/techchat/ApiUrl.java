@@ -7,7 +7,8 @@ package org.mtuosc.techchat;
  */
 
 public enum ApiUrl {
-    GET_BOARDS("/api/boards");
+    GET_BOARDS("/api/boards"),
+    LOGIN("/api/Users/login");
 
     private String name;
     ApiUrl(String string) {

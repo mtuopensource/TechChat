@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.mtuosc.techchat.activity.LoginActivity">
+
+    <!-- TODO create a base xml that hold the progress-->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        android:theme="@style/LoginProgressCircle"
+        style="?android:progressBarStyleLarge"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="162dp"
+        android:translationZ="100dp"
+        android:visibility="gone" />
+
+    <include layout="@layout/activity_login" />
+</RelativeLayout>
