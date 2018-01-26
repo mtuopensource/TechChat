@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,16 +64,18 @@ public class LoginActivity extends AppCompatActivity {
             return; // don't submit the form
 
         // send the form to backend
-        UserAuthenticator authenticator = new UserAuthenticator("141.219.197.116:8000");
+        UserAuthenticator authenticator = new UserAuthenticator("http://141.219.197.116:8000", email, password);
         loginProgress.setVisibility(View.VISIBLE);
         submitButton.setText("");
-        if (authenticator.logUserIn(email, password)){
+        authenticator.startLogin();
+        if (authenticator.isAuthenticated()){
             // save data to the shared preference
-
+            Toast.makeText(this, "You're Logged in", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
         }
         loginProgress.setVisibility(View.INVISIBLE);
         submitButton.setText(R.string.action_sign_in);
-        Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
     }
 
     private boolean showedErrorsToUser(String email, String password){

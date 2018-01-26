@@ -19,9 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.HttpGet;
+
 
 import org.mtuosc.techchat.ApiUrl;
 import org.mtuosc.techchat.R;
@@ -31,7 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import cz.msebera.android.httpclient.Header;
+
 
 
 /**
@@ -59,19 +57,7 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         // this gets data from the backend
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setBasicAuth("demo", "1234abcd");
-        client.get("http://141.219.197.116:8000/"+ ApiUrl.GET_BOARDS.getName(), null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String json = new String(responseBody); // This is the json.
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("API", "" + statusCode);
-            }
-        });
 
 
         boardRecyclerView = findViewById(R.id.board_list);

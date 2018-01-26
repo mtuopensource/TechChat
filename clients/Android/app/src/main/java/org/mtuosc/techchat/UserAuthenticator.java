@@ -1,59 +1,62 @@
 package org.mtuosc.techchat;
 
+
 import android.os.AsyncTask;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.goebl.david.Response;
+import com.goebl.david.Webb;
 
 
-import java.util.HashMap;
 
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ryan on 12/15/17.
  */
 
-public class UserAuthenticator {
-    private String serverIp;
+public class UserAuthenticator extends Thread {
+    private String email, password;
     private boolean isAuthenticated = false;
+    private Webb webb = Webb.create();
 
-    public UserAuthenticator(String serverIp) {
-        this.serverIp = serverIp;
+
+    public UserAuthenticator(String serverIp, String email, String password) {
+        webb.setBaseUri(serverIp);
+        this.email = email;
+        this.password = password;
     }
 
-    public boolean logUserIn(String email, String password){
-        RequestParams loginParams = createRequestParams(email, password);
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://" + serverIp + ApiUrl.LOGIN.getName(), loginParams, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                setAuthenticated(true);
-            }
+    private boolean logUserIn(String email, String password){
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                if(statusCode == 401) // user enter invalid credentials
-                    setAuthenticated(false);
-            }
-        });
-        return isAuthenticated();
-    }
+       Response<String> response = webb.post(ApiUrl.LOGIN.getName()).param("email", email).param("password", password).
+               asString();
+       if (response.getStatusCode() == 200)
+           setAuthenticated(true);
+       else
+           setAuthenticated(false);
+       return isAuthenticated;
 
-    private RequestParams createRequestParams(String email, String password){
-        HashMap<String, String> paramData = new HashMap<>();
-        paramData.put("email", email);
-        paramData.put("password", password);
-        return  new RequestParams(paramData);
-    }
-
-    private boolean isAuthenticated() {
-        return isAuthenticated;
     }
 
     private void setAuthenticated(boolean authenticated) {
         isAuthenticated = authenticated;
     }
 
+    public boolean isAuthenticated(){
+        return isAuthenticated;
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        logUserIn(email, password);
+    }
+
+    public void startLogin(){
+        start();
+        try {
+            join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
