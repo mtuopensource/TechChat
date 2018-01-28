@@ -1,5 +1,6 @@
 package org.mtuosc.techchat.activity;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -53,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
      * @param view this should be the text view
      */
     public void moveToUserCreation(View view) {
-        // TODO implement the user creation usecase
-        Toast.makeText(this, "Moving to Create User", Toast.LENGTH_SHORT).show();
+        Intent userCreation = new Intent(this, CreateUserActivity.class);
+        startActivity(userCreation);
     }
 
     public void authenticateUser(View view) {
