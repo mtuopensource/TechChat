@@ -1,5 +1,8 @@
 package org.mtuosc.techchat.activity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -40,12 +43,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_base);
 
 
+
         // check the shared preference for user data, auto login
 
         emailTextWrapper = findViewById(R.id.email_login_wrapper);
         passwordTextWrapper = findViewById(R.id.password_login_wrapper);
         loginProgress = findViewById(R.id.login_progress);
         submitButton = findViewById(R.id.email_sign_in_button);
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
     /**
@@ -65,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // send the form to backend
         UserAuthenticator authenticator = new UserAuthenticator("http://141.219.197.116:8000", email, password);
+
         loginProgress.setVisibility(View.VISIBLE);
         submitButton.setText("");
+
         authenticator.startLogin();
         if (authenticator.isAuthenticated()){
             // save data to the shared preference
@@ -87,6 +98,10 @@ public class LoginActivity extends AppCompatActivity {
         if (isPasswordValid(password)){
             errorShown = true;
             passwordTextWrapper.setError("Not a Valid Password");
+        }
+        if (!isNetworkConnected()) {
+            Toast.makeText(this, "No Network", Toast.LENGTH_SHORT).show();
+            errorShown = true;
         }
         return errorShown;
     }
