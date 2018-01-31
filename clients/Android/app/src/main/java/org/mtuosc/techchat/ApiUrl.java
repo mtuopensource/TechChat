@@ -6,15 +6,9 @@ package org.mtuosc.techchat;
  * This will allow the whole application to easily change url patterns
  */
 
-public enum ApiUrl {
-    GET_BOARDS("/api/boards"),
-    LOGIN("/api/Users/login");
+public class ApiUrl {
+    public static final String GET_BOARDS = "/api/boards";
+    public static final String LOGIN = "/api/Users/login";
 
-    private String name;
-    ApiUrl(String string) {
-    }
-    public String getName(){
-        return name;
-    }
 
 }
