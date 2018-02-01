@@ -1,5 +1,6 @@
 from mongoengine import Document, EmbeddedDocument, fields
 from mongoengine.queryset.base import DO_NOTHING
+from django.utils.crypto import get_random_string
 
 # http://docs.mongoengine.org/guide/defining-documents.html
 
@@ -14,7 +15,7 @@ class Thread(Document):
 class User(Document):
     email = fields.EmailField(domain_whitelist = ("mtu.edu",), required = True)
     password = fields.StringField(required = True)
-    salt = fields.StringField(required = True)
+    salt = fields.StringField()
     hidden = fields.BooleanField(required = True, default = False)
 
 class Post(Document):
