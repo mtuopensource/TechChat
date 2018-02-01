@@ -72,7 +72,7 @@ class UserViewSet(viewsets.ModelViewSet):
             else:
                 return INSUFFICIENT_INFORMATION.as_response()
 
-        queryset = User.objects.filter(email=username).filter(password=password) # Set of User objects with the given email and password
+        queryset = User.login_manager.login(username, password) # Set of User objects with the given email and password
         serializer = UserSerializer(queryset, context={'request': request}, many=True)
 
         # Does not exist

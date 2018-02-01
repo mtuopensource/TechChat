@@ -1,6 +1,13 @@
+import bcrypt
 from mongoengine import Document, EmbeddedDocument, fields
 from mongoengine.queryset.base import DO_NOTHING
-from django.utils.crypto import get_random_string
+from django.db.models import Manager
+
+class LoginManager(Manager):
+    def login(self, email, password):
+        users = User.objects.all()
+        ids = [user.id for user in users if user.login(email, password)]
+        return users.filter(id__in=ids)
 
 # http://docs.mongoengine.org/guide/defining-documents.html
 
@@ -15,8 +22,13 @@ class Thread(Document):
 class User(Document):
     email = fields.EmailField(domain_whitelist = ("mtu.edu",), required = True)
     password = fields.StringField(required = True)
-    salt = fields.StringField()
     hidden = fields.BooleanField(required = True, default = False)
+
+    login_manager = LoginManager()
+    def login(self, email, password):
+        a =      password.encode('utf-8')
+        b = self.password.encode('utf-8')
+        return bcrypt.checkpw(a, b) and self.email == email
 
 class Post(Document):
     thread_id = fields.LazyReferenceField(Thread)
