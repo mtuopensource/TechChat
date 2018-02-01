@@ -5,7 +5,7 @@ from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread, User, Post, Participant
 from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
 from .permissions import IsAdminOrReadOnly
-from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
+from .response import INSUFFICIENT_INFORMATION
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -55,31 +55,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['get', 'post'], permission_classes = ())
     def login(self, request):
-        username = None
-        password = None
-
-        # Location of the username and password depends on the method
-        if request.method == 'GET':
-            if 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
-                username = request.GET['email']
-                password = request.GET['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
-        elif request.method == 'POST':
-            if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
-                username = request.POST['email']
-                password = request.POST['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
-
-        queryset = User.objects.filter(email=username).filter(password=password) # Set of User objects with the given email and password
-        serializer = UserSerializer(queryset, context={'request': request}, many=True)
-
-        # Does not exist
-        if not serializer.data:
-            return INVALID_CREDENTIALS.as_response()
-        else:
-            return SUCCESS.as_response()
+        return User.login_manager.login(request)
 
 class PostViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
