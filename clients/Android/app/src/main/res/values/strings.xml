@@ -18,4 +18,5 @@
         completions."
     </string>
     <string name="signup_message">Or Create a New Account and Join TechChat</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

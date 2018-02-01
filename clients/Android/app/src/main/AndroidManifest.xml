@@ -31,7 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CreateUserActivity"/>
+        <activity android:name=".activity.CreateUserActivity"
+            android:label="Sign Up"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
