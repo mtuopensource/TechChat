@@ -7,4 +7,4 @@ class Thread(Document):
     board = LazyReferenceField(Board, required=True)
     content = StringField(required=True, max_length=512)
     author = LazyReferenceField(User)
-    ip = StringField()
+    ip = StringField(max_length=39)
