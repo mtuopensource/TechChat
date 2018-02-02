@@ -7,3 +7,7 @@ class IsAdminOrReadOnly(BasePermission):
             return request.user and request.user.is_authenticated
         else:
             return request.user and request.user.is_staff
+
+class TechChatIsAuthenticated(BasePermission):
+    def has_permission(self, request, view):
+        return request.session.get('techchat_userid', False)

@@ -23,16 +23,14 @@ class LoginManager(Manager):
         if not credentials:
             return INSUFFICIENT_INFORMATION.as_response()
 
-        users = User.objects.all()
-        ids = [user.id for user in users if user.login(credentials.get('username'), credentials.get('password'))]
-        queryset = users.filter(id__in=ids) # Set of User objects with the given email and password
-        serializer = UserSerializer(queryset, context={'request': request}, many=True)
-
-        # Does not exist
-        if not serializer.data:
-            return INVALID_CREDENTIALS.as_response()
+        user = User.objects.get(email=credentials.get('username'))
+        if user.check_password(credentials.get('password')):
+            response = SUCCESS.as_response()
+            request.session['techchat_userid'] = str(user.id)
+            request.session.modified = True
+            return response
         else:
-            return SUCCESS.as_response()
+            return INVALID_CREDENTIALS.as_response()
 
 # http://docs.mongoengine.org/guide/defining-documents.html
 
@@ -45,15 +43,15 @@ class Thread(Document):
     content = fields.StringField(max_length=512, required=True)
 
 class User(Document):
-    email = fields.EmailField(domain_whitelist = ("mtu.edu",), required = True)
+    email = fields.EmailField(unique=True, required = True)
     password = fields.StringField(required = True)
     hidden = fields.BooleanField(required = True, default = False)
 
     login_manager = LoginManager()
-    def login(self, email, password):
+    def check_password(self, password):
         a =      password.encode('utf-8')
         b = self.password.encode('utf-8')
-        return bcrypt.checkpw(a, b) and self.email == email
+        return bcrypt.checkpw(a, b)
 
 class Post(Document):
     thread_id = fields.LazyReferenceField(Thread)
