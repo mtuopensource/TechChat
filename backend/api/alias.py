@@ -11,6 +11,6 @@ class Alias:
 
         adj = adjectives[random.randint(0, len(adjectives))]
         person = people[random.randint(0, len(people))]
-        rumber = str(random.randint(0, 1000))
+        number = str(random.randint(0, 1000))
 
         return  adj + person + number
