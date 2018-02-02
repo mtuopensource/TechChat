@@ -67,6 +67,12 @@ class UserViewSet(viewsets.ModelViewSet):
         code = status.HTTP_405_METHOD_NOT_ALLOWED
         return Response(content, status=code)
 
+    # Disable retrieval of individual user data for security reasons.
+    def retrieve(self, request, id=None):
+        content = {'detail': 'Method "GET" not allowed.'}
+        code = status.HTTP_405_METHOD_NOT_ALLOWED
+        return Response(content, status=code)
+
     @list_route(methods=['get', 'post'], permission_classes = ())
     def login(self, request):
         return User.login_manager.login(request)
