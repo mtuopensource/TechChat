@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-from .views import BoardViewSet, ThreadViewSet, UserViewSet, PostViewSet, ParticipantViewSet
+from api.views import BoardViewSet, ThreadViewSet, UserViewSet, PostViewSet, ParticipantViewSet
 
 # DRF router for REST API viewsets
 router = routers.DefaultRouter()
