@@ -4,7 +4,7 @@ class Alias:
 
     def create:
         #TODO add more people and adjectives
-        adjectives = ["obnoxious", "gruesome", "abhorrent", "sleazy", "stupid", "swesome", "lovely", "lonely",
+        adjectives = ["obnoxious", "gruesome", "abhorrent", "sleazy", "stupid", "awesome", "lovely", "lonely",
                       "bored", "condescending", "dorky"]
         people = ["Newton", "Pythagoras", "Turing", "Edison", "Tesla", "Dijkstra", "Lovelace", "Jobs",
                   "Wozniak","Gates", "Gosling", "Hawking", "Einstein", "Pascal", "Schrodinger", "Mendeleev"]
