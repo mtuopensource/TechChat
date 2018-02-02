@@ -16,7 +16,7 @@ class UserSerializer(serializers.DocumentSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        read_only_fields = ('hidden',)
+        read_only_fields = ('hidden', 'is_staff')
 
     def create(self, validated_data):
         password = validated_data.pop('password').encode('utf-8')

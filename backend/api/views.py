@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from .models import Board, Thread, User, Post, Participant
 from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
-from .permissions import IsAdminOrReadOnly, TechChatIsAuthenticated
+from .permissions import IsAdminOrReadOnly, TechChatIsAuthenticated, TechChatIsAdminOrReadOnly
 from .response import INSUFFICIENT_INFORMATION, SUCCESS, NOT_AUTHORIZED
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = BoardSerializer
-    permission_classes = (TechChatIsAuthenticated,)
+    permission_classes = (TechChatIsAdminOrReadOnly,)
     # Set of all Boards
     def get_queryset(self):
         return Board.objects.all()

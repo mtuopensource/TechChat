@@ -35,7 +35,7 @@ class LoginManager(Manager):
 # http://docs.mongoengine.org/guide/defining-documents.html
 
 class Board(Document):
-    title = fields.StringField(max_length=32, required=True)
+    title = fields.StringField(max_length=32, unique=True, required=True)
     description = fields.StringField(max_length=128, required=True, null=True)
 
 class Thread(Document):
@@ -43,10 +43,10 @@ class Thread(Document):
     content = fields.StringField(max_length=512, required=True)
 
 class User(Document):
-    email = fields.EmailField(unique=True, required = True)
-    password = fields.StringField(required = True)
-    hidden = fields.BooleanField(required = True, default = False)
-
+    email = fields.EmailField(max_length=254, unique=True, required=True)
+    password = fields.StringField(required=True)
+    hidden = fields.BooleanField(default = False)
+    is_staff = fields.BooleanField(default = False)
     login_manager = LoginManager()
     def check_password(self, password):
         a =      password.encode('utf-8')
