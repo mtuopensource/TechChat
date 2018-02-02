@@ -13,6 +13,5 @@ router.register(r'posts', PostViewSet, r"post")
 router.register(r'participants', ParticipantViewSet, r"participant")
 
 urlpatterns = [
-    url(r'^', include(router.urls, namespace='api')),
-    url(r'^', include('rest_framework.urls', namespace='rest_framework')), # Login/Logout URLs
+    url(r'^', include(router.urls, namespace='api'))
 ]
