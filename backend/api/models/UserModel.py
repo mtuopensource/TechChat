@@ -35,7 +35,7 @@ class LoginManager(Manager):
 class User(Document):
     email    = EmailField(unique=True, required=True, max_length=254)
     password = StringField(required=True)
-    hidden   = BooleanField(default=False)
+    deleted   = BooleanField(default=False)
     is_staff = BooleanField(default=False)
 
     login_manager = LoginManager()

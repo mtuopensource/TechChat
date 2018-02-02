@@ -6,7 +6,7 @@ class PostSerializer(DocumentSerializer):
     class Meta:
         model = Post
         fields = '__all__' # Fields stored in MongoDB
-        read_only_fields = ('hidden', 'ip', 'author') # Fields computed automatically
+        read_only_fields = ('deleted', 'ip', 'author') # Fields computed automatically
 
     # Handles creating and saving a new Post instance.
     def create(self, validated_data):
