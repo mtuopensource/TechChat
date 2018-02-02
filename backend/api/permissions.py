@@ -24,3 +24,7 @@ class TechChatIsAdminOrReadOnly(BasePermission):
                 return user.is_staff
         else:
             return False
+
+class TechChatIsOwnerOrAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return False

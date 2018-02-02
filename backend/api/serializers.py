@@ -1,6 +1,6 @@
 import bcrypt
 from rest_framework_mongoengine import serializers
-from .models import Board, Thread, User, Post, Participant
+from api.models import Board, Thread, User, Post, Participant
 
 class BoardSerializer(serializers.DocumentSerializer):
     class Meta:
@@ -17,6 +17,7 @@ class UserSerializer(serializers.DocumentSerializer):
         model = User
         fields = '__all__'
         read_only_fields = ('hidden', 'is_staff')
+        write_only_fields = ('password',)
 
     def create(self, validated_data):
         password = validated_data.pop('password').encode('utf-8')
