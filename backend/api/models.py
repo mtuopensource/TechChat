@@ -5,40 +5,37 @@ from django.db.models import Manager
 from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
 
 class LoginManager(Manager):
+    def get_credentials_from_request(self, request):
+        credentials = {}
+        # Location of the username and password might be in the parameters or body
+        if 'email' in request.data and 'password' in request.data: # Check if the username and password was provided
+            credentials.update(username = request.data.get('email'))
+            credentials.update(password = request.data.get('password'))
+        elif 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
+            credentials.update(username = request.GET.get('email'))
+            credentials.update(password = request.GET.get('password'))
+        return credentials
+
     def login(self, request):
         from .serializers import UserSerializer
-        username = None
-        password = None
 
-        # Location of the username and password depends on the method
-        if request.method == 'GET':
-            if 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
-                username = request.GET['email']
-                password = request.GET['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
-        elif request.method == 'POST':
-            if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
-                username = request.POST['email']
-                password = request.POST['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
+        credentials = self.get_credentials_from_request(request)
+        if not credentials:
+            return INSUFFICIENT_INFORMATION.as_response()
 
-        users = User.objects.all()
-        ids = [user.id for user in users if user.login(username, password)]
-        queryset = users.filter(id__in=ids) # Set of User objects with the given email and password
-        serializer = UserSerializer(queryset, context={'request': request}, many=True)
-
-        # Does not exist
-        if not serializer.data:
-            return INVALID_CREDENTIALS.as_response()
+        user = User.objects.get(email=credentials.get('username'))
+        if user.check_password(credentials.get('password')):
+            response = SUCCESS.as_response()
+            request.session['techchat_userid'] = str(user.id)
+            request.session.modified = True
+            return response
         else:
-            return SUCCESS.as_response()
+            return INVALID_CREDENTIALS.as_response()
 
 # http://docs.mongoengine.org/guide/defining-documents.html
 
 class Board(Document):
-    title = fields.StringField(max_length=32, required=True)
+    title = fields.StringField(max_length=32, unique=True, required=True)
     description = fields.StringField(max_length=128, required=True, null=True)
 
 class Thread(Document):
@@ -46,15 +43,15 @@ class Thread(Document):
     content = fields.StringField(max_length=512, required=True)
 
 class User(Document):
-    email = fields.EmailField(domain_whitelist = ("mtu.edu",), required = True)
-    password = fields.StringField(required = True)
-    hidden = fields.BooleanField(required = True, default = False)
-
+    email = fields.EmailField(max_length=254, unique=True, required=True)
+    password = fields.StringField(required=True)
+    hidden = fields.BooleanField(default = False)
+    is_staff = fields.BooleanField(default = False)
     login_manager = LoginManager()
-    def login(self, email, password):
+    def check_password(self, password):
         a =      password.encode('utf-8')
         b = self.password.encode('utf-8')
-        return bcrypt.checkpw(a, b) and self.email == email
+        return bcrypt.checkpw(a, b)
 
 class Post(Document):
     thread_id = fields.LazyReferenceField(Thread)
