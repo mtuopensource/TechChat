@@ -1,42 +1,69 @@
-from rest_framework import status, permissions
+from rest_framework import status, permissions, mixins
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework_mongoengine import viewsets, generics
 from api.models import Board, Thread, User, Post, Participant
 from .serializers import BoardSerializer, ThreadSerializer, UserSerializer, PostSerializer, ParticipantSerializer
-from .permissions import IsAdminOrReadOnly, TechChatIsAuthenticated, TechChatIsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, TechChatIsAuthenticated, TechChatIsAdminOrReadOnly, TechChatIsOwnerOrAdmin
 from .response import INSUFFICIENT_INFORMATION, SUCCESS, NOT_AUTHORIZED
 
 class BoardViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
     serializer_class = BoardSerializer
     permission_classes = (TechChatIsAdminOrReadOnly,)
-    # Set of all Boards
-    def get_queryset(self):
-        return Board.objects.all()
+    queryset=Board.objects.all()
 
     # List of Threads related to the specified Board.
-    @detail_route(methods=['get'], suffix='Threads')
-    def threads(self, request, id=None):
+    def retrieve(self, request, id=None):
         queryset = Thread.objects.filter(board=id)
         serializer = ThreadSerializer(queryset, context={'request': request}, many=True)
         return Response(serializer.data)
 
-# Allows a Thread to be created, retrieved, and destroyed.
-class ThreadViewSet(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView, viewsets.GenericViewSet):
+# Allows a Thread to be created, retrieved, updated, and destroyed.
+class ThreadViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     lookup_field = 'id'
     serializer_class = ThreadSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (TechChatIsOwnerOrAdmin,)
+    queryset=Thread.objects.all()
 
-    # Set of all Threads
-    def get_queryset(self):
-        return Thread.objects.all()
+    # List of Posts related to the specified Thread.
+    def retrieve(self, request, id=None):
+        queryset = Post.objects.filter(thread=id)
+        serializer = PostSerializer(queryset, context={'request': request}, many=True)
+        return Response(serializer.data)
 
-    # Disable list of all Threads for performance reasons.
-    def list(self, request):
-        content = {'detail': 'Method "GET" not allowed.'}
-        code = status.HTTP_405_METHOD_NOT_ALLOWED
-        return Response(content, status=code)
+class PostViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    lookup_field = 'id'
+    serializer_class = PostSerializer
+    permission_classes = (TechChatIsOwnerOrAdmin,)
+    queryset=Post.objects.all()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class UserViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
@@ -83,13 +110,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def login(self, request):
         return User.login_manager.login(request)
 
-class PostViewSet(viewsets.ModelViewSet):
-    lookup_field = 'id'
-    serializer_class = PostSerializer
-    permission_classes = (IsAdminOrReadOnly,)
-    # Set of all Boards
-    def get_queryset(self):
-        return Post.objects.all()
+
 
 class ParticipantViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'

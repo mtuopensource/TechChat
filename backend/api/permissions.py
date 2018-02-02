@@ -27,4 +27,14 @@ class TechChatIsAdminOrReadOnly(BasePermission):
 
 class TechChatIsOwnerOrAdmin(BasePermission):
     def has_permission(self, request, view):
-        return False
+        return 'techchat_userid' in request.session
+    def has_object_permission(self, request, view, obj):
+        if 'techchat_userid' in request.session:
+            if request.method in SAFE_METHODS:
+                return True
+            else:
+                userid = request.session.get('techchat_userid')
+                user   = User.objects.get(id=userid)
+                return user.is_staff or user.id == obj.author.id
+        else:
+            return False

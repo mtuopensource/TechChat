@@ -2,6 +2,14 @@ import bcrypt
 from rest_framework_mongoengine import serializers
 from api.models import Board, Thread, User, Post, Participant
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 class BoardSerializer(serializers.DocumentSerializer):
     class Meta:
         model = Board
@@ -11,6 +19,12 @@ class ThreadSerializer(serializers.DocumentSerializer):
     class Meta:
         model = Thread
         fields = '__all__'
+        read_only_fields = ('author', 'ip')
+    def create(self, validated_data):
+        userid = self.context['request'].session.get('techchat_userid')
+        author = User.objects.get(id=userid)
+        ip = get_client_ip(self.context['request'])
+        return Thread.objects.create(author=author, ip=ip, **validated_data)
 
 class UserSerializer(serializers.DocumentSerializer):
     class Meta:
@@ -28,6 +42,12 @@ class PostSerializer(serializers.DocumentSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+        read_only_fields = ('hidden', 'ip', 'author')
+    def create(self, validated_data):
+        userid = self.context['request'].session.get('techchat_userid')
+        author = User.objects.get(id=userid)
+        ip = get_client_ip(self.context['request'])
+        return Post.objects.create(author=author, ip=ip, hidden=False, **validated_data)
 
 class ParticipantSerializer(serializers.DocumentSerializer):
     class Meta:
