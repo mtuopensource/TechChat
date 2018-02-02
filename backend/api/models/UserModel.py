@@ -16,6 +16,11 @@ class LoginManager(Manager):
             credentials.update(password = request.GET.get('password'))
         return credentials
 
+    def logout(self, request):
+        del request.session['techchat_userid']
+        request.session.modified = True
+        return SUCCESS.as_response()
+
     def login(self, request):
         from ..serializers import UserSerializer
 
