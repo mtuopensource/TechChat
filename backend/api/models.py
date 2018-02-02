@@ -5,27 +5,26 @@ from django.db.models import Manager
 from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
 
 class LoginManager(Manager):
+    def get_credentials_from_request(self, request):
+        credentials = {}
+        # Location of the username and password might be in the parameters or body
+        if 'email' in request.data and 'password' in request.data: # Check if the username and password was provided
+            credentials.update(username = request.data.get('email'))
+            credentials.update(password = request.data.get('password'))
+        elif 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
+            credentials.update(username = request.GET.get('email'))
+            credentials.update(password = request.GET.get('password'))
+        return credentials
+
     def login(self, request):
         from .serializers import UserSerializer
-        username = None
-        password = None
 
-        # Location of the username and password depends on the method
-        if request.method == 'GET':
-            if 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
-                username = request.GET['email']
-                password = request.GET['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
-        elif request.method == 'POST':
-            if 'email' in request.POST and 'password' in request.POST: # Check if the username and password was provided
-                username = request.POST['email']
-                password = request.POST['password']
-            else:
-                return INSUFFICIENT_INFORMATION.as_response()
+        credentials = self.get_credentials_from_request(request)
+        if not credentials:
+            return INSUFFICIENT_INFORMATION.as_response()
 
         users = User.objects.all()
-        ids = [user.id for user in users if user.login(username, password)]
+        ids = [user.id for user in users if user.login(credentials.get('username'), credentials.get('password'))]
         queryset = users.filter(id__in=ids) # Set of User objects with the given email and password
         serializer = UserSerializer(queryset, context={'request': request}, many=True)
 
