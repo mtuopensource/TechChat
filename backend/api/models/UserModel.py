@@ -3,6 +3,7 @@ from django.db.models import Manager
 from mongoengine import Document
 from mongoengine.fields import BooleanField, EmailField, StringField
 from ..response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
+from mongoengine import DoesNotExist
 
 class LoginManager(Manager):
     def get_credentials_from_request(self, request):
@@ -28,19 +29,22 @@ class LoginManager(Manager):
         if not credentials:
             return INSUFFICIENT_INFORMATION.as_response()
 
-        user = User.objects.get(email=credentials.get('username'))
-        if user.check_password(credentials.get('password')):
-            response = SUCCESS.as_response()
-            request.session['techchat_userid'] = str(user.id)
-            request.session.modified = True
-            return response
-        else:
-            return INVALID_CREDENTIALS.as_response()
+        try:
+            user = User.objects.get(email=credentials.get('username'))
+            if user.check_password(credentials.get('password')):
+                response = SUCCESS.as_response()
+                request.session['techchat_userid'] = str(user.id)
+                request.session.modified = True
+                return response
+            else:
+                return INVALID_CREDENTIALS.as_response()
+        except DoesNotExist:
+                return INVALID_CREDENTIALS.as_response()
 
 class User(Document):
-    email    = EmailField(unique=True, required=True, max_length=254)
+    email = EmailField(unique=True, required=True, max_length=254)
     password = StringField(required=True)
-    deleted   = BooleanField(default=False)
+    deleted = BooleanField(default=False)
     is_staff = BooleanField(default=False)
 
     login_manager = LoginManager()
