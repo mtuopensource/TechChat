@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
-from .models import User
+from api.models import User
 
 # Authenticated have read access. Staff members have write access.
 class IsAdminOrReadOnly(BasePermission):
