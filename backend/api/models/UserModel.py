@@ -1,45 +1,7 @@
 import bcrypt
-from django.db.models import Manager
 from mongoengine import Document
 from mongoengine.fields import BooleanField, EmailField, StringField
-from ..response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
-from mongoengine import DoesNotExist
-
-class LoginManager(Manager):
-    def get_credentials_from_request(self, request):
-        credentials = {}
-        # Location of the username and password might be in the parameters or body
-        if 'email' in request.data and 'password' in request.data: # Check if the username and password was provided
-            credentials.update(username = request.data.get('email'))
-            credentials.update(password = request.data.get('password'))
-        elif 'email' in request.GET and 'password' in request.GET: # Check if the username and password was provided
-            credentials.update(username = request.GET.get('email'))
-            credentials.update(password = request.GET.get('password'))
-        return credentials
-
-    def logout(self, request):
-        del request.session['techchat_userid']
-        request.session.modified = True
-        return SUCCESS.as_response()
-
-    def login(self, request):
-        from ..serializers import UserSerializer
-
-        credentials = self.get_credentials_from_request(request)
-        if not credentials:
-            return INSUFFICIENT_INFORMATION.as_response()
-
-        try:
-            user = User.objects.get(email=credentials.get('username'))
-            if user.check_password(credentials.get('password')):
-                response = SUCCESS.as_response()
-                request.session['techchat_userid'] = str(user.id)
-                request.session.modified = True
-                return response
-            else:
-                return INVALID_CREDENTIALS.as_response()
-        except DoesNotExist:
-                return INVALID_CREDENTIALS.as_response()
+from api.managers import LoginManager
 
 class User(Document):
     email = EmailField(unique=True, required=True, max_length=254)
@@ -49,6 +11,6 @@ class User(Document):
 
     login_manager = LoginManager()
     def check_password(self, password):
-        a = password.encode('utf-8')
-        b = self.password.encode('utf-8')
+        a = password.encode('utf-8') # TODO Environment variables
+        b = self.password.encode('utf-8') # TODO Environment variables
         return bcrypt.checkpw(a, b)

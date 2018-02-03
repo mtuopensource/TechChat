@@ -7,7 +7,7 @@ class Thread(Document):
     board = LazyReferenceField(Board, required=True)
     content = StringField(required=True, max_length=512)
     author = LazyReferenceField(User)
-    deleted = BooleanField(Default = False)
+    deleted = BooleanField(default=False)
 
     # Need 39 characters to store an IPV6 address
     # ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
