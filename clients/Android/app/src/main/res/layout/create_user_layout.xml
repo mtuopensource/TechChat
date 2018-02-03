@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:theme="@style/LoginTextLabel"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_email">
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
@@ -38,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_password">
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
@@ -55,7 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
-        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_confirm">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editText3"
             android:layout_width="match_parent"
@@ -74,6 +77,7 @@
         android:text="Create your Account"
         android:layout_marginTop="20dp"
         style="@style/SignUpSignInButtons"
+        android:onClick="signUpUser"
          />
     <TextView
         android:layout_width="200dp"
