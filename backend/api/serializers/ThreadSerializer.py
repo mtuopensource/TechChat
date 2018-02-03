@@ -6,7 +6,7 @@ class ThreadSerializer(DocumentSerializer):
     class Meta:
         model = Thread
         fields = '__all__' # Fields stored in MongoDB
-        read_only_fields = ('deleted', 'ip', 'author') # Fields computed automatically
+        read_only_fields = ('author', 'date_created', 'date_updated', 'deleted', 'ip') # Fields computed automatically
 
     # Handles creating and saving a new Thread instance.
     def create(self, validated_data):

@@ -1,3 +1,4 @@
+from rest_framework.response import Response
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from api.models import Board, Thread
 from api.serializers import BoardSerializer, ThreadSerializer
