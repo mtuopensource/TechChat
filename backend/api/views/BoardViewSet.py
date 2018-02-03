@@ -1,11 +1,11 @@
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from api.models import Board, Thread
 from api.serializers import BoardSerializer, ThreadSerializer
-from api.permissions import TechChatIsAdminOrReadOnly
+from api.permissions import IsAdminOrReadOnly
 
 # Threads can be listed, created, retrieved, updated, and destroyed.
 class BoardViewSet(ModelViewSet):
-    permission_classes = (TechChatIsAdminOrReadOnly,) # Only allow admins to create, update, destroy
+    permission_classes = (IsAdminOrReadOnly,) # Only allow admins to create, update, destroy
     serializer_class = BoardSerializer
     lookup_field = 'id'
 
