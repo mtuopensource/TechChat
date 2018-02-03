@@ -13,34 +13,35 @@
         android:text="Make your account"
         android:textSize="35sp"
         android:textColor="@color/white"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="25dp"/>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
         <EditText
             android:id="@+id/editText"
-            android:layout_width="@dimen/signup_form_width"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
             android:paddingTop="@dimen/signup_form_padding"
             android:textColor="@color/white"
+
             />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
         <EditText
             android:id="@+id/editText2"
-            android:layout_width="@dimen/signup_form_width"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/prompt_password"
@@ -51,13 +52,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editText3"
-            android:layout_width="@dimen/signup_form_width"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/confirm_password"
@@ -71,7 +72,7 @@
         android:layout_width="@dimen/signup_form_width"
         android:layout_height="wrap_content"
         android:text="Create your Account"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         style="@style/SignUpSignInButtons"
          />
     <TextView
