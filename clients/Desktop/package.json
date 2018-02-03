@@ -1,0 +1,20 @@
+{
+  "name": "TechChat",
+  "version": "1.0.0",
+  "description": "A geo-local, anonymous chat app.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/mtuopensource",
+  "keywords": [
+    "TechChat",
+    "chat",
+    "anonymous"
+  ],
+  "author": "MTU Open Source Club",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  }
+}

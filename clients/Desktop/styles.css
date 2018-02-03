@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body {
+   font-family: 'Poppins', sans-serif;
+   background-color: #26272F;
+}
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #26272F;
+    border-right: 1px solid black;
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+/* The navigation menu title */
+.sidenav h2 {
+    padding: 0px 8px 0px 16px;
+    font-size: 30px;
+    color: #FFC300;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 0px 8px 12px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #FFC300;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #DAF7A6;
+}
+
+/* Style page content */
+.main {
+    text-align: right;
+    margin-right: 50px;
+    padding: 0px 10px;
+    color: #FFC300;
+}
