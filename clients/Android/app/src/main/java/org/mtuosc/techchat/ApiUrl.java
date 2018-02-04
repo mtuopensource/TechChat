@@ -7,8 +7,8 @@ package org.mtuosc.techchat;
  */
 
 public class ApiUrl {
-    public static final String GET_BOARDS = "/api/boards";
-    public static final String LOGIN = "/api/Users/login";
+    public static final String GET_BOARDS = "/api/boards/";
+    public static final String LOGIN = "/api/users/login/";
 
 
 }
