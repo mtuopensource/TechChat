@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
 import org.mtuosc.techchat.UserAuthenticator;
 
@@ -31,8 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * regular expression found at https://en.wikipedia.org/wiki/Email_address#Valid_email_addresses
      */
-    private static final String EMAIL_PATTERN_EXPRESS = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
-    private Pattern emailPattern = Pattern.compile(EMAIL_PATTERN_EXPRESS);
+    private EmailPasswordValidator validator = new EmailPasswordValidator();
 
     private TextInputLayout emailTextWrapper;
     private TextInputLayout passwordTextWrapper;
@@ -93,13 +93,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean showedErrorsToUser(String email, String password){
         boolean errorShown = false;
-        if (!isEmailValid(email)) {
-            emailTextWrapper.setError("Not a Valid Email");
+        if (!validator.isEmailValid(email)) {
+            emailTextWrapper.getEditText().setError("Invalid Email");
             errorShown = true;
         }
-        if (isPasswordValid(password)){
+        if (validator.isPasswordValid(password)){
             errorShown = true;
-            passwordTextWrapper.setError("Not a Valid Password");
+            passwordTextWrapper.getEditText().setError("Not a Valid Password");
         }
         if (!isNetworkConnected()) {
             Toast.makeText(this, "No Network", Toast.LENGTH_SHORT).show();
@@ -108,14 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         return errorShown;
     }
 
-    private boolean isPasswordValid(String password){
-        // TODO add more logic if password must meet a requirement
-        return password.equalsIgnoreCase("");
-    }
 
-    private boolean isEmailValid(String email){
-        Matcher emailMatcher = emailPattern.matcher(email);
-        return emailMatcher.matches();
-    }
+
+
 }
 
