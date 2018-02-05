@@ -1,5 +1,6 @@
 package org.mtuosc.techchat.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -9,17 +10,29 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.goebl.david.Response;
+import com.goebl.david.Webb;
+
+import org.json.JSONObject;
+import org.mtuosc.techchat.ApiUrl;
+import org.mtuosc.techchat.AsyncApiResponse;
+import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
 
 /**
  * Created by ryan on 1/27/18.
  */
 
-public class CreateUserActivity extends AppCompatActivity {
-    EditText confirmEditText;
-    EditText passwordEditText;
-    EditText email;
+public class CreateUserActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONObject>> {
+    private EditText confirmEditText;
+    private EditText passwordEditText;
+    private EditText emailEditText;
+
+    private EmailPasswordValidator validator = new EmailPasswordValidator();
+    private SignUpUserTask signUpTask;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +40,7 @@ public class CreateUserActivity extends AppCompatActivity {
         setContentView(R.layout.create_user_layout);
         TextView termsOfServ = createTermsOfServiceText();
 
-        email = ((TextInputLayout) findViewById(R.id.signup_email)).getEditText();
+        emailEditText = ((TextInputLayout) findViewById(R.id.signup_email)).getEditText();
         passwordEditText = ((TextInputLayout) findViewById(R.id.signup_password)).getEditText();
         confirmEditText = ((TextInputLayout) findViewById(R.id.signup_confirm)).getEditText();
 
@@ -41,17 +54,32 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
     public void signUpUser(View view) {
-        if (passwordsMatch()){
-            //TODO send the request to the server
-        }else
-            confirmEditText.setError("Passwords Do Not Match");
 
-
+        String email = emailEditText.getText().toString();
+        if (passwordsMatch() && validator.isEmailValid(email)) {
+            String password = passwordEditText.getText().toString();
+            signUpTask = new SignUpUserTask("http://141.219.197.116:8000", email, password, this);
+            signUpTask.execute();
+        }
     }
 
     private boolean passwordsMatch() {
         String confirm = confirmEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        return confirm.equals(password);
+        if (!confirm.equals(password)){
+            confirmEditText.setError("Passwords do not match");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void taskCompleted(Response<JSONObject> result) {
+        if (result.getStatusCode() == 201){
+            //TODO do other task after user creation
+            Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
+        }
     }
 }
