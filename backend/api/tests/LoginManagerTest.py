@@ -1,6 +1,6 @@
-from unittest import TestCase
 from django.test import Client
-from .response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS
+from unittest import TestCase
+from api.response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS
 
 class LoginManagerTest(TestCase):
     def setUp(self):
