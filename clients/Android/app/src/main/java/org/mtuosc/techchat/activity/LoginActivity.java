@@ -16,14 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
 import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
-import org.mtuosc.techchat.UserAuthenticator;
+import org.mtuosc.techchat.asynctasks.UserAuthenticator;
 
 /**
  * A login screen that offers login via email/password.

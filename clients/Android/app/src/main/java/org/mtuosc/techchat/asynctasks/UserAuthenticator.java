@@ -1,4 +1,4 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.asynctasks;
 
 
 import android.os.AsyncTask;
@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
-
+import org.mtuosc.techchat.ApiUrl;
 
 
 /**

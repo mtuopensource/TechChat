@@ -1,4 +1,4 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.asynctasks;
 
 /**
  * Created by ryan on 2/4/18.

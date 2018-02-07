@@ -1,6 +1,5 @@
 package org.mtuosc.techchat.activity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -13,13 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.goebl.david.Response;
-import com.goebl.david.Webb;
 
 import org.json.JSONObject;
-import org.mtuosc.techchat.ApiUrl;
-import org.mtuosc.techchat.AsyncApiResponse;
+import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
+import org.mtuosc.techchat.asynctasks.SignUpUserTask;
 
 /**
  * Created by ryan on 1/27/18.
