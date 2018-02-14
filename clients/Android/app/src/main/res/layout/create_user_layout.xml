@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make your account"
+        android:textSize="35sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:theme="@style/LoginTextLabel"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_email">
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:paddingTop="@dimen/signup_form_padding"
+            android:textColor="@color/white"
+
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/LoginTextLabel"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_password">
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword"
+            android:paddingTop="@dimen/signup_form_padding"
+            android:textColor="@color/white"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/LoginTextLabel"
+        app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+        android:id="@+id/signup_confirm">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:paddingTop="@dimen/signup_form_padding"
+            android:textColor="@color/white"
+             />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="@dimen/signup_form_width"
+        android:layout_height="wrap_content"
+        android:text="Create your Account"
+        android:layout_marginTop="20dp"
+        style="@style/SignUpSignInButtons"
+        android:onClick="signUpUser"
+         />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:linksClickable="true"
+        android:id="@+id/terms_of_service"/>
+</LinearLayout>

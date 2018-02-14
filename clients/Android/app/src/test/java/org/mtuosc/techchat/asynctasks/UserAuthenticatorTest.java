@@ -1,14 +1,12 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.asynctasks;
 
 
 import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.Test;
-
-
+import org.mtuosc.techchat.ApiUrl;
+import org.mtuosc.techchat.asynctasks.UserAuthenticator;
 
 
 import static org.junit.Assert.*;
@@ -22,7 +20,7 @@ public class UserAuthenticatorTest {
     public void testingLibrary(){
         Webb webb = Webb.create();
         webb.setBaseUri("http://141.219.197.116:8000");
-       Response<String> object=  webb.post(ApiUrl.LOGIN.getName()).param("email", "ajwalhof@mtu.edu")
+       Response<String> object=  webb.post(ApiUrl.LOGIN).param("email", "ajwalhof@mtu.edu")
                 .param("password", "test").asString();
        assertTrue(object.getStatusCode() == 200);
 
