@@ -14,6 +14,6 @@
 3.  Run `py manage.py test api.tests`
 
 ## Deploying with Jenkins
-1.  Create a post build shell script
-2.  Run `pip install -r requirements.txt` 
-3.  Run `py manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &`
+Create a post build shell script with the following lines
+1.  `pip install -r requirements.txt` 
+2.  `py manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &`
