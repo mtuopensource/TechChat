@@ -14,4 +14,5 @@
 3.  Run `py manage.py test api.tests`
 
 ## Deploying
-1.  Run `py manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &`
+1.  Run `pip install -r requirements.txt`
+2.  Run `py manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &`
