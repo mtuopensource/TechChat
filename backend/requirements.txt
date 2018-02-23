@@ -4,3 +4,4 @@ mongoengine
 blinker == 1.*
 django-rest-framework-mongoengine
 bcrypt
+requests
