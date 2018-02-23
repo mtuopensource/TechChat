@@ -1,3 +1,6 @@
+# TechChat Backend
+[![Build Status](http://ci.mtuopensource.club/job/TechChat%20Backend/badge/icon)](http://ci.mtuopensource.club/job/TechChat%20Backend/)
+
 ## Table of Contents
  - [Getting started](#getting-started)
  - [Deploying](#deploying)
