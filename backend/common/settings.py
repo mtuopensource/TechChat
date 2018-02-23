@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_mongoengine',
     'api',
+    'web'
 ]
 
 MIDDLEWARE = [
