@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             return; // don't submit the form
 
         // send the form to backend
-        UserAuthenticator authenticator = new UserAuthenticator("http://141.219.197.116:8000", email, password);
+        UserAuthenticator authenticator = new UserAuthenticator(email, password);
 
         loginProgress.setVisibility(View.VISIBLE);
         submitButton.setText("");

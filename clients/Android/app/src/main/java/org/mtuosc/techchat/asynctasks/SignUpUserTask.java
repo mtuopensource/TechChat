@@ -18,8 +18,8 @@ public class SignUpUserTask extends AsyncTask<Void, Void, Response<JSONObject>>{
     private String password;
     private AsyncApiResponse responder;
 
-    public SignUpUserTask(String serverIP, String email, String password, AsyncApiResponse responder) {
-        webb.setBaseUri(serverIP);
+    public SignUpUserTask(String email, String password, AsyncApiResponse responder) {
+        webb.setBaseUri(ApiUrl.SERVER_URL);
         this.email = email;
         this.password = password;
         this.responder = responder;

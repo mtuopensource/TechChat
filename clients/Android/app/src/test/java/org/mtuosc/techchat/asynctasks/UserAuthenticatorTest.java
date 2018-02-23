@@ -28,7 +28,7 @@ public class UserAuthenticatorTest {
 
     @Test
     public void simpleLogin(){
-        UserAuthenticator authenticator = new UserAuthenticator("http://ci.mtuopensource.club:8000","test@mtu.edu", "test");
+        UserAuthenticator authenticator = new UserAuthenticator("test@mtu.edu", "test");
         authenticator.start();
         try {
             authenticator.join();

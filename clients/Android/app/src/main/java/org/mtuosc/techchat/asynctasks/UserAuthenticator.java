@@ -19,8 +19,8 @@ public class UserAuthenticator extends Thread {
     private Webb webb = Webb.create();
 
 
-    public UserAuthenticator(String serverIp, String email, String password) {
-        webb.setBaseUri(serverIp);
+    public UserAuthenticator(String email, String password) {
+        webb.setBaseUri(ApiUrl.SERVER_URL);
         this.email = email;
         this.password = password;
     }
