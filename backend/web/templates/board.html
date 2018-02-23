@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
+    <li class="mdc-list-item">
+      <span class="mdc-list-item__text mdc-typography--headline">
+        Thread Title
+        <span class="mdc-list-item__secondary-text">Poster Alias: Fuzzy Barney</span>
+      </span>
+      <!-- TODO: Add aria-label and title -->
+      <a href="#" class="mdc-list-item__meta material-icons" onclick="event.preventDefault();">favorite</a>
+    </li>
+    <hr />
+  </ul>
+  <button class="mdc-fab material-icons tc-create-post" aria-label="Add">
+    <span class="mdc-fab__icon">add</span>
+  </button>
+{% endblock %}

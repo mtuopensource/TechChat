@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from . import views
+from web.views import index, board
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', index, name='index'),
+    url(r'^board/(?P<id>\w+)/$', board, name='board'),
 ]
