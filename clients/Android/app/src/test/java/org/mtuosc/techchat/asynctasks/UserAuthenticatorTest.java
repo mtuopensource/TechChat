@@ -19,8 +19,8 @@ public class UserAuthenticatorTest {
     @Test
     public void testingLibrary(){
         Webb webb = Webb.create();
-        webb.setBaseUri("http://141.219.197.116:8000");
-       Response<String> object=  webb.post(ApiUrl.LOGIN).param("email", "ajwalhof@mtu.edu")
+        webb.setBaseUri("http://ci.mtuopensource.club:8000");
+       Response<String> object=  webb.post(ApiUrl.LOGIN).param("email", "test@mtu.edu")
                 .param("password", "test").asString();
        assertTrue(object.getStatusCode() == 200);
 
@@ -28,7 +28,7 @@ public class UserAuthenticatorTest {
 
     @Test
     public void simpleLogin(){
-        UserAuthenticator authenticator = new UserAuthenticator("http://141.219.197.116:8000","ajwalhof@mtu.edu", "test");
+        UserAuthenticator authenticator = new UserAuthenticator("http://ci.mtuopensource.club:8000","test@mtu.edu", "test");
         authenticator.start();
         try {
             authenticator.join();
