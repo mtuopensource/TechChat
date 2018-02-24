@@ -8,43 +8,73 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'app.css' %}">
+    <!-- FIXME: Loading Moment.js here will crush loading times. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script>
   </head>
   <body class="mdc-typography">
     <header class="mdc-toolbar mdc-toolbar--fixed">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <button class="material-icons mdc-toolbar__menu-icon tc-menu-toggle">menu</button>
-          <span class="mdc-toolbar__title catalog-title">TechChat</span>
+          <span class="mdc-toolbar__title catalog-title">
+            {% block title %}
+              TechChat
+            {% endblock %}
+          </span>
         </section>
         <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
           <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Refresh this page" alt="Download">refresh</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Settings" alt="Print this page">settings</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Send feedback" alt="More">feedback</a>
+          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="My profile" alt="More">person</a>
+          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Logout" alt="More">exit_to_app</a>
         </section>
       </div>
     </header>
-    <div class="tc-content">
-      <aside class="mdc-drawer mdc-drawer--persistent">
-        <nav class="mdc-drawer__drawer">
-          <div class="mdc-drawer__toolbar-spacer"></div>
-          <div class="mdc-list-group">
-            <h3 class="mdc-list-group__subheader mdc-typography--display1">Boards</h3>
-            <hr class="mdc-list-divider">
-            <nav class="mdc-list">
-              {% for board in boards %}
-                <a class="mdc-list-item" href="/web/board/{{ board.id }}">
-                  <span class="mdc-typography--headline">{{ board.title }}</span>
-                </a>
-              {% endfor %}
-            </nav>
+    <main id="main" class="mdc-toolbar-fixed-adjust">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
+            {% block content %}
+            {% endblock %}
           </div>
-        </nav>
-      </aside>
-      <main id="main" class="mdc-toolbar-fixed-adjust">
-        {% block content %}
-        {% endblock %}
-      </main>
-    </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+            <button class="mdc-button mdc-button--raised tc-raised-secondary tc-full">New Thread</button>
+            <div class="mdc-list-group">
+              <h3 class="mdc-list-group__subheader">Threads</h3>
+              <ul class="mdc-list mdc-list--avatar-list tc-action-box">
+                <li class="mdc-list-item">
+                  <span class="mdc-list-item__graphic">
+                    <i class="material-icons">access_time</i>
+                  </span>
+                  Recently Viewed
+                  <span class="mdc-list-item__meta">99</span>
+                </li>
+                <li class="mdc-list-item">
+                  <span class="mdc-list-item__graphic">
+                    <i class="material-icons" aria-hidden="true">bookmark</i>
+                  </span>
+                  Bookmarks
+                  <span class="mdc-list-item__meta">99</span>
+                </li>
+                <li class="mdc-list-item">
+                  <span class="mdc-list-item__graphic">
+                    <i class="material-icons" aria-hidden="true">feedback</i>
+                  </span>
+                  Send Feedback
+                </li>
+              </ul>
+              <h3 class="mdc-list-group__subheader">Boards</h3>
+              <ul class="mdc-list tc-action-box">
+                {% for board in boards %}
+                <li class="mdc-list-item">
+                  {{ board.title }}
+                  <span class="mdc-list-item__meta">99</span>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://material-components-web.appspot.com/assets/material-components-web.js"></script>
     <script type="text/javascript" src="{% static 'app.js' %}"></script>
