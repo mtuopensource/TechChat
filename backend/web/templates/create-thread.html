@@ -12,22 +12,28 @@
     <br />
     <div id="board-select" class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
       <div class="mdc-select__surface mdc-ripple-upgraded" tabindex="0">
-        <div class="mdc-select__label">Board</div>
+        <div class="mdc-select__label mdc-select__label--float-above">Board</div>
         <div class="mdc-select__selected-text"></div>
         <div class="mdc-select__bottom-line"></div>
       </div>
       <div class="mdc-menu mdc-select__menu">
         <ul class="mdc-list mdc-menu__items">
           {% for board in boards %}
-            <li class="mdc-list-item" role="option" id="{{ board.id }}" tabindex="0">
-              {{ board.title }}
-            </li>
+            {% if forloop.first %}
+              <li class="mdc-list-item" role="option" id="{{ board.id }}" tabindex="0" aria-selected>
+                {{ board.title }}
+              </li>
+            {% else %}
+              <li class="mdc-list-item" role="option" id="{{ board.id }}" tabindex="0">
+                {{ board.title }}
+              </li>
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
     </div>
     <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--upgraded" data-mdc-auto-init="MDCTextField">
-      <textarea name="content" class="mdc-text-field__input" rows="8"></textarea>
+      <textarea name="content" class="mdc-text-field__input" rows="8" required></textarea>
       <label for="content" class="mdc-text-field__label">Content</label>
     </div>
     <br />
