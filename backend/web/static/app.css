@@ -49,7 +49,7 @@ a {
   margin-left: 0;
 }
 
-@media (max-width: 839px) and (min-width: 480px) {
+@media (max-width: 839px) {
   .mdc-layout-grid__cell--span-3, .mdc-layout-grid__cell--span-3-tablet {
     width: auto;
     grid-column-end: span 12;
