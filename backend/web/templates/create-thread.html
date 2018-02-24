@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <form class="tc-form" method="post">
+  <form id="create-thread-form" class="tc-form" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="board" value="" />
     <h1 class="mdc-typography--display1">Create a Thread</h1>
     <div class="mdc-text-field mdc-text-field--fullwidth" data-mdc-auto-init="MDCTextField">
-      <input class="mdc-text-field__input" type="text" id="title">
+      <input class="mdc-text-field__input" type="text" name="title" required>
       <label for="title" class="mdc-text-field__label">Title</label>
       <div class="mdc-line-ripple"></div>
     </div>
     <br />
-    <div class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
+    <div id="board-select" class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
       <div class="mdc-select__surface mdc-ripple-upgraded" tabindex="0">
         <div class="mdc-select__label">Board</div>
         <div class="mdc-select__selected-text"></div>
@@ -25,8 +27,10 @@
       </div>
     </div>
     <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--upgraded" data-mdc-auto-init="MDCTextField">
-      <textarea id="content" class="mdc-text-field__input" rows="8"></textarea>
+      <textarea name="content" class="mdc-text-field__input" rows="8"></textarea>
       <label for="content" class="mdc-text-field__label">Content</label>
     </div>
+    <br />
+    <button class="mdc-button mdc-button--raised tc-raised-secondary" type="submit" form="create-thread-form" value="Submit">Submit</button>
   </form>
 {% endblock %}
