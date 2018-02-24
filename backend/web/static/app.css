@@ -26,6 +26,9 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  resize: none !important;
+}
 
 .mdc-toolbar-fixed-adjust {
   margin-top: 80px;
@@ -47,6 +50,10 @@ a {
 /* Align chip with paragraph text. */
 .mdc-chip {
   margin-left: 0;
+}
+
+.mdc-text-field--textarea {
+  margin-top: 64px;
 }
 
 @media (max-width: 839px) {
@@ -71,6 +78,11 @@ a {
 
 .tc-action-box {
   background: white;
+}
+
+.tc-form {
+  background: white;
+  padding: 16px;
 }
 
 .tc-full {
