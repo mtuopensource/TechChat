@@ -40,7 +40,6 @@ def createthread(request):
     response = client.post('/api/users/login/', {'email': 'ajwalhof@mtu.edu', 'password': 'test'})
     response = client.get('/api/boards/', {})
     boards = json.loads(response.content)
-    submit = None
     if request.method == "POST":
         board = request.POST.get('board')
         title = request.POST.get('title')
@@ -53,4 +52,4 @@ def createthread(request):
         if response.status_code == 201:
             id = json.loads(response.content).get('id')
             return redirect('/web/thread/' + id + '/')
-    return render(request, 'create-thread.html', {'boards': boards, 'submit': submit})
+    return render(request, 'create-thread.html', {'boards': boards})
