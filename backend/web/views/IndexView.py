@@ -20,7 +20,16 @@ def board(request, id):
     response = client.get('/api/boards/', {})
     boards = json.loads(response.content)
     response = client.get('/api/boards/' + id + '/', {})
-    threads = json.loads(response.content)
+    board = json.loads(response.content)
+    rendered = render_to_string('board.html', {'board': board, 'boards': boards})
+    return HttpResponse(rendered)
 
-    rendered = render_to_string('board.html', {'threads': threads, 'boards': boards})
+def thread(request, id):
+    client = Client()
+    response = client.post('/api/users/login/', {'email': 'ajwalhof@mtu.edu', 'password': 'test'})
+    response = client.get('/api/boards/', {})
+    boards = json.loads(response.content)
+    response = client.get('/api/threads/' + id + '/', {})
+    thread = json.loads(response.content)
+    rendered = render_to_string('thread.html', {'thread': thread, 'boards': boards})
     return HttpResponse(rendered)

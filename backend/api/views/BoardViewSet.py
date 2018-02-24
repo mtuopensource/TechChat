@@ -19,5 +19,7 @@ class BoardViewSet(ModelViewSet):
         context = {
             'request': request # Used to determine ip, author
         }
-        serializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
-        return Response(serializer.data)
+        threadSerializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
+        boardSerializer = BoardSerializer(Board.objects.filter(id=id), context=context, many=True)
+        boardSerializer.data[0]['threads'] = threadSerializer.data
+        return Response(boardSerializer.data[0])

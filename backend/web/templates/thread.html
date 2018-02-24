@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>{{ board.title }}</h1>
-  <p>{{ board.description }}</p>
+  <h1 class="mdc-typography--display3">
+    {{ thread.title }}
+  </h1>
+  <p class="mdc-typography--text">
+    {{ thread.content }}
+  </p>
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
-    {% for thread in board.threads %}
+    {% for post in thread.posts %}
       <li class="mdc-list-item">
         <span class="mdc-list-item__text mdc-typography--headline">
-          {{ thread.title }}
-          <span class="mdc-list-item__secondary-text">{{ thread.content|truncatewords:25 }}</span>
-          <span class="mdc-list-item__secondary-text">Poster Alias: Fuzzy Barney</span>
+          {{ post.content }}
         </span>
         <!-- TODO: Add aria-label and title, onclick="event.preventDefault();" -->
-        <a href="/web/thread/{{thread.id}}" class="mdc-list-item__meta material-icons">favorite</a>
+        <a href="#" class="mdc-list-item__meta material-icons">favorite</a>
       </li>
       <hr />
     {% endfor %}

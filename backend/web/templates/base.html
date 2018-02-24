@@ -28,10 +28,14 @@
         <nav class="mdc-drawer__drawer">
           <div class="mdc-drawer__toolbar-spacer"></div>
           <div class="mdc-list-group">
+            <h3 class="mdc-list-group__subheader mdc-typography--display1">Boards</h3>
+            <hr class="mdc-list-divider">
             <nav class="mdc-list">
-              <a class="mdc-list-item mdc-list-item--selected" href="#">
-                Board Title
-              </a>
+              {% for board in boards %}
+                <a class="mdc-list-item" href="/web/board/{{ board.id }}">
+                  <span class="mdc-typography--headline">{{ board.title }}</span>
+                </a>
+              {% endfor %}
             </nav>
           </div>
         </nav>

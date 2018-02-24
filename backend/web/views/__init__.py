@@ -1,3 +1,3 @@
-from web.views.IndexView import index, board
+from web.views.IndexView import index, board, thread
 
-__all__ = ['index', 'board']
+__all__ = ['index', 'board', 'thread']

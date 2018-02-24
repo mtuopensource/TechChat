@@ -21,5 +21,7 @@ class ThreadViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, Dest
         context = {
             'request': request # Used to determine ip, author
         }
-        serializer = ThreadSerializer(Post.objects.filter(thread=id), context=context, many=True)
-        return Response(serializer.data)
+        postSerializer = PostSerializer(Post.objects.filter(thread=id), context=context, many=True)
+        threadSerializer = ThreadSerializer(Thread.objects.filter(id=id), context=context, many=True)
+        threadSerializer.data[0]['posts'] = postSerializer.data
+        return Response(threadSerializer.data[0])
