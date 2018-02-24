@@ -1,9 +1,9 @@
 $(document).ready(function() {
   window.mdc.autoInit();
 
-  /* Update the hidden input when the select has changed. */
-  $("#board-select").on("MDCSelect:change", function() {
-    let select = new mdc.select.MDCSelect(this);
+  /* Update the hidden input when the form submits. */
+  $('#create-thread-form').submit(function() {
+    let select = new mdc.select.MDCSelect($('#board-select')[0]);
     $('input[name=board]').val(select.value);
   });
 });
