@@ -7,9 +7,9 @@
   </span>
 {% endblock %}
 {% block content %}
-  <ul class="mdc-list mdc-list--two-line tc-action-box">
+  <div class="mdc-list mdc-list--two-line tc-action-box">
     {% for thread in board.threads %}
-    <li href="#" class="tc-thread mdc-list-item">
+    <a href="/web/thread/{{ thread.id }}" class="tc-thread mdc-list-item">
       <span class="mdc-list-item__text">
         <span class="mdc-typography--display1">{{ thread.title }}</span>
         <span class="mdc-list-item__secondary-text">
@@ -34,7 +34,7 @@
       <span class="mdc-list-item__meta">
         <i class="material-icons" aria-hidden="true">bookmark</i>
       </span>
-    </li>
+    </a>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
