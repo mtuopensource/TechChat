@@ -18,10 +18,7 @@
             <div class="mdc-chip-set mdc-typography--caption tc-thread-meta">
               <div class="mdc-chip">
                 <div class="mdc-chip__text">
-                  <!-- FIXME: Calculate this in Python. This is horrible practice. The DOM can be corrupted. -->
-                  <script>
-                    document.write(moment("{{ thread.date_created }}", "YYYY-MM-DDTHH:mm:ss.SSSS[Z]").fromNow());
-                  </script>
+                  {{ thread.date_created_friendly }}
                 </div>
                 <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing">access_time</i>
               </div>

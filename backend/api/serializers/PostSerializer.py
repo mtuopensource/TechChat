@@ -1,8 +1,14 @@
+import humanize
+import datetime
+from rest_framework.serializers import SerializerMethodField
 from rest_framework_mongoengine.serializers import DocumentSerializer
 from api.models import Post, User
 from api.utils import get_client_ip
 
 class PostSerializer(DocumentSerializer):
+    date_created_friendly = SerializerMethodField()
+    date_updated_friendly = SerializerMethodField()
+
     class Meta:
         model = Post
         exclude = ('ip',) # Fields not displayed publicly
@@ -14,3 +20,9 @@ class PostSerializer(DocumentSerializer):
         ip = get_client_ip(request)
         author = User.objects.get(id=request.session.get('techchat_userid')) # TODO Constants
         return Post.objects.create(ip=ip, author=author, **validated_data)
+
+    def get_date_created_friendly(self, user):
+        return humanize.naturaltime(datetime.datetime.now() - user.date_created)
+
+    def get_date_updated_friendly(self, user):
+        return humanize.naturaltime(datetime.datetime.now() - user.date_updated)
