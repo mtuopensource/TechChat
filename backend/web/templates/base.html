@@ -62,14 +62,14 @@
                 </li>
               </ul>
               <h3 class="mdc-list-group__subheader">Boards</h3>
-              <ul class="mdc-list tc-action-box">
+              <div class="mdc-list tc-action-box">
                 {% for board in boards %}
-                <li class="mdc-list-item">
+                <a href="/web/board/{{ board.id }}/" class="mdc-list-item">
                   {{ board.title }}
                   <span class="mdc-list-item__meta">99</span>
-                </li>
+                </a>
                 {% endfor %}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
