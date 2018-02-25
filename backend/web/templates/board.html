@@ -8,33 +8,37 @@
 {% endblock %}
 {% block content %}
   <div class="mdc-list mdc-list--two-line tc-action-box">
-    {% for thread in board.threads %}
-    <a href="/web/thread/{{ thread.id }}" class="tc-thread mdc-list-item">
-      <span class="mdc-list-item__text">
-        <span class="mdc-typography--display1">{{ thread.title }}</span>
-        <span class="mdc-list-item__secondary-text">
-          <span class="mdc-typography--subheading2">{{ thread.content }}</span>
-          <div class="mdc-chip-set mdc-typography--caption tc-thread-meta">
-            <div class="mdc-chip">
-              <div class="mdc-chip__text">
-                <!-- FIXME: Calculate this in Python. This is horrible practice. The DOM can be corrupted. -->
-                <script>
-                  document.write(moment("{{ thread.date_created }}", "YYYY-MM-DDTHH:mm:ss.SSSS[Z]").fromNow());
-                </script>
+    {% if board.threads %}
+      {% for thread in board.threads %}
+      <a href="/web/thread/{{ thread.id }}" class="tc-thread mdc-list-item">
+        <span class="mdc-list-item__text">
+          <span class="mdc-typography--display1">{{ thread.title }}</span>
+          <span class="mdc-list-item__secondary-text">
+            <span class="mdc-typography--subheading2">{{ thread.content }}</span>
+            <div class="mdc-chip-set mdc-typography--caption tc-thread-meta">
+              <div class="mdc-chip">
+                <div class="mdc-chip__text">
+                  <!-- FIXME: Calculate this in Python. This is horrible practice. The DOM can be corrupted. -->
+                  <script>
+                    document.write(moment("{{ thread.date_created }}", "YYYY-MM-DDTHH:mm:ss.SSSS[Z]").fromNow());
+                  </script>
+                </div>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing">access_time</i>
               </div>
-              <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing">access_time</i>
+              <div class="mdc-chip">
+                <div class="mdc-chip__text">0 Comments</div>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing">comment</i>
+              </div>
             </div>
-            <div class="mdc-chip">
-              <div class="mdc-chip__text">0 Comments</div>
-              <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing">comment</i>
-            </div>
-          </div>
+          </span>
         </span>
-      </span>
-      <span class="mdc-list-item__meta">
-        <i class="material-icons" aria-hidden="true">bookmark</i>
-      </span>
-    </a>
-    {% endfor %}
+        <span class="mdc-list-item__meta">
+          <i class="material-icons" aria-hidden="true">bookmark</i>
+        </span>
+      </a>
+      {% endfor %}
+    {% else %}
+      <h1 class="mdc-typography--display1 tc-no-threads">There's nothing here!</h1>
+    {% endif %}
   </div>
 {% endblock %}

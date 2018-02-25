@@ -89,6 +89,10 @@ textarea {
   width: 100%;
 }
 
+.tc-no-threads {
+  padding: 32px;
+}
+
 /* FIXME: Workaround since .secondary-filled-button is broken in MDC Web. */
 .tc-raised-secondary {
   background-color: var(--mdc-theme-secondary) !important;
