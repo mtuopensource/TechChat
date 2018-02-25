@@ -4,6 +4,7 @@ from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateMo
 from api.models import Thread, Post
 from api.serializers import ThreadSerializer, PostSerializer
 from api.permissions import IsOwnerOrAdmin
+from api.response import NOT_FOUND
 
 # Threads can be created, retrieved, updated, and destroyed.
 # Threads cannot be listed for performance reasons.
@@ -21,7 +22,14 @@ class ThreadViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, Dest
         context = {
             'request': request # Used to determine ip, author
         }
-        postSerializer = PostSerializer(Post.objects.filter(thread=id), context=context, many=True)
-        threadSerializer = ThreadSerializer(Thread.objects.filter(id=id), context=context, many=True)
-        threadSerializer.data[0]['posts'] = postSerializer.data
-        return Response(threadSerializer.data[0])
+        try:
+            serializer = ThreadSerializer(Thread.objects.get(id=id), context=context)
+            postSerializer = PostSerializer(Post.objects.filter(thread=id), context=context, many=True)
+            return Response({
+                **serializer.data,
+                **{
+                    'posts': postSerializer.data
+                }
+            })
+        except Thread.DoesNotExist:
+            return NOT_FOUND.as_response()

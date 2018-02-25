@@ -3,6 +3,7 @@ from rest_framework_mongoengine.viewsets import ModelViewSet
 from api.models import Board, Thread
 from api.serializers import BoardSerializer, ThreadSerializer
 from api.permissions import IsAdminOrReadOnly
+from api.response import NOT_FOUND
 
 # Threads can be listed, created, retrieved, updated, and destroyed.
 class BoardViewSet(ModelViewSet):
@@ -19,7 +20,14 @@ class BoardViewSet(ModelViewSet):
         context = {
             'request': request # Used to determine ip, author
         }
-        threadSerializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
-        boardSerializer = BoardSerializer(Board.objects.filter(id=id), context=context, many=True)
-        boardSerializer.data[0]['threads'] = threadSerializer.data
-        return Response(boardSerializer.data[0])
+        try:
+            serializer = BoardSerializer(Board.objects.get(id=id), context=context)
+            threadSerializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
+            return Response({
+                **serializer.data,
+                **{
+                    'threads': threadSerializer.data
+                }
+            })
+        except Board.DoesNotExist:
+            return NOT_FOUND.as_response()
