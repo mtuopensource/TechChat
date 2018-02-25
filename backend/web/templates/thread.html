@@ -9,11 +9,9 @@
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
     {% for post in thread.posts %}
       <li class="mdc-list-item">
-        <span class="mdc-list-item__text mdc-typography--headline">
+        <span class="mdc-list-item__text mdc-typography--body1">
           {{ post.content }}
         </span>
-        <!-- TODO: Add aria-label and title, onclick="event.preventDefault();" -->
-        <a href="#" class="mdc-list-item__meta material-icons">favorite</a>
       </li>
       <hr />
     {% endfor %}
