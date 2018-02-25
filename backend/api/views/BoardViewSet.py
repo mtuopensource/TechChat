@@ -29,5 +29,5 @@ class BoardViewSet(ModelViewSet):
                     'threads': threadSerializer.data
                 }
             })
-        except Board.DoesNotExist:
+        except:
             return NOT_FOUND.as_response()

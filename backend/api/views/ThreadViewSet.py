@@ -31,5 +31,5 @@ class ThreadViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, Dest
                     'posts': postSerializer.data
                 }
             })
-        except Thread.DoesNotExist:
+        except:
             return NOT_FOUND.as_response()
