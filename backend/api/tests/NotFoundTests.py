@@ -9,7 +9,7 @@ class NotFoundTests(TestCase):
         self.client.post('/api/users/login/', {'email': 'test@mtu.edu', 'password': 'test'})
 
     # Provides an invalid Board id and expects an HTTP_404_NOT_FOUND response.
-    def test_invalid_id_board(self):
+    def test_invalid_id_boards(self):
         response = self.client.get('/api/boards/badid/')
         self.assertEqual(response.status_code, NOT_FOUND.status_code)
 
