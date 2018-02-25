@@ -52,4 +52,4 @@ def createthread(request):
         if response.status_code == 201:
             id = json.loads(response.content).get('id')
             return redirect('/web/thread/' + id + '/')
-    return render(request, 'create-thread.html', {'boards': boards})
+    return render(request, 'thread-create.html', {'boards': boards})
