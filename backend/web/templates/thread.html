@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mdc-typography--display3">
+    {{ thread.title }}
+  </h1>
+  <p class="mdc-typography--text">
+    {{ thread.content }}
+  </p>
+  <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
+    {% for post in thread.posts %}
+      <li class="mdc-list-item">
+        <span class="mdc-list-item__text mdc-typography--body1">
+          {{ post.content }}
+        </span>
+      </li>
+      <hr />
+    {% endfor %}
+  </ul>
+  <button class="mdc-fab material-icons tc-create-post" aria-label="Add">
+    <span class="mdc-fab__icon">add</span>
+  </button>
+{% endblock %}
