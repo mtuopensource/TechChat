@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^board/(?P<id>\w+)/$', board, name='board'),
     url(r'^thread/(?P<id>\w+)/$', thread, name='thread'),
-    url(r'^new/$', createthread, name='createthread'),
+    url(r'^create-thread/$', createthread, name='createthread'),
 ]
