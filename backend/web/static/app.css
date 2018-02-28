@@ -52,7 +52,7 @@ textarea {
   margin-left: 0;
 }
 
-.mdc-text-field--textarea {
+#create-thread-form > .mdc-text-field--textarea {
   margin-top: 64px;
 }
 
@@ -89,8 +89,21 @@ textarea {
   width: 100%;
 }
 
-.tc-no-threads {
+.tc-no-threads, .tc-no-posts {
   padding: 32px;
+}
+
+.tc-thread {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.tc-posts {
+  margin: 16px 0;
+}
+
+.tc-post {
+  padding: 16px;
 }
 
 /* FIXME: Workaround since .secondary-filled-button is broken in MDC Web. */
