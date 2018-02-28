@@ -32,8 +32,17 @@ def thread(request, id):
     boards = json.loads(response.content.decode('utf-8'))
     response = client.get('/api/threads/' + id + '/', {})
     thread = json.loads(response.content.decode('utf-8'))
-    rendered = render_to_string('thread.html', {'thread': thread, 'boards': boards})
-    return HttpResponse(rendered)
+    if request.method == "POST":
+        text = request.POST.get('content')
+        response = client.post('/api/posts/', {
+            'thread': thread.get('id'),
+            'content': text
+        })
+        if response.status_code == 201:
+            response = client.get('/api/threads/' + id + '/', {})
+            thread = json.loads(response.content.decode('utf-8'))
+            return render(request, 'thread.html', {'thread': thread, 'boards': boards, 'snackbar': 'Your comment has been posted!'})
+    return render(request, 'thread.html', {'thread': thread, 'boards': boards})
 
 def createthread(request):
     client = Client()
