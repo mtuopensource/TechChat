@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.mtuosc.techchat.ApiUrl;
 
 
@@ -13,51 +15,27 @@ import org.mtuosc.techchat.ApiUrl;
  * Created by ryan on 12/15/17.
  */
 
-public class UserAuthenticator extends Thread {
+public class UserAuthenticator extends AsyncTask<Void, Void, Response<JSONObject>> {
     private String email, password;
-    private boolean isAuthenticated = false;
     private Webb webb = Webb.create();
+    private AsyncApiResponse<Response<JSONObject>> responder;
 
 
-    public UserAuthenticator(String email, String password) {
+    public UserAuthenticator(String email, String password, AsyncApiResponse<Response<JSONObject>> responder) {
         webb.setBaseUri(ApiUrl.SERVER_URL);
         this.email = email;
         this.password = password;
+        this.responder = responder;
     }
 
-    private boolean logUserIn(String email, String password){
-        try {
-            Response<String> response = webb.post(ApiUrl.LOGIN).param("email", email).param("password", password).
-                    asString();
-            if (response.getStatusCode() == 200)
-                setAuthenticated(true);
-            return isAuthenticated;
-        }catch (Exception e){
-            return false;
-        }
 
-    }
-
-    private void setAuthenticated(boolean authenticated) {
-        isAuthenticated = authenticated;
-    }
-
-    public boolean isAuthenticated(){
-        return isAuthenticated;
+    @Override
+    protected Response<JSONObject> doInBackground(Void... voids) {
+        return webb.post(ApiUrl.LOGIN).param("email", email).param("password", password).asJsonObject();
     }
 
     @Override
-    public void run() {
-        super.run();
-        logUserIn(email, password);
-    }
-
-    public void startLogin(){
-        start();
-        try {
-            join(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    protected void onPostExecute(Response<JSONObject> jsonObjectResponse) {
+        responder.taskCompleted(jsonObjectResponse);
     }
 }

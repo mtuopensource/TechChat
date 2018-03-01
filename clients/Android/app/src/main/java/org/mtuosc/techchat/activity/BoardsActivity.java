@@ -1,14 +1,11 @@
 package org.mtuosc.techchat.activity;
 
-import android.os.AsyncTask;
+
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,22 +18,23 @@ import android.view.MenuItem;
 
 
 
-import org.mtuosc.techchat.ApiUrl;
+
+import org.mtuosc.techchat.BoardsAdapter;
 import org.mtuosc.techchat.R;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
+import org.mtuosc.techchat.asynctasks.GetBoards;
+import org.mtuosc.techchat.models.Board;
 
 
+import java.util.ArrayList;
 
 
 /**
  * This class will handle the boards view. The nav bar will contain some quick settings
  */
-public class BoardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BoardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , AsyncApiResponse{
     private RecyclerView boardRecyclerView;
+    BoardsAdapter adapter;
 
 
 
@@ -60,8 +58,16 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
 
         boardRecyclerView = findViewById(R.id.board_list);
         boardRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager boardLayoutManager = new LinearLayoutManager(this);
-        boardRecyclerView.setLayoutManager(boardLayoutManager);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        boardRecyclerView.setLayoutManager(llm);
+
+        adapter = new BoardsAdapter(new ArrayList<Board>());
+        String cookie = getIntent().getExtras().getString("cookie");
+        GetBoards getBoards = new GetBoards(cookie, adapter, this);
+        getBoards.execute(10); //TODO default to 10: change this later
+
+
 
     }
 
@@ -119,4 +125,8 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
     }
 
 
+    @Override
+    public void taskCompleted(Object result) {
+        boardRecyclerView.setAdapter(adapter);
+    }
 }
