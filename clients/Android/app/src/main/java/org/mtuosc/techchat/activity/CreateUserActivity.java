@@ -75,7 +75,7 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
     public void taskCompleted(Response<JSONObject> result) {
         if (result.getStatusCode() == 201){
             //TODO do other task after user creation
-            Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show();
+
         }else{
             Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
         }
