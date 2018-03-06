@@ -9,6 +9,17 @@ from django.template.loader import render_to_string
 
 from .Helper import *
 
+def logout(request, client=None):
+    destroy_session(request)
+    return redirect('/web/login/')
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        return authenticate(request, username, password)
+    return render(request, 'login.html')
+    
 @check_authentication
 def index(request, client=None):
     boards_list = get_boards_list(client)
@@ -25,19 +36,15 @@ def board(request, id, client=None):
         'boards_list': boards_list
     })
 
-def login(request):
-    if request.method == "POST":
-        c = Client()
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        response = c.post('/api/users/login/', {'email': username, 'password': password})
-        if response.status_code == SUCCESS.status_code:
-            request.session['techchat_cookies'] = c.cookies.output(header='', sep='; ')
-            request.session.modified = True
-            return redirect('/web/')
-        else:
-            return render(request, 'login.html', { 'snackbar': str(response.content, 'utf-8') })
-    return render(request, 'login.html')
+
+
+
+
+
+
+
+
+
 
 def thread(request, id):
     client = Client()

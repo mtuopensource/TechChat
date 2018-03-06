@@ -1,5 +1,7 @@
 import json
 from django.test import Client
+from api.response import SUCCESS
+from django.shortcuts import render, redirect
 
 def get_client(request):
     if 'techchat_cookies' in request.session:
@@ -22,3 +24,23 @@ def get_board(client, id):
 def get_boards_list(client):
     boards_list = str(client.get('/api/boards/').content, 'utf-8')
     return json.loads(boards_list)
+
+def authenticate(request, username, password):
+    client = Client()
+    response = client.post('/api/users/login/', {
+        'email':    username,
+        'password': password
+    })
+    if response.status_code == SUCCESS.status_code:
+        request.session['techchat_cookies'] = client.cookies.output(header='', sep=';') # TODO Constants
+        request.session.modified = True
+        return redirect('/web/')
+    message = json.loads(str(response.content, 'utf-8'))
+    return render(request, 'login.html', {
+        'snackbar': message['detail']
+    })
+
+def destroy_session(request):
+    client = get_client(request)
+    client.post('/api/users/logout/')
+    request.session.flush()
