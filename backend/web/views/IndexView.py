@@ -9,17 +9,19 @@ from django.template.loader import render_to_string
 
 from .Helper import *
 
-def logout(request, client=None):
-    destroy_session(request)
-    return redirect('/web/login/')
-
 def login(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         return authenticate(request, username, password)
     return render(request, 'login.html')
-    
+
+@check_authentication
+def logout(request, client=None):
+    client.post('/api/users/logout/')
+    request.session.flush()
+    return redirect('/web/login/')
+
 @check_authentication
 def index(request, client=None):
     boards_list = get_boards_list(client)

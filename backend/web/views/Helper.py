@@ -39,8 +39,3 @@ def authenticate(request, username, password):
     return render(request, 'login.html', {
         'snackbar': message['detail']
     })
-
-def destroy_session(request):
-    client = get_client(request)
-    client.post('/api/users/logout/')
-    request.session.flush()
