@@ -61,7 +61,7 @@
               </ul>
               <h3 class="mdc-list-group__subheader">Boards</h3>
               <div class="mdc-list tc-action-box">
-                {% for board in boards %}
+                {% for board in boards_list %}
                 <a href="/web/board/{{ board.id }}/" class="mdc-list-item">
                   {{ board.title }}
                 </a>
