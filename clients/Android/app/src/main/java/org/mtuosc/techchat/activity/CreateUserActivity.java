@@ -56,7 +56,7 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
         String email = emailEditText.getText().toString();
         if (passwordsMatch() && validator.isEmailValid(email)) {
             String password = passwordEditText.getText().toString();
-            signUpTask = new SignUpUserTask("http://141.219.197.116:8000", email, password, this);
+            signUpTask = new SignUpUserTask(email, password, this);
             signUpTask.execute();
         }
     }
@@ -75,7 +75,7 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
     public void taskCompleted(Response<JSONObject> result) {
         if (result.getStatusCode() == 201){
             //TODO do other task after user creation
-            Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show();
+
         }else{
             Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
         }

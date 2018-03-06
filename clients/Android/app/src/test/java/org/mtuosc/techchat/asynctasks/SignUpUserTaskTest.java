@@ -18,11 +18,11 @@ public class SignUpUserTaskTest {
     @Test
     public void testUserCreation(){
 
-        SignUpUserTask task = new SignUpUserTask("http://ci.mtuopensource.club:8000",
-            "tester@mtu.edu","test",new AsyncApiResponse<Response<JSONObject>>() {
+        SignUpUserTask task = new SignUpUserTask("test@mtu.edu","test",
+            new AsyncApiResponse<Response<JSONObject>>() {
                 @Override
                 public void taskCompleted(Response<JSONObject> result) {
-                      if (result.getStatusCode() != 201)
+                      if (result.getStatusCode() != 201 ||  result.getStatusCode() == 401)
                           fail();
                 }
             });
