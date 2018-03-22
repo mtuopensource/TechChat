@@ -1,6 +1,7 @@
 from rest_framework.permissions import BasePermission
+from api.resources import Constants
 
 # Grants full permissions if the User is authenticated.
 class IsAuthenticated(BasePermission):
     def has_permission(self, request, view):
-        return 'techchat_userid' in request.session # TODO Constants
+        return Constants.USER_ID_KEY in request.session
