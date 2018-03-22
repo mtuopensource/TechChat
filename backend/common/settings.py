@@ -86,7 +86,6 @@ DATABASES = {
 }
 
 # Setup MongoEngine
-print(os.getenv("HOST"))
 mongoengine.connect(host=os.getenv("HOST"))
 
 # Password validation
