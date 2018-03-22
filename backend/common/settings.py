@@ -86,8 +86,8 @@ DATABASES = {
 }
 
 # Setup MongoEngine
-# TODO: Add an environment variable for host, so the ip is not public.
-mongoengine.connect(db="techchat", host="ci.mtuopensource.club")
+print(os.getenv("HOST"))
+mongoengine.connect(host=os.getenv("HOST"))
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
