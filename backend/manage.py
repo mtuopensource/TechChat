@@ -5,8 +5,13 @@ import dotenv
 
 if __name__ == "__main__":
     dotenv.read_dotenv()
-
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "common.settings")
+
+    if "HOST" not in os.environ:
+        raise EnvironmentError("dotenv must contain HOST key")
+    if "ENCODING" not in os.environ:
+        raise EnvironmentError("dotenv must contain ENCODING key")
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
