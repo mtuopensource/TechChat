@@ -1,4 +1,5 @@
 import bcrypt
+import os
 import datetime
 from mongoengine import Document
 from mongoengine.fields import BooleanField, DateTimeField, EmailField, StringField
@@ -24,6 +25,6 @@ class User(Document):
 
     login_manager = LoginManager()
     def check_password(self, password):
-        a = password.encode('utf-8') # TODO Environment variables
-        b = self.password.encode('utf-8') # TODO Environment variables
+        a = password.encode(os.getenv('ENCODING'))
+        b = self.password.encode(os.getenv('ENCODING'))
         return bcrypt.checkpw(a, b)
