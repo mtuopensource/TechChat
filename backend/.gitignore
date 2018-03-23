@@ -4,3 +4,6 @@
 # Temporary directories
 __pycache__/
 .idea/
+
+# Protected information
+.env

@@ -4,8 +4,11 @@ from rest_framework.serializers import SerializerMethodField
 from rest_framework_mongoengine.serializers import DocumentSerializer
 from api.models import Post, User
 from api.utils import get_client_ip
+from api.serializers.UserSerializer import UserSerializer
+from api.resources import Constants
 
 class PostSerializer(DocumentSerializer):
+    author_friendly = SerializerMethodField()
     date_created_friendly = SerializerMethodField()
     date_updated_friendly = SerializerMethodField()
 
@@ -18,7 +21,7 @@ class PostSerializer(DocumentSerializer):
     def create(self, validated_data):
         request = self.context.get('request')
         ip = get_client_ip(request)
-        author = User.objects.get(id=request.session.get('techchat_userid')) # TODO Constants
+        author = User.objects.get(id=request.session.get(Constants.USER_ID_KEY))
         return Post.objects.create(ip=ip, author=author, **validated_data)
 
     def get_date_created_friendly(self, post):
@@ -26,3 +29,7 @@ class PostSerializer(DocumentSerializer):
 
     def get_date_updated_friendly(self, post):
         return humanize.naturaltime(datetime.datetime.now() - post.date_updated)
+
+    def get_author_friendly(self, post):
+        serializer = UserSerializer(User.objects.get(id=post.author.id))
+        return serializer.data

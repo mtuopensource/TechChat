@@ -13,5 +13,5 @@ router.register(r'posts', PostViewSet, r"post")
 router.register(r'participants', ParticipantViewSet, r"participant")
 
 urlpatterns = [
-    url(r'^', include(router.urls, namespace='api'))
+    url(r'^', include((router.urls, 'api'), namespace='api'))
 ]

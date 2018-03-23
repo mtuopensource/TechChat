@@ -1,6 +1,7 @@
 from django.db.models import Manager
 from mongoengine import DoesNotExist
 from api.response import INSUFFICIENT_INFORMATION, INVALID_CREDENTIALS, SUCCESS
+from api.resources import Constants
 
 class LoginManager(Manager):
 
@@ -19,7 +20,7 @@ class LoginManager(Manager):
                 user = User.objects.get(email=username)
                 if user.check_password(password):
                     response = SUCCESS.as_response() # User exists and the password matches, we're in
-                    request.session['techchat_userid'] = str(user.id) # TODO Constants
+                    request.session[Constants.USER_ID_KEY] = str(user.id)
                     request.session.modified = True # Save changes to the database
                     return response
                 else:
@@ -31,8 +32,8 @@ class LoginManager(Manager):
     # Returns 200 OK
     # @see https://docs.djangoproject.com/en/2.0/topics/http/sessions/
     def logout(self, request):
-        if 'techchat_userid' in request.session:
-            del request.session['techchat_userid'] # TODO Constants
+        if Constants.USER_ID_KEY in request.session:
+            del request.session[Constants.USER_ID_KEY]
             request.session.modified = True # Save changes to the database
         return SUCCESS.as_response()
 
