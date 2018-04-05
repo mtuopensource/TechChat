@@ -21,9 +21,30 @@ def get_board(client, id):
     board = str(client.get(f'/api/boards/{id}/').content, 'utf-8')
     return json.loads(board)
 
+def get_thread(client, id):
+    thread = str(client.get(f'/api/threads/{id}/').content, 'utf-8')
+    return json.loads(thread)
+
 def get_boards_list(client):
     boards_list = str(client.get('/api/boards/').content, 'utf-8')
     return json.loads(boards_list)
+
+def post_comment(client, id, comment_text):
+    response = client.post('/api/posts/', {
+        'thread':  id,
+        'content': comment_text
+    })
+    return response.status_code == 201
+
+def create_thread(client, board, thread_title, thread_content):
+    response = client.post('/api/threads/', {
+        'board': board,
+        'title': thread_title,
+        'content': thread_content
+    })
+    if response.status_code == 201:
+        return json.loads(response.content.decode('utf-8')).get('id')
+    return None
 
 def authenticate(request, username, password):
     client = Client()
