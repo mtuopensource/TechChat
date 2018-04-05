@@ -31,57 +31,38 @@ def index(request, client=None):
 
 @check_authentication
 def board(request, id, client=None):
-    board       = get_board      (client, id)
+    board = get_board(client, id)
     boards_list = get_boards_list(client)
     return render(request, 'board.html', {
-        'board':       board,
+        'board': board,
         'boards_list': boards_list
     })
 
-
-
-
-
-
-
-
-
-
-
-def thread(request, id):
-    client = Client()
-    response = client.post('/api/users/login/', {'email': 'ajwalhof@mtu.edu', 'password': 'test'})
-    response = client.get('/api/boards/', {})
-    boards = json.loads(response.content.decode('utf-8'))
-    response = client.get('/api/threads/' + id + '/', {})
-    thread = json.loads(response.content.decode('utf-8'))
+@check_authentication
+def thread(request, id, client=None):
+    boards_list = get_boards_list(client)
+    snackbar = None
+    if request.method == 'POST':
+        comment_text = request.POST['content']
+        if post_comment(client, id, comment_text):
+            snackbar = 'Your comment has been posted!'
+    thread = get_thread(client, id)
+    return render(request, 'thread.html', {
+        'thread': thread,
+        'boards_list': boards_list,
+        'snackbar': snackbar
+    })
+    
+@check_authentication
+def createthread(request, client=None):
+    boards_list = get_boards_list(client)
     if request.method == "POST":
-        text = request.POST.get('content')
-        response = client.post('/api/posts/', {
-            'thread': thread.get('id'),
-            'content': text
-        })
-        if response.status_code == 201:
-            response = client.get('/api/threads/' + id + '/', {})
-            thread = json.loads(response.content.decode('utf-8'))
-            return render(request, 'thread.html', {'thread': thread, 'boards': boards, 'snackbar': 'Your comment has been posted!'})
-    return render(request, 'thread.html', {'thread': thread, 'boards': boards})
-
-def createthread(request):
-    client = Client()
-    response = client.post('/api/users/login/', {'email': 'ajwalhof@mtu.edu', 'password': 'test'})
-    response = client.get('/api/boards/', {})
-    boards = json.loads(response.content.decode('utf-8'))
-    if request.method == "POST":
-        board = request.POST.get('board')
-        title = request.POST.get('title')
-        ttext = request.POST.get('content')
-        response = client.post('/api/threads/', {
-            'board': board,
-            'title': title,
-            'content': ttext
-        })
-        if response.status_code == 201:
-            id = json.loads(response.content.decode('utf-8')).get('id')
+        board = request.POST['board']
+        thread_title = request.POST['title']
+        thread_content = request.POST['content']
+        id = create_thread(client, board, thread_title, thread_content)
+        if id is not None:
             return redirect('/web/thread/' + id + '/')
-    return render(request, 'thread-create.html', {'boards': boards})
+    return render(request, 'thread-create.html', {
+        'boards_list': boards_list
+    })

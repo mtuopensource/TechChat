@@ -18,7 +18,7 @@
       </div>
       <div class="mdc-menu mdc-select__menu">
         <ul class="mdc-list mdc-menu__items">
-          {% for board in boards %}
+          {% for board in boards_list %}
             {% if forloop.first %}
               <li class="mdc-list-item" role="option" id="{{ board.id }}" tabindex="0" aria-selected>
                 {{ board.title }}
