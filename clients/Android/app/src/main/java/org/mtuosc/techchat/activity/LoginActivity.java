@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
             Intent moveToBoards = new Intent(this, BoardsActivity.class);
             moveToBoards.putExtra("cookie", userData.getCookie());
             startActivity(moveToBoards);
+            finish();
         }
 
         // check the shared preference for user data, auto login
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
             Intent moveToBoards = new Intent(this, BoardsActivity.class);
             moveToBoards.putExtra("cookie", cookieData);
             startActivity(moveToBoards);
+            finish(); // prevents users going back
         }else {
             Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
         }
@@ -135,7 +137,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
         submitButton.setText(R.string.action_sign_in);
     }
 
-    private String getCookieData(String cookieSession) {
+    //TODO: Make this into a helper class or something
+    public static String getCookieData(String cookieSession) {
         final String regex = "(?<=sessionid=)(\\w+)";
 
         final Pattern pattern = Pattern.compile(regex);
