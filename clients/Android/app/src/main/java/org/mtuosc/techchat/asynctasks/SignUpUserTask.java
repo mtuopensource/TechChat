@@ -2,6 +2,7 @@ package org.mtuosc.techchat.asynctasks;
 
 import android.os.AsyncTask;
 
+import android.util.Log;
 import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
@@ -16,9 +17,9 @@ public class SignUpUserTask extends AsyncTask<Void, Void, Response<JSONObject>>{
     private Webb webb = Webb.create();
     private String email;
     private String password;
-    private AsyncApiResponse responder;
+    private AsyncApiResponse<Response<JSONObject>> responder;
 
-    public SignUpUserTask(String email, String password, AsyncApiResponse responder) {
+    public SignUpUserTask(String email, String password, AsyncApiResponse<Response<JSONObject>> responder) {
         webb.setBaseUri(ApiUrl.SERVER_URL);
         this.email = email;
         this.password = password;
@@ -33,7 +34,13 @@ public class SignUpUserTask extends AsyncTask<Void, Void, Response<JSONObject>>{
 
     @Override
     protected void onPostExecute(Response<JSONObject> jsonObjectResponse) {
-        super.onPostExecute(jsonObjectResponse);
+        String signupCookie = jsonObjectResponse.getHeaderField("Set-cookie");
+        // TODO find a better solution
+        if (signupCookie == null){
+            UserAuthenticator authenticator = new UserAuthenticator(this.email, this.password, responder);
+            authenticator.execute();
+            return;
+        }
         responder.taskCompleted(jsonObjectResponse);
     }
 }

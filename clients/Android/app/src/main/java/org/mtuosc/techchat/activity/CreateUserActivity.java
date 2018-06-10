@@ -77,7 +77,7 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
 
     @Override
     public void taskCompleted(Response<JSONObject> result) {
-        if (result.getStatusCode() == 201){
+        if (result.getStatusCode() == 201 || result.getStatusCode() == 200){
             String cookieSession = result.getHeaderField("Set-Cookie");
             String cookie = LoginActivity.getCookieData(cookieSession);
 
