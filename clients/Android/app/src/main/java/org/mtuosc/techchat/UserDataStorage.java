@@ -28,4 +28,10 @@ public class UserDataStorage {
         cookie = sharedPreferences.getString("cookie", cookie);
         return new UserData(cookie);
     }
+
+    public void removeCurrentUserData(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("cookie");
+        editor.apply();
+    }
 }
