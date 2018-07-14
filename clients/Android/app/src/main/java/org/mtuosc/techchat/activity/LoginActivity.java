@@ -23,6 +23,8 @@ import com.goebl.david.Response;
 import org.json.JSONObject;
 import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
+import org.mtuosc.techchat.UserData;
+import org.mtuosc.techchat.UserDataStorage;
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.asynctasks.UserAuthenticator;
 
@@ -42,13 +44,21 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
     private TextInputLayout passwordTextWrapper;
     private ProgressBar loginProgress;
     private Button submitButton;
+    private UserDataStorage dataStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_base);
 
-
+        dataStorage = new UserDataStorage(getSharedPreferences("TechChat", Context.MODE_PRIVATE));
+        UserData userData = dataStorage.getCurrentUserData();
+        if (userData.userExists()) {
+            Intent moveToBoards = new Intent(this, BoardsActivity.class);
+            moveToBoards.putExtra("cookie", userData.getCookie());
+            startActivity(moveToBoards);
+            finish();
+        }
 
         // check the shared preference for user data, auto login
 
@@ -57,6 +67,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
         loginProgress = findViewById(R.id.login_progress);
         submitButton = findViewById(R.id.email_sign_in_button);
     }
+
+
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -110,9 +122,14 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
         if (result.getStatusCode() == 200){
             String cookieSession = result.getHeaderField("Set-Cookie"); //TODO parse out cookie
             String cookieData = getCookieData(cookieSession);
+
+            // saving the user cookie
+            dataStorage.saveUserData(new UserData(cookieData));
+
             Intent moveToBoards = new Intent(this, BoardsActivity.class);
             moveToBoards.putExtra("cookie", cookieData);
             startActivity(moveToBoards);
+            finish(); // prevents users going back
         }else {
             Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
         }
@@ -120,7 +137,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
         submitButton.setText(R.string.action_sign_in);
     }
 
-    private String getCookieData(String cookieSession) {
+    //TODO: Make this into a helper class or something
+    public static String getCookieData(String cookieSession) {
         final String regex = "(?<=sessionid=)(\\w+)";
 
         final Pattern pattern = Pattern.compile(regex);

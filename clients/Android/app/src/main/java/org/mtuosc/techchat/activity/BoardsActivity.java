@@ -1,6 +1,8 @@
 package org.mtuosc.techchat.activity;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,6 +24,7 @@ import android.view.MenuItem;
 
 import org.mtuosc.techchat.BoardsAdapter;
 import org.mtuosc.techchat.R;
+import org.mtuosc.techchat.UserDataStorage;
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.asynctasks.GetBoards;
 import org.mtuosc.techchat.models.Board;
@@ -96,9 +100,7 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -109,10 +111,12 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_logout){
+            UserDataStorage storage = new UserDataStorage(getSharedPreferences("TechChat", Context.MODE_PRIVATE));
+            storage.removeCurrentUserData();
+            Intent goToLogin = new Intent(this, LoginActivity.class);
+            startActivity(goToLogin);
+            finish();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

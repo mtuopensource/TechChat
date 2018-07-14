@@ -1,5 +1,7 @@
 package org.mtuosc.techchat.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 import com.goebl.david.Response;
 
 import org.json.JSONObject;
+import org.mtuosc.techchat.UserData;
+import org.mtuosc.techchat.UserDataStorage;
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
@@ -73,8 +77,18 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
 
     @Override
     public void taskCompleted(Response<JSONObject> result) {
-        if (result.getStatusCode() == 201){
-            //TODO do other task after user creation
+        if (result.getStatusCode() == 201 || result.getStatusCode() == 200){
+            String cookieSession = result.getHeaderField("Set-Cookie");
+            String cookie = LoginActivity.getCookieData(cookieSession);
+
+            //saving cookie to file
+            UserDataStorage storage = new UserDataStorage(getSharedPreferences("TechChat", Context.MODE_PRIVATE));
+            storage.saveUserData(new UserData(cookie));
+
+            // Move user to boards activity
+            Intent moveToBoards = new Intent(this, BoardsActivity.class);
+            moveToBoards.putExtra("cookie", cookie);
+            startActivity(moveToBoards);
 
         }else{
             Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
