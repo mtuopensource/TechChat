@@ -4,10 +4,7 @@ package org.mtuosc.techchat.activity;
 import android.content.Intent;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 
-import android.net.Uri;
-import android.os.PatternMatcher;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,7 +18,7 @@ import android.widget.Toast;
 import com.goebl.david.Response;
 
 import org.json.JSONObject;
-import org.mtuosc.techchat.EmailPasswordValidator;
+import org.mtuosc.techchat.utils.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
 import org.mtuosc.techchat.UserData;
 import org.mtuosc.techchat.UserDataStorage;
@@ -34,7 +31,7 @@ import java.util.regex.Pattern;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONObject>> {
+public class LoginActivity extends BaseInternetActivity implements AsyncApiResponse<Response<JSONObject>> {
     /**
      * regular expression found at https://en.wikipedia.org/wiki/Email_address#Valid_email_addresses
      */
@@ -70,10 +67,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
 
 
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
+
 
     /**
      * Moves the user to the create user activity
@@ -85,21 +79,27 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
     }
 
     public void authenticateUser(View view) {
-        String email = emailTextWrapper.getEditText().getText().toString();
-        String password = passwordTextWrapper.getEditText().getText().toString();
-        if(showedErrorsToUser(email, password))
-            return; // don't submit the form
+        if (hasInternet()) {
+            String email = emailTextWrapper.getEditText().getText().toString();
+            String password = passwordTextWrapper.getEditText().getText().toString();
 
-        // send the form to backend
-        UserAuthenticator authenticator = new UserAuthenticator(email, password, this);
+            if (showedInputErrorsToUser(email, password))
+                return; // don't submit the form
 
-        loginProgress.setVisibility(View.VISIBLE);
-        submitButton.setText("");
+            // send the form to backend
 
-        authenticator.execute();
+            UserAuthenticator authenticator = new UserAuthenticator(email, password, this);
+
+            loginProgress.setVisibility(View.VISIBLE);
+            submitButton.setText("");
+
+            authenticator.execute();
+        }else
+            showConnectionWarning();
+
     }
 
-    private boolean showedErrorsToUser(String email, String password){
+    private boolean showedInputErrorsToUser(String email, String password){
         boolean errorShown = false;
         if (!validator.isEmailValid(email)) {
             emailTextWrapper.getEditText().setError("Invalid Email");
@@ -109,10 +109,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncApiResponse
             errorShown = true;
             passwordTextWrapper.getEditText().setError("Not a Valid Password");
         }
-        if (!isNetworkConnected()) {
-            Toast.makeText(this, "No Network", Toast.LENGTH_SHORT).show();
-            errorShown = true;
-        }
+
         return errorShown;
     }
 
