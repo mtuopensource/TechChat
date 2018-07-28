@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import org.mtuosc.techchat.UserData;
 import org.mtuosc.techchat.UserDataStorage;
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
-import org.mtuosc.techchat.EmailPasswordValidator;
+import org.mtuosc.techchat.utils.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
 import org.mtuosc.techchat.asynctasks.SignUpUserTask;
 
@@ -27,7 +27,7 @@ import org.mtuosc.techchat.asynctasks.SignUpUserTask;
  * Created by ryan on 1/27/18.
  */
 
-public class CreateUserActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONObject>> {
+public class CreateUserActivity extends BaseInternetActivity implements AsyncApiResponse<Response<JSONObject>> {
     private EditText confirmEditText;
     private EditText passwordEditText;
     private EditText emailEditText;
@@ -49,6 +49,7 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
     }
     private TextView createTermsOfServiceText(){
         TextView termsOfServ = findViewById(R.id.terms_of_service);
+        // TODO: Find cleaner solution for external links
         termsOfServ.setText(Html.fromHtml("<p> By Tapping the button above, you subscribe yourself to our " +
                 "<a href=\"http://google.com\">Terms of Service</a> and our <a href=\"https://google.com\">Privacy Policy</a> </p>"));
         termsOfServ.setMovementMethod(LinkMovementMethod.getInstance());
@@ -56,13 +57,15 @@ public class CreateUserActivity extends AppCompatActivity implements AsyncApiRes
     }
 
     public void signUpUser(View view) {
-
-        String email = emailEditText.getText().toString();
-        if (passwordsMatch() && validator.isEmailValid(email)) {
-            String password = passwordEditText.getText().toString();
-            signUpTask = new SignUpUserTask(email, password, this);
-            signUpTask.execute();
-        }
+        if (hasInternet()) {
+            String email = emailEditText.getText().toString();
+            if (passwordsMatch() && validator.isEmailValid(email)) {
+                String password = passwordEditText.getText().toString();
+                signUpTask = new SignUpUserTask(email, password, this);
+                signUpTask.execute();
+            }
+        }else
+            showConnectionWarning();
     }
 
     private boolean passwordsMatch() {

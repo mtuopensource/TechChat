@@ -8,7 +8,7 @@ import com.goebl.david.Webb;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.mtuosc.techchat.ApiUrl;
-import org.mtuosc.techchat.BoardsAdapter;
+import org.mtuosc.techchat.models.BoardsAdapter;
 import org.mtuosc.techchat.models.Board;
 import org.mtuosc.techchat.models.BoardsFactory;
 
