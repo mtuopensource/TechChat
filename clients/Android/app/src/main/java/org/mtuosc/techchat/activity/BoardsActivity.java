@@ -60,7 +60,7 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // this gets data from the backend
+
 
 
 
@@ -71,7 +71,6 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         boardRecyclerView.setLayoutManager(llm);
 
         adapter = new BoardsAdapter(new ArrayList<Board>());
-        adapter.addBoardToAdapter(new Board("1", "Hello", "World"));
         boardRecyclerView.setAdapter(adapter);
         boardRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, boardRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -86,10 +85,10 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
             }
         }));
 
-
-//        String cookie = getIntent().getExtras().getString("cookie");
-//        GetBoards getBoards = new GetBoards(cookie, adapter, this);
-//        getBoards.execute(10); //TODO default to 10: change this later
+        // this gets data from the backend
+        String cookie = getIntent().getExtras().getString("cookie");
+        GetBoards getBoards = new GetBoards(cookie, adapter, this);
+        getBoards.execute(10); //TODO default to 10: change this later
 
 
 
