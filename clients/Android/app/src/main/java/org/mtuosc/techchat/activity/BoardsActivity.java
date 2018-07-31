@@ -17,14 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
-
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 
 import org.mtuosc.techchat.BoardsAdapter;
 import org.mtuosc.techchat.R;
+
+import org.mtuosc.techchat.RecyclerTouchListener;
+
 import org.mtuosc.techchat.UserDataStorage;
+
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.asynctasks.GetBoards;
 import org.mtuosc.techchat.models.Board;
@@ -56,7 +60,7 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // this gets data from the backend
+
 
 
 
@@ -67,6 +71,21 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         boardRecyclerView.setLayoutManager(llm);
 
         adapter = new BoardsAdapter(new ArrayList<Board>());
+        boardRecyclerView.setAdapter(adapter);
+        boardRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, boardRecyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onLongClick(View child, int childPosition) {
+                onClick(child, childPosition);
+            }
+
+            @Override
+            public void onClick(View child, int childPosition) {
+                Board board = adapter.getBoardFrom(childPosition);
+                Toast.makeText(BoardsActivity.this, board.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        // this gets data from the backend
         String cookie = getIntent().getExtras().getString("cookie");
         GetBoards getBoards = new GetBoards(cookie, adapter, this);
         getBoards.execute(10); //TODO default to 10: change this later
