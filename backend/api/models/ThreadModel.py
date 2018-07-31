@@ -6,6 +6,7 @@ from api.models.UserModel import User
 
 class Thread(Document):
     board = LazyReferenceField(Board, required=True)
+    title = StringField(required=True, max_length=32)
     content = StringField(required=True, max_length=512)
     author = LazyReferenceField(User)
     date_created = DateTimeField()

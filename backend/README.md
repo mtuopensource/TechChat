@@ -1,6 +1,9 @@
+# TechChat Backend
+[![Build Status](http://ci.mtuopensource.club/job/TechChat%20Backend/badge/icon)](http://ci.mtuopensource.club/job/TechChat%20Backend/)
+
 ## Table of Contents
  - [Getting started](#getting-started)
- - [Deploying](#deploying)
+ - [Deploying](#deploying-with-jenkins)
 
 ## Getting started
 1.  Clone this repository: `git clone https://github.com/mtuopensource/TechChat.git`

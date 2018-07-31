@@ -17,3 +17,4 @@ INSUFFICIENT_INFORMATION = TechChatResponse(status.HTTP_400_BAD_REQUEST, { 'deta
 INVALID_CREDENTIALS = TechChatResponse(status.HTTP_401_UNAUTHORIZED, { 'detail': 'The credentials you provided cannot be determined to be authentic' })
 NOT_AUTHORIZED = TechChatResponse(status.HTTP_401_UNAUTHORIZED, { 'detail': 'Not Authorized' })
 SUCCESS = TechChatResponse(status.HTTP_200_OK, { 'detail': 'Success' })
+NOT_FOUND = TechChatResponse(status.HTTP_404_NOT_FOUND, { 'detail': 'Not Found' })

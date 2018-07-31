@@ -1,6 +1,9 @@
-Django == 1.*
+Django == 2.*
 djangorestframework == 3.*
 mongoengine
 blinker == 1.*
 django-rest-framework-mongoengine
 bcrypt
+requests
+humanize
+django-dotenv
