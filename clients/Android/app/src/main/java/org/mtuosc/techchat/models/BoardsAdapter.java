@@ -1,10 +1,12 @@
 package org.mtuosc.techchat.models;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.mtuosc.techchat.R;
 
@@ -25,6 +27,7 @@ public class BoardsAdapter extends RecyclerView.Adapter<BoardsAdapter.BoardViewH
             super(itemView);
             boardTitle = itemView.findViewById(R.id.board_row_title);
             boardDesc = itemView.findViewById(R.id.board_row_description);
+
         }
     }
 
@@ -52,8 +55,15 @@ public class BoardsAdapter extends RecyclerView.Adapter<BoardsAdapter.BoardViewH
         return boardList.size();
     }
 
+    public Board getBoardFrom(int position){
+        return boardList.get(position);
+    }
 
     public void addBoardToAdapter(Board board){
         boardList.add(board);
     }
+
+
+
+
 }
