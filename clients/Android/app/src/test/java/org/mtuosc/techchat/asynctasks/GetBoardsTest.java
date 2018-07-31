@@ -4,15 +4,12 @@ import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
 import org.mtuosc.techchat.ApiUrl;
-import org.mtuosc.techchat.BoardsAdapter;
+import org.mtuosc.techchat.models.BoardsAdapter;
 import org.mtuosc.techchat.models.Board;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 

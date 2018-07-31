@@ -1,4 +1,4 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

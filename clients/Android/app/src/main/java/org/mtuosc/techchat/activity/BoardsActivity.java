@@ -14,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -22,7 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import org.mtuosc.techchat.BoardsAdapter;
+import org.mtuosc.techchat.models.BoardsAdapter;
 import org.mtuosc.techchat.R;
 
 import org.mtuosc.techchat.RecyclerTouchListener;
@@ -40,8 +39,9 @@ import java.util.ArrayList;
 /**
  * This class will handle the boards view. The nav bar will contain some quick settings
  */
-public class BoardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , AsyncApiResponse{
+public class BoardsActivity extends BaseInternetActivity implements NavigationView.OnNavigationItemSelectedListener , AsyncApiResponse{
     private RecyclerView boardRecyclerView;
+    private String cookie;
     BoardsAdapter adapter;
 
 
@@ -71,6 +71,9 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
         boardRecyclerView.setLayoutManager(llm);
 
         adapter = new BoardsAdapter(new ArrayList<Board>());
+
+
+
         boardRecyclerView.setAdapter(adapter);
         boardRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, boardRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -85,14 +88,11 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
             }
         }));
 
-        // this gets data from the backend
-        String cookie = getIntent().getExtras().getString("cookie");
-        GetBoards getBoards = new GetBoards(cookie, adapter, this);
-        getBoards.execute(10); //TODO default to 10: change this later
-
-
+        cookie = getIntent().getExtras().getString("cookie");
+        getBoards();
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -151,5 +151,13 @@ public class BoardsActivity extends AppCompatActivity implements NavigationView.
     @Override
     public void taskCompleted(Object result) {
         boardRecyclerView.setAdapter(adapter);
+    }
+
+    private void getBoards() {
+        if (hasInternet()) {
+            GetBoards getBoards = new GetBoards(cookie, adapter, this);
+            getBoards.execute(10); //TODO default to 10: change this later
+        }else
+            showConnectionWarning();
     }
 }

@@ -1,4 +1,4 @@
-package org.mtuosc.techchat;
+package org.mtuosc.techchat.models;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.mtuosc.techchat.models.Board;
+import org.mtuosc.techchat.R;
 
 import java.util.List;
 
