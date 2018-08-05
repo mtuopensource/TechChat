@@ -105,7 +105,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
             emailTextWrapper.getEditText().setError("Invalid Email");
             errorShown = true;
         }
-        if (validator.isPasswordValid(password)){
+        if (!validator.isPasswordValid(password)){
             errorShown = true;
             passwordTextWrapper.getEditText().setError("Not a Valid Password");
         }
