@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -42,9 +41,9 @@ public class CreateUserActivity extends BaseInternetActivity implements AsyncApi
         setContentView(R.layout.create_user_layout);
         TextView termsOfServ = createTermsOfServiceText();
 
-        emailEditText = ((TextInputLayout) findViewById(R.id.signup_email)).getEditText();
-        passwordEditText = ((TextInputLayout) findViewById(R.id.signup_password)).getEditText();
-        confirmEditText = ((TextInputLayout) findViewById(R.id.signup_confirm)).getEditText();
+        emailEditText = ((TextInputLayout) findViewById(R.id.signup_email_wrapper)).getEditText();
+        passwordEditText = ((TextInputLayout) findViewById(R.id.signup_password_wrapper)).getEditText();
+        confirmEditText = ((TextInputLayout) findViewById(R.id.signup_confirm_wrapper)).getEditText();
 
     }
     private TextView createTermsOfServiceText(){

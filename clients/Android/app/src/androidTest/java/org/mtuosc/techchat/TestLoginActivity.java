@@ -1,9 +1,5 @@
 package org.mtuosc.techchat;
 
-
-
-
-
 import android.support.design.widget.TextInputEditText;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.BoundedMatcher;
@@ -25,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.mtuosc.techchat.activity.BoardsActivity;
 import org.mtuosc.techchat.activity.CreateUserActivity;
 import org.mtuosc.techchat.activity.LoginActivity;
-
+import org.mtuosc.techchat.testutil.MatcherUtil;
 
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
@@ -47,20 +43,6 @@ import static org.hamcrest.CoreMatchers.not;
 @MediumTest
 public class TestLoginActivity {
 
-    public static Matcher<View> hasErrorText(){
-        return new BoundedMatcher<View, TextInputEditText>(TextInputEditText.class) {
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("has no error text: ");
-            }
-
-            @Override
-            protected boolean matchesSafely(TextInputEditText item) {
-                return item.getError() != null;
-            }
-        };
-    }
 
     @Rule
     public ActivityTestRule<LoginActivity>
@@ -77,8 +59,8 @@ public class TestLoginActivity {
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
         // check for the expected form errors
-        onView(withId(R.id.login_email_input)).check(matches(hasErrorText()));
-        onView(withId(R.id.login_password_input)).check(matches(hasErrorText()));
+        onView(withId(R.id.login_email_input)).check(matches(MatcherUtil.hasErrorText()));
+        onView(withId(R.id.login_password_input)).check(matches(MatcherUtil.hasErrorText()));
 
     }
 

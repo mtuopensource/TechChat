@@ -21,9 +21,9 @@
         android:layout_marginTop="10dp"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:id="@+id/signup_email">
-        <EditText
-            android:id="@+id/editText"
+        android:id="@+id/signup_email_wrapper">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signup_email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:id="@+id/signup_password">
-        <EditText
-            android:id="@+id/editText2"
+        android:id="@+id/signup_password_wrapper">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signup_password_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -58,9 +58,9 @@
         android:layout_height="wrap_content"
         android:theme="@style/LoginTextLabel"
         app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-        android:id="@+id/signup_confirm">
+        android:id="@+id/signup_confirm_wrapper">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/editText3"
+            android:id="@+id/signup_confirm_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -71,7 +71,7 @@
              />
     </android.support.design.widget.TextInputLayout>
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signup_button"
         android:layout_width="@dimen/signup_form_width"
         android:layout_height="wrap_content"
         android:text="Create your Account"
