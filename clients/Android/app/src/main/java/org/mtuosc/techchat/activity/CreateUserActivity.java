@@ -92,8 +92,12 @@ public class CreateUserActivity extends BaseInternetActivity implements AsyncApi
             moveToBoards.putExtra("cookie", cookie);
             startActivity(moveToBoards);
 
-        }else{
-            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
         }
+        // user entered an existing user's email
+        else if (result.getStatusCode() == 400)
+            Toast.makeText(this, "Email is already taken", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
+
     }
 }

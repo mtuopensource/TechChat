@@ -36,7 +36,7 @@ public class SignUpUserTask extends AsyncTask<Void, Void, Response<JSONObject>>{
     protected void onPostExecute(Response<JSONObject> jsonObjectResponse) {
         String signupCookie = jsonObjectResponse.getHeaderField("Set-cookie");
         // TODO find a better solution
-        if (signupCookie == null){
+        if (signupCookie == null && jsonObjectResponse.getStatusCode() != 400){
             UserAuthenticator authenticator = new UserAuthenticator(this.email, this.password, responder);
             authenticator.execute();
             return;

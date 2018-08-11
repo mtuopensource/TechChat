@@ -1,16 +1,11 @@
 package org.mtuosc.techchat;
 
-import android.support.design.widget.TextInputEditText;
 import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
 
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 
 import org.junit.After;
 import org.junit.Before;
