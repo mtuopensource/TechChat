@@ -45,6 +45,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar); // must come before onCreate, for  the splash screen to work
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_base);
 
@@ -64,10 +65,6 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
         loginProgress = findViewById(R.id.login_progress);
         submitButton = findViewById(R.id.email_sign_in_button);
     }
-
-
-
-
 
     /**
      * Moves the user to the create user activity
