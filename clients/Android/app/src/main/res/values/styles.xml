@@ -47,4 +47,11 @@
     <style name="LoginProgressCircle" parent="Theme.Design.Light">
         <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
+
+    <!-- Splash Screen theme. -->
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>
