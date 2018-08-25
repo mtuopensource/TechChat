@@ -1,5 +1,7 @@
 package org.mtuosc.techchat.utils;
 
+import android.support.annotation.NonNull;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +20,6 @@ public class EmailPasswordValidator {
 
     public boolean isPasswordValid(String password){
         // TODO add more logic if password must meet a requirement
-        return password.equalsIgnoreCase("");
+        return !password.equalsIgnoreCase("");
     }
 }
