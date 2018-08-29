@@ -105,7 +105,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
             emailTextWrapper.getEditText().setError("Invalid Email");
             errorShown = true;
         }
-        if (validator.isPasswordValid(password)){
+        if (!validator.isPasswordValid(password)){
             errorShown = true;
             passwordTextWrapper.getEditText().setError("Not a Valid Password");
         }
@@ -128,7 +128,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
             startActivity(moveToBoards);
             finish(); // prevents users going back
         }else {
-            Toast.makeText(this, "Not a valid Email or Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.bad_credentials, Toast.LENGTH_SHORT).show();
         }
         loginProgress.setVisibility(View.INVISIBLE);
         submitButton.setText(R.string.action_sign_in);
