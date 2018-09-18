@@ -16,13 +16,18 @@
 2.  Open a terminal and navigate to the backend directory
 3.  Run `py manage.py test api.tests`
 
-## Deploying with Jenkins
-Create a build shell script with the following lines:
-1.  `killall -q python3 || true`
-2.  `cd "/var/lib/jenkins/workspace/TechChat Backend/backend"`
-3.  `pip3 install -r requirements.txt`
-4.  `python3 manage.py test`
-
-Create a post build shell script with the following lines:
-1.  `pip install -r requirements.txt` 
-2.  `py manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &`
+## Heroku
+Heroku is a free hosting service for small projects. Easily setup and deploy from the command line via Git.
+### Buildpacks:
+1.  `heroku buildpacks:clear` 
+2.  `heroku buildpacks:set https://github.com/timanovsky/subdir-heroku-buildpack` 
+3.  `heroku buildpacks:add heroku/python` 
+### Environment Variables:
+1.  `heroku config:set PROJECT_PATH='backend'` 
+2.  `heroku config:set DISABLE_COLLECTSTATIC=1` 
+3.  `heroku config:set DJANGO_SETTINGS_MODULE='common.settings'`
+4.  `heroku config:set ENCODING='utf-8'`
+5.  `heroku config:set DJANGO_SETTINGS_MODULE='mongodb://user:password@localhost/db?authSource=tech_chat'`
+### Deployment
+1. Deploy from the Heroku web interface
+3. Run `heroku ps:scale web=1`  
