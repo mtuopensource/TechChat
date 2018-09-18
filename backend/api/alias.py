@@ -12,7 +12,7 @@ class Alias:
                   "Wozniak","Gates", "Gosling", "Hawking", "Einstein", "Pascal", "Schrodinger", "Mendeleev", "Babbage", "Zuckerberg",
                   "Darwin", "Copernicus", "Farnsworth", "Bohr", "Watson", "Kepler", "Brahe", "Planck", "Mozart", "Chopin", "Beethoven",
                   "Lovecraft", "Locke", "Archimedes", "Mendel", "Hubble", "Boyle", "Washington", "Hertz", "Nobel", "Heisenberg", "Hippocrates",
-                  "Fleming", "Avogadro", "Aristotle", "Sagan", "Fermi", "Ohm", "Watt"]
+                  "Fleming", "Avogadro", "Aristotle", "Sagan", "Fermi", "Ohm", "Watt", "Euler"]
 
         adj = adjectives[random.randint(0, len(adjectives))]
         person = people[random.randint(0, len(people))]
