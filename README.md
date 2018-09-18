@@ -18,4 +18,4 @@ Anonymous Chat App
 ## Deploying
 
 ## Copyright and License
-Code released under [MIT License](LICENSE).
+Code released under [GNU-GPL2 License](LICENSE).
