@@ -8,7 +8,7 @@ Anonymous Chat App
  - [Copyright and License](#copyright-and-license)
 
 ## Documentation
- We require that all changes are documented clearly and concisely. Please read the [contributing guidelines](https://github.com/mtuopensource/TechChat/blob/master/CONTRIBUTING.md) for more information.
+ We require that all changes are documented clearly and concisely. Please read the [contributing guidelines](https://github.com/mtuopensource/TechChat/blob/master/.github/CONTRIBUTING.md) for more information.
 
 ## Installation
 
