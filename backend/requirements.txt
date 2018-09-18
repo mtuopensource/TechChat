@@ -6,4 +6,3 @@ django-rest-framework-mongoengine
 bcrypt
 requests
 humanize
-django-dotenv
