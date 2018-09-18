@@ -1,5 +1,5 @@
 # TechChat Backend
-[![Build Status](http://ci.mtuopensource.club/job/TechChat%20Backend/badge/icon)](http://ci.mtuopensource.club/job/TechChat%20Backend/)
+[![Build Status](http://heroku-badge.herokuapp.com/?app=open-source-at-mtu-tech-chat&root=api/&style=flat)](https://open-source-at-mtu-tech-chat.herokuapp.com/web/)
 
 ## Table of Contents
  - [Getting started](#getting-started)
