@@ -6,3 +6,5 @@ django-rest-framework-mongoengine
 bcrypt
 requests
 humanize
+psycopg2-binary
+dj-database-url
