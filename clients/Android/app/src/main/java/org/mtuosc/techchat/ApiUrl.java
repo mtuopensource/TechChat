@@ -7,8 +7,8 @@ package org.mtuosc.techchat;
  */
 
 public class ApiUrl {
-    public static final String SERVER_HOSTNAME = "ci.mtuopensource.club";
-    public static final String SERVER_URL = "http://ci.mtuopensource.club:8000";
+    public static final String SERVER_HOSTNAME = "open-source-at-mtu-tech-chat.herokuapp.com";
+    public static final String SERVER_URL = "https://open-source-at-mtu-tech-chat.herokuapp.com";
     public static final String GET_BOARDS = "/api/boards/";
     public static final String LOGIN = "/api/users/login/";
     public static final String SIGN_UP = "/api/users/";
