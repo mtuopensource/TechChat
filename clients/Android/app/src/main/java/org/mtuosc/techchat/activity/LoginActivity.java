@@ -125,7 +125,10 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
             startActivity(moveToBoards);
             finish(); // prevents users going back
         }else {
-            Toast.makeText(this, R.string.bad_credentials, Toast.LENGTH_SHORT).show();
+            if (result.getStatusCode() == 401)
+                Toast.makeText(this, R.string.bad_credentials, Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Server Error", Toast.LENGTH_LONG).show();
         }
         loginProgress.setVisibility(View.INVISIBLE);
         submitButton.setText(R.string.action_sign_in);
