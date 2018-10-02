@@ -2,10 +2,11 @@
 [![Build Status](http://heroku-badge.herokuapp.com/?app=open-source-at-mtu-tech-chat&root=api/&style=flat)](https://open-source-at-mtu-tech-chat.herokuapp.com/web/)
 
 ## Table of Contents
- - [Getting started](#getting-started)
- - [Deploying](#deploying-with-jenkins)
+ - [Getting Started](#getting-started)
+ - [Unit Tests](#unit-tests)
+ - [Heroku](#Heroku)
 
-## Getting started
+## Getting Started
 1.  Clone this repository: `git clone https://github.com/mtuopensource/TechChat.git`
 2.  Open a terminal and navigate to the backend directory
 3.  Run `pip install -r requirements.txt`
