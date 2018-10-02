@@ -1,5 +1,5 @@
 django==1.11.8
 djangorestframework
-djangorestframework-jwt
+djangorestframework_simplejwt
 psycopg2-binary
 dj-database-url
