@@ -3,12 +3,16 @@ from django.db.models import Model, CharField, ForeignKey, CASCADE, TextField, D
 from api.models.Board import Board
 
 class Post(Model):
+    author    = ForeignKey(settings.AUTH_USER_MODEL, on_delete = CASCADE)
+    ip        = GenericIPAddressField()
+    timestamp = DateTimeField(auto_now_add = True)
     board     = ForeignKey(Board, on_delete = CASCADE)
     title     = CharField(max_length = 32)
     content   = TextField(max_length = 512)
-    timestamp = DateTimeField(auto_now_add = True)
-    ip        = GenericIPAddressField()
-    # TODO author
+
+    @property
+    def owner(self):
+        return self.author
 
     def __str__(self):
         return self.title
