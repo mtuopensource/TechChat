@@ -1,33 +1,18 @@
+from rest_framework.viewsets import ReadOnlyModelViewSet 
 from rest_framework.response import Response
-from rest_framework_mongoengine.viewsets import ModelViewSet
-from api.models import Board, Thread
-from api.serializers import BoardSerializer, ThreadSerializer
-from api.permissions import IsAdminOrReadOnly
-from api.response import NOT_FOUND
+from rest_framework.decorators import action
+from api.models.Board import Board
+from api.models.Post import Post
+from api.serializers.BoardSerializer import BoardSerializer
+from api.serializers.PostSerializer import PostSerializer
 
-# Threads can be listed, created, retrieved, updated, and destroyed.
-class BoardViewSet(ModelViewSet):
-    permission_classes = (IsAdminOrReadOnly,) # Only allow admins to create, update, destroy
+class BoardViewSet(ReadOnlyModelViewSet):
+    queryset = Board.objects.all()
     serializer_class = BoardSerializer
-    lookup_field = 'id'
 
-    # Set of all Boards
-    def get_queryset(self):
-        return Board.objects.all()
-
-    # When viewing a Board's details, display a list of associated Threads.
-    def retrieve(self, request, id=None):
-        context = {
-            'request': request # Used to determine ip, author
-        }
-        try:
-            serializer = BoardSerializer(Board.objects.get(id=id), context=context)
-            threadSerializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
-            return Response({
-                **serializer.data,
-                **{
-                    'threads': threadSerializer.data
-                }
-            })
-        except:
-            return NOT_FOUND.as_response()
+    @action(methods=['get'], detail=True)
+    def posts(self, request, *args, **kwargs):
+        board = self.get_object()
+        query = Post.objects.filter(board = board)
+        serial = PostSerializer(query, many = True) 
+        return Response(serial.data)

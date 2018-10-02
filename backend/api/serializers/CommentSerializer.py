@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from api.models.Post import Post
+from api.models.Comment import Comment
 
-class PostSerializer(ModelSerializer):
+class CommentSerializer(ModelSerializer):
     class Meta:
-        model   = Post
+        model   = Comment
         exclude = ('timestamp', 'ip')
