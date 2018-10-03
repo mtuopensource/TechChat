@@ -23,7 +23,6 @@ class Comment(Model):
     post = ForeignKey(Post, on_delete=CASCADE)
     parent = ForeignKey('self', on_delete=CASCADE, blank=True, null=True)
 
-    
     @property
     def owner(self):
         """

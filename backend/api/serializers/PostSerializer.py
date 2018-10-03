@@ -5,5 +5,5 @@ from api.models import Post
 class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
-        exclude = ('ip', )
-        read_only_fields = ('id', 'author', 'ip', 'timestamp')
+        exclude = ('ip', )  # do not include ip address in response
+        read_only_fields = ('id', 'author', 'ip', 'timestamp')  # cannot be updated by user
