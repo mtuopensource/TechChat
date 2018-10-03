@@ -25,7 +25,7 @@ class PostViewSet(CreateRetrieveUpdateDestroy):
         serializer.save(author=self.request.user, ip=ip)
 
     @action(detail=True)
-    def comments(self):
+    def comments(self, request, *args, **kwargs):
         """
         Return:
             HttpResponse containing Comments associated with the given Post.

@@ -13,7 +13,7 @@ class BoardViewSet(ReadOnlyModelViewSet):
     queryset = Board.objects.all()
 
     @action(detail=True)
-    def posts(self):
+    def posts(self, request, *args, **kwargs):
         """
         Return:
             HttpResponse containing Posts associated with the given Board.
