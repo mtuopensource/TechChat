@@ -7,7 +7,7 @@ from api.serializers.PostSerializer import PostSerializer
 from api.serializers.CommentSerializer import CommentSerializer
 from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
-from ..utils import get_client_ip
+from api.utils import get_client_ip
 
 
 class PostViewSet(CreateRetrieveUpdateDestroy):
