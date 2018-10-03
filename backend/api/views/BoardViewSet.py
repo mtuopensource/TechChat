@@ -6,12 +6,19 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 
 class BoardViewSet(ReadOnlyModelViewSet):
-    queryset = Board.objects.all()
+    """
+    Simple ViewSet for listing or retrieving Boards.
+    """
     serializer_class = BoardSerializer
+    queryset = Board.objects.all()
 
     @action(detail=True)
     def posts(self):
+        """
+        Return:
+            HttpResponse containing Posts associated with the given Board.
+        """
         board = self.get_object()
-        query = Post.objects.filter(board=board)
-        serial = PostSerializer(query, many=True)
-        return Response(serial.data)
+        posts = Post.objects.filter(board=board)
+        post_serializer = PostSerializer(posts, many=True)
+        return Response(post_serializer.data)

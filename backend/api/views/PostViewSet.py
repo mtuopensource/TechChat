@@ -8,17 +8,29 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class PostViewSet(CreateRetrieveUpdateDestroy):
-    queryset = Post.objects.all()
+    """
+    Simple ViewSet for creating, retrieving, updating, and destroying Posts.
+    """
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
+    queryset = Post.objects.all()
 
     def perform_create(self, serializer):
+        """
+        Saves the User's UUID and IP address.
+        Parameters:
+            serializer: PostSerializer used to create Post.
+        """
         ip = self.get_client_ip(self.request)
         serializer.save(author=self.request.user, ip=ip)
 
     @action(detail=True)
     def comments(self):
+        """
+        Return:
+            HttpResponse containing Comments associated with the given Post.
+        """
         post = self.get_object()
-        query = Comment.objects.filter(post=post)
-        serial = CommentSerializer(query, many=True)
-        return Response(serial.data)
+        comments = Comment.objects.filter(post=post)
+        comment_serializer = CommentSerializer(comments, many=True)
+        return Response(comment_serializer.data)
