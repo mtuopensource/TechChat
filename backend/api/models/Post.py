@@ -29,7 +29,7 @@ class Post(Model):
         """
         Used to determine the User(s) allowed to update the Post.
         See IsOwnerOrReadOnly permission class.
-        
+
         Returns:
             Django User that authored the Post.
         """
