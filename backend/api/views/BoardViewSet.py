@@ -9,7 +9,7 @@ class BoardViewSet(ReadOnlyModelViewSet):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
-    @action(methods=['get'], detail=True)
+    @action(detail=True)
     def posts(self):
         board = self.get_object()
         query = Post.objects.filter(board=board)

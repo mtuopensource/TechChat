@@ -17,7 +17,7 @@ class PostViewSet(CreateRetrieveUpdateDestroy):
         ip = get_client_ip(self.request)
         serializer.save(author=self.request.user, ip=ip)
 
-    @action(methods=['get'], detail=True)
+    @action(detail=True)
     def comments(self):
         post = self.get_object()
         query = Comment.objects.filter(post=post)
