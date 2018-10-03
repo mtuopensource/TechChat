@@ -1,4 +1,4 @@
-from api.viewsets.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
+from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from api.models.Post import Post

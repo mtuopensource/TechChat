@@ -1,4 +1,4 @@
-from api.viewsets.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
+from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
 from api.models.Comment import Comment
 from api.serializers.CommentSerializer import CommentSerializer
 from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
