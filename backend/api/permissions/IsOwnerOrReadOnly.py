@@ -15,6 +15,8 @@ class IsOwnerOrReadOnly(BasePermission):
         Returns:
             True if the User(s) have permission. False otherwise.
         """
+        if not hasattr(instance, 'owner'):
+            raise ValueError()
         if request.method in SAFE_METHODS:
             return True
         return instance.owner == request.user
