@@ -12,7 +12,7 @@ class PostViewSet(CreateRetrieveUpdateDestroy):
     Simple ViewSet for creating, retrieving, updating, and destroying Posts.
     """
     serializer_class = PostSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]  # destructive actions require ownership and authentication
     queryset = Post.objects.all()
 
     def perform_create(self, serializer):
