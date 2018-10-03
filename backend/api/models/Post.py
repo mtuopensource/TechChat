@@ -1,5 +1,5 @@
 from api.models.Board import Board
-from django.conf import settings
+from django.contrib.auth.models import User
 from django.db.models import Model, CharField, TextField, ForeignKey, GenericIPAddressField, DateTimeField, CASCADE
 
 
@@ -19,7 +19,7 @@ class Post(Model):
 
     title = CharField(max_length=32)
     description = TextField(max_length=512)
-    author = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
+    author = ForeignKey(User, on_delete=CASCADE)
     ip = GenericIPAddressField()
     timestamp = DateTimeField(auto_now_add=True)
     board = ForeignKey(Board, on_delete=CASCADE)

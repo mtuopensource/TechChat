@@ -1,5 +1,5 @@
 from api.models.Post import Post
-from django.conf import settings
+from django.contrib.auth.models import User
 from django.db.models import Model, TextField, ForeignKey, GenericIPAddressField, DateTimeField, CASCADE
 
 
@@ -17,7 +17,7 @@ class Comment(Model):
     """
 
     description = TextField(max_length=512)
-    author = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
+    author = ForeignKey(User, on_delete=CASCADE)
     ip = GenericIPAddressField()
     timestamp = DateTimeField(auto_now_add=True)
     post = ForeignKey(Post, on_delete=CASCADE)
