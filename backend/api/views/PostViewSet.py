@@ -2,9 +2,9 @@ from api.models import Post, Comment
 from api.permissions import IsOwnerOrReadOnly
 from api.serializers import PostSerializer, CommentSerializer
 from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
-from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 
 class PostViewSet(CreateRetrieveUpdateDestroy):
