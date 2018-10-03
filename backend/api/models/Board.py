@@ -3,7 +3,7 @@ from django.db.models import Model, CharField, SlugField
 
 class Board(Model):
     """
-    Represents a forum, dedicated to a specific topic.
+    Represents a forum dedicated to a specific topic.
 
     Attributes:
         title: The Board's name. Limited to 32 characters. Must be unique.
