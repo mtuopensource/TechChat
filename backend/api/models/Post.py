@@ -26,6 +26,13 @@ class Post(Model):
 
     @property
     def owner(self):
+        """
+        Used to determine the User(s) allowed to update the Post.
+        See IsOwnerOrReadOnly permission class.
+        
+        Returns:
+            Django User that authored the Post.
+        """
         return self.author
 
     def __str__(self):
