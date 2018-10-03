@@ -5,7 +5,7 @@ from api.models.Post import Post
 
 class Comment(Model):
     """
-    Continuation of a discussion within a Post.
+    Consists of a user-submitted message containing the User's details and the date and time it was submitted.
 
     Attributes:
         description: User-submitted message. Limited to 512 characters.

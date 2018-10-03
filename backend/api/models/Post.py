@@ -5,7 +5,6 @@ from api.models.Board import Board
 
 class Post(Model):
     """
-    Represents a discussion within a Board.
     Consists of a user-submitted message containing the User's details and the date and time it was submitted.
 
     Attributes:
