@@ -1,12 +1,11 @@
-from rest_framework.viewsets import GenericViewSet 
-from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, DestroyModelMixin, UpdateModelMixin
+from api.viewsets.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
 from api.models.Comment import Comment
 from api.serializers.CommentSerializer import CommentSerializer
 from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from ..utils import get_client_ip
 
-class CommentViewSet(RetrieveModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
+class CommentViewSet(CreateRetrieveUpdateDestroy):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]

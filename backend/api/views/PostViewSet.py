@@ -1,7 +1,6 @@
-from rest_framework.viewsets import GenericViewSet 
+from api.viewsets.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, DestroyModelMixin, UpdateModelMixin
 from api.models.Post import Post
 from api.models.Comment import Comment
 from api.serializers.PostSerializer import PostSerializer
@@ -9,8 +8,9 @@ from api.serializers.CommentSerializer import CommentSerializer
 from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from ..utils import get_client_ip
+from rest_framework import generics
 
-class PostViewSet(RetrieveModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
+class PostViewSet(CreateRetrieveUpdateDestroy):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
