@@ -1,0 +1,3 @@
+from api.serializers.BoardSerializer import BoardSerializer
+from api.serializers.CommentSerializer import CommentSerializer
+from api.serializers.PostSerializer import PostSerializer
