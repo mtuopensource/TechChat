@@ -1,8 +1,4 @@
-from django.contrib.admin import site
-from api.models.Board import Board
-from api.models.Post import Post
-from api.models.Comment import Comment
+from django.contrib.admin import register, ModelAdmin
+from api.models import Board, Post, Comment
 
-site.register(Board)
-site.register(Post)
-site.register(Comment)
+register(Board, Post, Comment)(ModelAdmin)
