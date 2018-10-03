@@ -8,7 +8,7 @@ from api.serializers.CommentSerializer import CommentSerializer
 from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from ..utils import get_client_ip
-from rest_framework import generics
+
 
 class PostViewSet(CreateRetrieveUpdateDestroy):
     queryset = Post.objects.all()
@@ -17,12 +17,12 @@ class PostViewSet(CreateRetrieveUpdateDestroy):
 
     def perform_create(self, serializer):
         ip = get_client_ip(self.request)
-        serializer.save(author = self.request.user, ip=ip)
+        serializer.save(author=self.request.user, ip=ip)
 
     @action(methods=['get'], detail=True)
-    def comments(self, request, *args, **kwargs):
+    def comments(self):
         post = self.get_object()
-        query = Comment.objects.filter(post = post)
-        serial = CommentSerializer(query, many = True) 
+        query = Comment.objects.filter(post=post)
+        serial = CommentSerializer(query, many=True)
         return Response(serial.data)
 

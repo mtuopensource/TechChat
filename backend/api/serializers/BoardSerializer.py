@@ -1,7 +1,8 @@
 from rest_framework.serializers import ModelSerializer
 from api.models.Board import Board
 
+
 class BoardSerializer(ModelSerializer):
     class Meta:
-        model  = Board
+        model = Board
         fields = '__all__'

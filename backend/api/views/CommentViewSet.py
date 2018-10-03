@@ -5,6 +5,7 @@ from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from ..utils import get_client_ip
 
+
 class CommentViewSet(CreateRetrieveUpdateDestroy):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -12,4 +13,4 @@ class CommentViewSet(CreateRetrieveUpdateDestroy):
 
     def perform_create(self, serializer):
         ip = get_client_ip(self.request)
-        serializer.save(author = self.request.user, ip = ip)
+        serializer.save(author=self.request.user, ip=ip)

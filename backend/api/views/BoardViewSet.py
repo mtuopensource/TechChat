@@ -6,13 +6,14 @@ from api.models.Post import Post
 from api.serializers.BoardSerializer import BoardSerializer
 from api.serializers.PostSerializer import PostSerializer
 
+
 class BoardViewSet(ReadOnlyModelViewSet):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
     @action(methods=['get'], detail=True)
-    def posts(self, request, *args, **kwargs):
+    def posts(self):
         board = self.get_object()
-        query = Post.objects.filter(board = board)
-        serial = PostSerializer(query, many = True) 
+        query = Post.objects.filter(board=board)
+        serial = PostSerializer(query, many=True)
         return Response(serial.data)
