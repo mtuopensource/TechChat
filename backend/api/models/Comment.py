@@ -5,6 +5,7 @@ from api.models.Post import Post
 
 class Comment(Model):
     """
+    Response to a Post.
     Consists of a user-submitted message containing the User's details and the date and time it was submitted.
 
     Attributes:
