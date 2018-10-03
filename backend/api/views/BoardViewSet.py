@@ -1,10 +1,8 @@
-from rest_framework.viewsets import ReadOnlyModelViewSet 
-from rest_framework.response import Response
+from api.models import Board, Post
+from api.serializers import BoardSerializer, PostSerializer
 from rest_framework.decorators import action
-from api.models.Board import Board
-from api.models.Post import Post
-from api.serializers.BoardSerializer import BoardSerializer
-from api.serializers.PostSerializer import PostSerializer
+from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
 
 class BoardViewSet(ReadOnlyModelViewSet):

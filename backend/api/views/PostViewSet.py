@@ -1,13 +1,11 @@
+from api.models import Post, Comment
+from api.permissions import IsOwnerOrReadOnly
+from api.serializers import PostSerializer, CommentSerializer
+from api.utils import get_client_ip
 from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from api.models.Post import Post
-from api.models.Comment import Comment
-from api.serializers.PostSerializer import PostSerializer
-from api.serializers.CommentSerializer import CommentSerializer
-from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
-from api.utils import get_client_ip
 
 
 class PostViewSet(CreateRetrieveUpdateDestroy):
@@ -25,4 +23,3 @@ class PostViewSet(CreateRetrieveUpdateDestroy):
         query = Comment.objects.filter(post=post)
         serial = CommentSerializer(query, many=True)
         return Response(serial.data)
-

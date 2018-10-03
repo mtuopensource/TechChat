@@ -1,9 +1,9 @@
-from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
-from api.models.Comment import Comment
-from api.serializers.CommentSerializer import CommentSerializer
-from api.permissions.IsOwnerOrReadOnly import IsOwnerOrReadOnly
-from rest_framework.permissions import IsAuthenticated
+from api.models import Comment
+from api.permissions import IsOwnerOrReadOnly
+from api.serializers import CommentSerializer
 from api.utils import get_client_ip
+from api.views import CreateRetrieveUpdateDestroy
+from rest_framework.permissions import IsAuthenticated
 
 
 class CommentViewSet(CreateRetrieveUpdateDestroy):
