@@ -4,7 +4,7 @@ from rest_framework.viewsets import GenericViewSet
 
 class CreateRetrieveUpdateDestroy(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
     """
-    ViewSet that provides endpoints for POST, GET, PUT, and DELETE requests.
+    Abstract ViewSet that provides endpoints for POST, GET, PUT, and DELETE requests.
     """
 
     @staticmethod
