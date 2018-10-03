@@ -1,6 +1,6 @@
-from django.conf import settings
-from django.db.models import Model, CharField, ForeignKey, CASCADE, TextField, DateTimeField, GenericIPAddressField
 from api.models.Board import Board
+from django.conf import settings
+from django.db.models import Model, CharField, TextField, ForeignKey, GenericIPAddressField, DateTimeField, CASCADE
 
 
 class Post(Model):

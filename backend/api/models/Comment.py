@@ -1,6 +1,6 @@
-from django.conf import settings
-from django.db.models import Model, ForeignKey, CASCADE, TextField, DateTimeField, GenericIPAddressField
 from api.models.Post import Post
+from django.conf import settings
+from django.db.models import Model, TextField, ForeignKey, GenericIPAddressField, DateTimeField, CASCADE
 
 
 class Comment(Model):
