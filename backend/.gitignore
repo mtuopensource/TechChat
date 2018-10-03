@@ -1,11 +1,9 @@
-# Django creates these for superusers.
+# SQLite
 *.sqlite3
 
 # Temporary directories
+migrations/
 __pycache__/
+
+# PyCharm
 .idea/
-
-# Protected information
-.env
-
-api/migrations
