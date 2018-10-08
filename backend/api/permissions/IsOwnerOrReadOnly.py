@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
@@ -15,8 +16,11 @@ class IsOwnerOrReadOnly(BasePermission):
         Returns:
             True if the User(s) have permission. False otherwise.
         """
-        if not hasattr(instance, 'owner'):
-            raise ValueError()
         if request.method in SAFE_METHODS:
             return True
-        return instance.owner == request.user
+        elif isinstance(instance, User):
+            return instance == request.user
+        else:
+            if not hasattr(instance, 'owner'):
+                raise ValueError()
+            return instance.owner == request.user
