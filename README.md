@@ -1,6 +1,6 @@
 # TechChat
 [![Build Status](http://heroku-badge.herokuapp.com/?app=open-source-at-mtu-tech-chat&root=api/&style=flat)](https://open-source-at-mtu-tech-chat.herokuapp.com/web/) <br />
-Anonymous Chat App
+Open source replacement for BarkBoard.
 
 
 
