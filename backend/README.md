@@ -26,9 +26,7 @@ Heroku is a free hosting service for small projects. Easily setup and deploy fro
 ### Environment Variables:
 1.  `heroku config:set PROJECT_PATH='backend'` 
 2.  `heroku config:set DISABLE_COLLECTSTATIC=1` 
-3.  `heroku config:set DJANGO_SETTINGS_MODULE='common.settings'`
-4.  `heroku config:set ENCODING='utf-8'`
-5.  `heroku config:set DJANGO_SETTINGS_MODULE='mongodb://user:password@localhost/db?authSource=tech_chat'`
+3.  `heroku config:set DJANGO_SECRET_KEY='YOUR_SECRET_KEY'` 
 ### Deployment
 1. Deploy from the Heroku web interface
 3. Run `heroku ps:scale web=1`  
