@@ -1,9 +1,11 @@
 import random
 
+
 class Alias:
 
-    def create:
-        #TODO add more people and adjectives
+    @staticmethod
+    def create():
+        # TODO add more people and adjectives
         adjectives = ["Obnoxious", "Gruesome", "Abhorrent", "Sleazy", "Stupid", "Awesome", "Lovely", "Lonely",
                       "Bored", "Condescending", "Dorky", "Happy", "Brilliant", "Blunt", "Silly", "Adventurous", "Affectionate", "Ambitious",
                       "Compassionate", "Diligent", "Generous", "Impartial", "Persistent", "Philosophical", "Rational", "Sincere", "Sensible",
@@ -18,4 +20,4 @@ class Alias:
         person = people[random.randint(0, len(people))]
         number = str(random.randint(0, 1000))
 
-        return  adj + person + number
+        return adj + person + number
