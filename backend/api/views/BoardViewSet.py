@@ -1,33 +1,24 @@
+from api.models import Board, Post
+from api.serializers import BoardSerializer, PostSerializer
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework_mongoengine.viewsets import ModelViewSet
-from api.models import Board, Thread
-from api.serializers import BoardSerializer, ThreadSerializer
-from api.permissions import IsAdminOrReadOnly
-from api.response import NOT_FOUND
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
-# Threads can be listed, created, retrieved, updated, and destroyed.
-class BoardViewSet(ModelViewSet):
-    permission_classes = (IsAdminOrReadOnly,) # Only allow admins to create, update, destroy
+
+class BoardViewSet(ReadOnlyModelViewSet):
+    """
+    Simple ViewSet for listing or retrieving Boards.
+    """
     serializer_class = BoardSerializer
-    lookup_field = 'id'
+    queryset = Board.objects.all()
 
-    # Set of all Boards
-    def get_queryset(self):
-        return Board.objects.all()
-
-    # When viewing a Board's details, display a list of associated Threads.
-    def retrieve(self, request, id=None):
-        context = {
-            'request': request # Used to determine ip, author
-        }
-        try:
-            serializer = BoardSerializer(Board.objects.get(id=id), context=context)
-            threadSerializer = ThreadSerializer(Thread.objects.filter(board=id), context=context, many=True)
-            return Response({
-                **serializer.data,
-                **{
-                    'threads': threadSerializer.data
-                }
-            })
-        except:
-            return NOT_FOUND.as_response()
+    @action(detail=True)
+    def posts(self, request, *args, **kwargs):
+        """
+        Return:
+            HttpResponse containing Posts associated with the given Board.
+        """
+        board = self.get_object()
+        posts = Post.objects.filter(board=board)
+        post_serializer = PostSerializer(posts, many=True)
+        return Response(post_serializer.data)

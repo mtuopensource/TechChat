@@ -1,16 +1,36 @@
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
-from api.models import Post
-from api.serializers import PostSerializer
-from api.permissions import IsOwnerOrAdmin
+from api.models import Post, Comment
+from api.permissions import IsOwnerOrReadOnly
+from api.serializers import PostSerializer, CommentSerializer
+from api.views.CreateRetrieveUpdateDestroy import CreateRetrieveUpdateDestroy
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-# Posts can be created, retrieved, updated, and destroyed.
-# Posts cannot be listed for performance reasons.
-class PostViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
-    permission_classes = (IsOwnerOrAdmin,) # Allow Post authors to update or destroy
+
+class PostViewSet(CreateRetrieveUpdateDestroy):
+    """
+    Simple ViewSet for creating, retrieving, updating, and destroying Posts.
+    """
     serializer_class = PostSerializer
-    lookup_field = 'id'
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]  # destructive actions require ownership and authentication
+    queryset = Post.objects.all()
 
-    # Set of all Posts
-    def get_queryset(self):
-        return Post.objects.all()
+    def perform_create(self, serializer):
+        """
+        Saves the User's UUID and IP address.
+        Parameters:
+            serializer: PostSerializer used to create Post.
+        """
+        ip = self.get_client_ip(self.request)
+        serializer.save(author=self.request.user, ip=ip)
+
+    @action(detail=True)
+    def comments(self, request, *args, **kwargs):
+        """
+        Return:
+            HttpResponse containing Comments associated with the given Post.
+        """
+        post = self.get_object()
+        comments = Comment.objects.filter(post=post)
+        comment_serializer = CommentSerializer(comments, many=True)
+        return Response(comment_serializer.data)

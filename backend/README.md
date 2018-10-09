@@ -2,10 +2,11 @@
 [![Build Status](http://heroku-badge.herokuapp.com/?app=open-source-at-mtu-tech-chat&root=api/&style=flat)](https://open-source-at-mtu-tech-chat.herokuapp.com/web/)
 
 ## Table of Contents
- - [Getting started](#getting-started)
- - [Deploying](#deploying-with-jenkins)
+ - [Getting Started](#getting-started)
+ - [Unit Tests](#unit-tests)
+ - [Heroku](#Heroku)
 
-## Getting started
+## Getting Started
 1.  Clone this repository: `git clone https://github.com/mtuopensource/TechChat.git`
 2.  Open a terminal and navigate to the backend directory
 3.  Run `pip install -r requirements.txt`
@@ -25,9 +26,7 @@ Heroku is a free hosting service for small projects. Easily setup and deploy fro
 ### Environment Variables:
 1.  `heroku config:set PROJECT_PATH='backend'` 
 2.  `heroku config:set DISABLE_COLLECTSTATIC=1` 
-3.  `heroku config:set DJANGO_SETTINGS_MODULE='common.settings'`
-4.  `heroku config:set ENCODING='utf-8'`
-5.  `heroku config:set DJANGO_SETTINGS_MODULE='mongodb://user:password@localhost/db?authSource=tech_chat'`
+3.  `heroku config:set DJANGO_SECRET_KEY='YOUR_SECRET_KEY'` 
 ### Deployment
 1. Deploy from the Heroku web interface
 3. Run `heroku ps:scale web=1`  

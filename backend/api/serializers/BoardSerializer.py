@@ -1,7 +1,8 @@
-from rest_framework_mongoengine.serializers import DocumentSerializer
 from api.models import Board
+from rest_framework.serializers import ModelSerializer
 
-class BoardSerializer(DocumentSerializer):
+
+class BoardSerializer(ModelSerializer):
     class Meta:
         model = Board
-        fields = '__all__' # Fields stored in MongoDB
+        fields = '__all__'
