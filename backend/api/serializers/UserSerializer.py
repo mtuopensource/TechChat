@@ -5,7 +5,7 @@ from rest_framework.serializers import ModelSerializer
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'password', 'date_joined')
+        fields = ('id', 'email', 'password', 'date_joined')
         read_only_fields = ('id', 'date_joined')  # cannot be updated by user
         extra_kwargs = {
             'password': {
@@ -19,13 +19,12 @@ class UserSerializer(ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and save a User with the given username, email, and password.
+        Create and save a User with the given email and password.
         Parameters:
             validated_data: HttpRequest that has been validated and sanitized.
         Returns:
             Django User
         """
-        username = validated_data['username']
         email_address = validated_data['email']
         password = validated_data['password']
-        return User.objects.create_user(username, email_address, password)
+        return User.objects.create_user(email_address, email_address, password)
