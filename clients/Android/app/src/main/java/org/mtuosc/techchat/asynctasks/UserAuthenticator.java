@@ -31,7 +31,7 @@ public class UserAuthenticator extends AsyncTask<Void, Void, Response<JSONObject
 
     @Override
     protected Response<JSONObject> doInBackground(Void... voids) {
-        return webb.post(ApiUrl.LOGIN).param("email", email).param("password", password).asJsonObject();
+        return webb.post(ApiUrl.LOGIN).param("username", email).param("password", password).asJsonObject();
     }
 
     @Override
