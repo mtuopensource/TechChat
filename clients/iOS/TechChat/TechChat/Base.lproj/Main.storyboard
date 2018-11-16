@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TechChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Tech Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Jwj-fh-FRZ">
+                                <rect key="frame" x="0.0" y="30" width="375" height="331"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="r36-HD-U5T">
+                                <rect key="frame" x="0.0" y="378" width="375" height="139"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="79A-0V-Hsf">
+                                        <rect key="frame" x="30" y="0.0" width="315" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-cI-Lx5">
+                                        <rect key="frame" x="30" y="49" width="315" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWh-NI-8x7">
+                                        <rect key="frame" x="100" y="98" width="175" height="41"/>
+                                        <color key="backgroundColor" red="1" green="0.90129980980000002" blue="0.0084875100379999992" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="LXv-cI-Lx5" firstAttribute="leading" secondItem="r36-HD-U5T" secondAttribute="leading" constant="30" id="8z5-ff-Fc5"/>
+                                    <constraint firstItem="WWh-NI-8x7" firstAttribute="leading" secondItem="r36-HD-U5T" secondAttribute="leading" constant="100" id="IV8-Uy-KrY"/>
+                                    <constraint firstAttribute="trailing" secondItem="79A-0V-Hsf" secondAttribute="trailing" constant="30" id="bBl-iO-kZW"/>
+                                    <constraint firstItem="79A-0V-Hsf" firstAttribute="leading" secondItem="r36-HD-U5T" secondAttribute="leading" constant="30" id="lNI-O9-ona"/>
+                                    <constraint firstAttribute="trailing" secondItem="LXv-cI-Lx5" secondAttribute="trailing" constant="30" id="lxk-xR-kIY"/>
+                                    <constraint firstAttribute="trailing" secondItem="WWh-NI-8x7" secondAttribute="trailing" constant="100" id="uG9-MD-9I3"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="r36-HD-U5T" firstAttribute="top" secondItem="Jwj-fh-FRZ" secondAttribute="bottom" constant="10" id="6xm-Z2-O4w"/>
+                            <constraint firstItem="Jwj-fh-FRZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7XH-q1-AP7"/>
+                            <constraint firstItem="r36-HD-U5T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bxa-xu-fTb"/>
+                            <constraint firstItem="Jwj-fh-FRZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="U7h-h8-zIs"/>
+                            <constraint firstItem="Jwj-fh-FRZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VKP-AH-4aP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r36-HD-U5T" secondAttribute="trailing" id="YEI-ie-34q"/>
+                            <constraint firstItem="Jwj-fh-FRZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Z7H-Tb-hdr"/>
+                            <constraint firstItem="Jwj-fh-FRZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fo1-Fc-kax"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Tech Logo" width="400" height="400"/>
+    </resources>
+</document>
