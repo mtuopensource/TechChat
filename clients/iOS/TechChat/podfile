@@ -1,0 +1,7 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'TechChat' do
+    pod 'Alamofire', '~> 4.7'
+end
