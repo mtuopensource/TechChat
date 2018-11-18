@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AEC2EAFB6A45E7129D4C88F /* Pods_TechChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAD590CA6B35A00239EF88 /* Pods_TechChat.framework */; };
 		94339143219E553F0000AE56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339142219E553F0000AE56 /* AppDelegate.swift */; };
 		94339145219E553F0000AE56 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339144219E553F0000AE56 /* LoginController.swift */; };
 		94339148219E553F0000AE56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94339146219E553F0000AE56 /* Main.storyboard */; };
@@ -14,6 +15,9 @@
 		9433914D219E55400000AE56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9433914B219E55400000AE56 /* LaunchScreen.storyboard */; };
 		94339158219E55410000AE56 /* TechChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339157219E55410000AE56 /* TechChatTests.swift */; };
 		94339163219E55410000AE56 /* TechChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339162219E55410000AE56 /* TechChatUITests.swift */; };
+		946BCAFF21A0906C00A5F9C7 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCAFE21A0906C00A5F9C7 /* Urls.swift */; };
+		946BCB0221A09CCA00A5F9C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCB0121A09CCA00A5F9C7 /* User.swift */; };
+		946BCB0321A09CCA00A5F9C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCB0121A09CCA00A5F9C7 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A05C3A041122F35895C554F /* Pods-TechChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TechChat/Pods-TechChat.debug.xcconfig"; sourceTree = "<group>"; };
+		49E5BF044DB0E4A09B78F520 /* Pods-TechChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TechChat/Pods-TechChat.release.xcconfig"; sourceTree = "<group>"; };
 		9433913F219E553F0000AE56 /* TechChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94339142219E553F0000AE56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94339144219E553F0000AE56 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -47,6 +53,9 @@
 		9433915E219E55410000AE56 /* TechChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94339162219E55410000AE56 /* TechChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechChatUITests.swift; sourceTree = "<group>"; };
 		94339164219E55410000AE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		946BCAFE21A0906C00A5F9C7 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		946BCB0121A09CCA00A5F9C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F7CAD590CA6B35A00239EF88 /* Pods_TechChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TechChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AEC2EAFB6A45E7129D4C88F /* Pods_TechChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +84,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4A8BF228BE67868D8B01DD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1A05C3A041122F35895C554F /* Pods-TechChat.debug.xcconfig */,
+				49E5BF044DB0E4A09B78F520 /* Pods-TechChat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		551CFC3ED8C51F2B045FAE31 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7CAD590CA6B35A00239EF88 /* Pods_TechChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		94339136219E553F0000AE56 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +108,8 @@
 				94339156219E55400000AE56 /* TechChatTests */,
 				94339161219E55410000AE56 /* TechChatUITests */,
 				94339140219E553F0000AE56 /* Products */,
+				1A4A8BF228BE67868D8B01DD /* Pods */,
+				551CFC3ED8C51F2B045FAE31 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,8 +126,10 @@
 		94339141219E553F0000AE56 /* TechChat */ = {
 			isa = PBXGroup;
 			children = (
+				946BCB0021A09CB700A5F9C7 /* models */,
+				946BCAFD21A0902F00A5F9C7 /* api */,
+				946BCAFC21A08FFD00A5F9C7 /* controllers */,
 				94339142219E553F0000AE56 /* AppDelegate.swift */,
-				94339144219E553F0000AE56 /* LoginController.swift */,
 				94339146219E553F0000AE56 /* Main.storyboard */,
 				94339149219E55400000AE56 /* Assets.xcassets */,
 				9433914B219E55400000AE56 /* LaunchScreen.storyboard */,
@@ -125,6 +156,30 @@
 			path = TechChatUITests;
 			sourceTree = "<group>";
 		};
+		946BCAFC21A08FFD00A5F9C7 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94339144219E553F0000AE56 /* LoginController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		946BCAFD21A0902F00A5F9C7 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				946BCAFE21A0906C00A5F9C7 /* Urls.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		946BCB0021A09CB700A5F9C7 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				946BCB0121A09CCA00A5F9C7 /* User.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +187,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94339167219E55410000AE56 /* Build configuration list for PBXNativeTarget "TechChat" */;
 			buildPhases = (
+				CD2CBF1404409635A8DB9678 /* [CP] Check Pods Manifest.lock */,
 				9433913B219E553F0000AE56 /* Sources */,
 				9433913C219E553F0000AE56 /* Frameworks */,
 				9433913D219E553F0000AE56 /* Resources */,
+				003FCC5615764B0F4DBEC194 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,11 +308,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		003FCC5615764B0F4DBEC194 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TechChat/Pods-TechChat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TechChat/Pods-TechChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD2CBF1404409635A8DB9678 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TechChat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9433913B219E553F0000AE56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946BCB0221A09CCA00A5F9C7 /* User.swift in Sources */,
+				946BCAFF21A0906C00A5F9C7 /* Urls.swift in Sources */,
 				94339145219E553F0000AE56 /* LoginController.swift in Sources */,
 				94339143219E553F0000AE56 /* AppDelegate.swift in Sources */,
 			);
@@ -265,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946BCB0321A09CCA00A5F9C7 /* User.swift in Sources */,
 				94339158219E55410000AE56 /* TechChatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +537,7 @@
 		};
 		94339168219E55410000AE56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A05C3A041122F35895C554F /* Pods-TechChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +555,7 @@
 		};
 		94339169219E55410000AE56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E5BF044DB0E4A09B78F520 /* Pods-TechChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
