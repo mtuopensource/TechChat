@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import org.mtuosc.techchat.UserData;
+import org.mtuosc.techchat.asynctasks.RefreshResponder;
 import org.mtuosc.techchat.models.BoardsAdapter;
 import org.mtuosc.techchat.R;
 
@@ -62,8 +64,6 @@ public class BoardsActivity extends BaseInternetActivity implements NavigationVi
 
 
 
-
-
         boardRecyclerView = findViewById(R.id.board_list);
         boardRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -88,7 +88,6 @@ public class BoardsActivity extends BaseInternetActivity implements NavigationVi
             }
         }));
 
-        cookie = getIntent().getExtras().getString("cookie");
         getBoards();
 
     }
@@ -155,8 +154,16 @@ public class BoardsActivity extends BaseInternetActivity implements NavigationVi
 
     private void getBoards() {
         if (hasInternet()) {
-            GetBoards getBoards = new GetBoards(cookie, adapter, this);
-            getBoards.execute(10); //TODO default to 10: change this later
+            final BoardsActivity activity = this;
+            refreshAccessToken(new RefreshResponder() {
+                @Override
+                public void respondToRefresh(String access_token) {
+                    user.setAccessToken(access_token);
+                    GetBoards getBoards = new GetBoards(access_token, adapter, activity);
+                    getBoards.execute(10); //TODO default to 10: change this later
+                }
+            });
+
         }else
             showConnectionWarning();
     }

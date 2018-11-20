@@ -19,19 +19,21 @@ public class UserDataStorage {
 
     public void saveUserData(UserData data) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("cookie", data.getCookie());
+        editor.putString("refreshToken", data.getRefreshToken());
         editor.apply();
     }
 
     public UserData getCurrentUserData() {
-        String cookie = "";
-        cookie = sharedPreferences.getString("cookie", cookie);
-        return new UserData(cookie);
+        String refreshToken = "";
+        refreshToken = sharedPreferences.getString("refreshToken", refreshToken);
+        UserData data = UserData.getInstance();
+        data.setRefreshToken(refreshToken);
+        return data;
     }
 
     public void removeCurrentUserData(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove("cookie");
+        editor.remove("refreshToken");
         editor.apply();
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import android.content.Context;
 
+import android.os.Parcel;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.goebl.david.Response;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.mtuosc.techchat.utils.EmailPasswordValidator;
 import org.mtuosc.techchat.R;
@@ -53,7 +55,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
         UserData userData = dataStorage.getCurrentUserData();
         if (userData.userExists()) {
             Intent moveToBoards = new Intent(this, BoardsActivity.class);
-            moveToBoards.putExtra("cookie", userData.getCookie());
+            //moveToBoards.putExtra("cookie", userData.getCookie());
             startActivity(moveToBoards);
             finish();
         }
@@ -114,17 +116,26 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
     @Override
     public void taskCompleted(Response<JSONObject> result) {
         if (result.getStatusCode() == 200){
-            String cookieSession = result.getHeaderField("Set-Cookie"); //TODO parse out cookie
-            String cookieData = getCookieData(cookieSession);
+            JSONObject tokenJSON = result.getBody();
+            try {
+                String refreshToken = tokenJSON.getString("refresh");
+                String accessToken = tokenJSON.getString("access");
+                UserData user = UserData.getInstance();
+                user.setRefreshToken(refreshToken);
+                user.setAccessToken(accessToken);
+                dataStorage.saveUserData(user);
 
-            // saving the user cookie
-            dataStorage.saveUserData(new UserData(cookieData));
 
-            Intent moveToBoards = new Intent(this, BoardsActivity.class);
-            moveToBoards.putExtra("cookie", cookieData);
-            startActivity(moveToBoards);
+                Intent moveToBoards = new Intent(this, BoardsActivity.class);
+                startActivity(moveToBoards);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             finish(); // prevents users going back
-        }else {
+
+        }
+        else {
             if (result.getStatusCode() == 401)
                 Toast.makeText(this, R.string.bad_credentials, Toast.LENGTH_SHORT).show();
             else
