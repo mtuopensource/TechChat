@@ -1,23 +1,53 @@
 package org.mtuosc.techchat;
 
+import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
+
 
 /**
  * Holds any relevant data regarding the user
  */
-public class UserData {
-    private String cookie;
+public class UserData implements AsyncApiResponse<String> {
+    private String refreshToken;
+    private String accessToken;
+    private long lastAccessTokenRefresh = Long.MIN_VALUE; // time the access token was generated
+    private static UserData data = new UserData();
+    private static long ACCESS_TOKEN_LIFETIME = 1200000; // 2 minutes in milliseconds
 
-    public UserData(String cookie) {
-        this.cookie = cookie;
+    private UserData() {
+
     }
+
+    public static UserData getInstance() { return data; }
 
     public boolean userExists(){
-        return cookie.length() > 0;
+        return refreshToken.length() > 0;
     }
 
+    public String getRefreshToken() { return this.refreshToken; }
 
-    public String getCookie(){
-        return this.cookie;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public boolean isAccessTokenValid() {
+        long currentTime = System.currentTimeMillis();
+        return (lastAccessTokenRefresh > 0 &&
+                (currentTime - lastAccessTokenRefresh) <= ACCESS_TOKEN_LIFETIME );
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.lastAccessTokenRefresh = System.currentTimeMillis();
+        this.accessToken = accessToken;
+    }
+
+    @Override
+    public void taskCompleted(String result) {
+        this.accessToken = result;
+        this.lastAccessTokenRefresh = System.currentTimeMillis();
     }
 
 }

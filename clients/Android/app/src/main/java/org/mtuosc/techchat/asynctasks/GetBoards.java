@@ -21,19 +21,21 @@ import org.mtuosc.techchat.models.BoardsFactory;
 public class GetBoards extends AsyncTask<Integer, Double, Void> {
     Webb webb = Webb.create();
     private BoardsAdapter adapter;
-    private String cookie;
-    private AsyncApiResponse responser;
+    private String access;
+    private AsyncApiResponse responder;
 
 
-    public GetBoards(String cookie, BoardsAdapter adapter, AsyncApiResponse responser) {
+    public GetBoards(String access, BoardsAdapter adapter, AsyncApiResponse responder) {
         this.adapter = adapter;
-        this.cookie = cookie;
-        this.responser = responser;
+        this.access = access;
+        this.responder = responder;
     }
 
     @Override
     protected Void doInBackground(Integer... integers) {
         Response<JSONArray> boardsInJSON = getBoardsFromServer();
+        if ( boardsInJSON.getStatusCode() == 401)
+            cancel(true);
         addJSONBoardsToAdapter(integers[0], boardsInJSON.getBody());
         return null;
     }
@@ -52,12 +54,12 @@ public class GetBoards extends AsyncTask<Integer, Double, Void> {
 
     private Response<JSONArray> getBoardsFromServer(){
         webb.setBaseUri(ApiUrl.SERVER_URL);
-        return webb.get(ApiUrl.GET_BOARDS).header("Cookie", "sessionid=" + cookie).asJsonArray();
+        return webb.get(ApiUrl.GET_BOARDS).header("Authorization", "Bearer " + access).asJsonArray();
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        responser.taskCompleted(aVoid);
+        responder.taskCompleted(aVoid);
     }
 }
