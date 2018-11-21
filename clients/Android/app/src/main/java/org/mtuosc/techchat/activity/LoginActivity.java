@@ -136,7 +136,7 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
 
         }
         else {
-            if (result.getStatusCode() == 401)
+            if (result.getStatusCode() == 400)
                 Toast.makeText(this, R.string.bad_credentials, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Server Error", Toast.LENGTH_LONG).show();

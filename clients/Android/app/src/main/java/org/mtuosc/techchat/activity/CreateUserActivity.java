@@ -85,7 +85,7 @@ public class CreateUserActivity extends BaseInternetActivity implements AsyncApi
 
             //saving cookie to file
             UserDataStorage storage = new UserDataStorage(getSharedPreferences("TechChat", Context.MODE_PRIVATE));
-            storage.saveUserData(new UserData(cookie));
+            storage.saveUserData(UserData.getInstance());
 
             // Move user to boards activity
             Intent moveToBoards = new Intent(this, BoardsActivity.class);
