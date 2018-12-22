@@ -7,11 +7,26 @@
 //
 
 import UIKit
+import Alamofire
 
 class BoardTableViewController: UITableViewController {
 
+   var boards = [Board]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if boards.count == 0 {
+            self.retreiveBoards() { success in
+                if success {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,23 +39,32 @@ class BoardTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return boards.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cellIdentifier = "BoardCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BoardTableViewCell else {
+            fatalError("This cell should have been a board table cell")
+        }
+        
+        let board = boards[indexPath.row]
+        cell.titleLabel.text = board.title
+        cell.descriptionLabel.text = board.description
+        
+        
         return cell
+        
+        
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -18,6 +18,9 @@
 		946BCAFF21A0906C00A5F9C7 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCAFE21A0906C00A5F9C7 /* Urls.swift */; };
 		946BCB0221A09CCA00A5F9C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCB0121A09CCA00A5F9C7 /* User.swift */; };
 		946BCB0321A09CCA00A5F9C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCB0121A09CCA00A5F9C7 /* User.swift */; };
+		94ACFA7321AE0E140063C02F /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACFA7221AE0E140063C02F /* BoardTableViewCell.swift */; };
+		94ACFA7521AE0F170063C02F /* BoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACFA7421AE0F170063C02F /* BoardTableViewController.swift */; };
+		94ACFA7721AE12790063C02F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACFA7621AE12790063C02F /* Board.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		94339164219E55410000AE56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946BCAFE21A0906C00A5F9C7 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		946BCB0121A09CCA00A5F9C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		94ACFA7221AE0E140063C02F /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
+		94ACFA7421AE0F170063C02F /* BoardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewController.swift; sourceTree = "<group>"; };
+		94ACFA7621AE12790063C02F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		F7CAD590CA6B35A00239EF88 /* Pods_TechChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TechChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -159,7 +165,9 @@
 		946BCAFC21A08FFD00A5F9C7 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				94ACFA7221AE0E140063C02F /* BoardTableViewCell.swift */,
 				94339144219E553F0000AE56 /* LoginController.swift */,
+				94ACFA7421AE0F170063C02F /* BoardTableViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				946BCB0121A09CCA00A5F9C7 /* User.swift */,
+				94ACFA7621AE12790063C02F /* Board.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -360,8 +369,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94ACFA7521AE0F170063C02F /* BoardTableViewController.swift in Sources */,
+				94ACFA7321AE0E140063C02F /* BoardTableViewCell.swift in Sources */,
 				946BCB0221A09CCA00A5F9C7 /* User.swift in Sources */,
 				946BCAFF21A0906C00A5F9C7 /* Urls.swift in Sources */,
+				94ACFA7721AE12790063C02F /* Board.swift in Sources */,
 				94339145219E553F0000AE56 /* LoginController.swift in Sources */,
 				94339143219E553F0000AE56 /* AppDelegate.swift in Sources */,
 			);
