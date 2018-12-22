@@ -51,8 +51,11 @@ class LoginController: UIViewController {
                 
                 
                 if let json = response.result.value as? [String: Any] {
-                    let refreshToken = json["refresh"]
-                    let accessToken = json["access"]
+                    let refreshToken = json["refresh"] as! String
+                    let accessToken = json["access"] as? String
+                    let user = User.instance
+                    user.refreshToken = refreshToken
+                    user.accessToken = accessToken
                     self.performSegue(withIdentifier: "login", sender: nil)
                 }
         })
