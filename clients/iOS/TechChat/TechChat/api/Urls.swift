@@ -16,6 +16,7 @@ class ApiUrls {
     enum Urls: String {
         case Login = "/api/token/"
         case Boards = "/api/boards/"
+        case Refresh = "/api/token/refresh/"
         
         func url() -> URL {
             return URL(string: BaseUrl + self.rawValue)!

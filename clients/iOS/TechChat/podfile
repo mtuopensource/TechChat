@@ -1,7 +1,17 @@
 
 source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
+platform :ios, '12.1'
+
 
 target 'TechChat' do
+    use_frameworks!
+    pod 'Alamofire', '~> 4.7'
+end
+
+target 'TechChatTests' do
+    pod 'Alamofire', '~> 4.7'
+end
+
+target 'TechChatUITests' do
     pod 'Alamofire', '~> 4.7'
 end

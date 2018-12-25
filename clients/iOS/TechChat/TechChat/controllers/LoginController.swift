@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 
-
 class LoginController: UIViewController {
 
     @IBOutlet weak var emailInput: UITextField!

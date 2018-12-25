@@ -120,6 +120,9 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="BoardTable"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="zrx-fR-T5K" id="1Vi-Um-O5Z"/>
                             <outlet property="delegate" destination="zrx-fR-T5K" id="pLC-uF-Ps1"/>

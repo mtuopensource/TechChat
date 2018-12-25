@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import Alamofire
 
 final class User {
     private let LIFE_TIME = 20.0 // in miliseconds
     
     var refreshToken: String
     var accessToken: String?
-    var tokenLifeTime: Double
+    private var tokenLifeTime: Double
     
     static let instance = User()
     
@@ -22,7 +23,7 @@ final class User {
         tokenLifeTime = -1
     }
     
-    func setData(with json: [String: Any]) -> Bool {
+    func setData(json: [String: Any]) -> Bool {
         guard let refreshToken = json["refresh"] as? String,
         let accessToken = json["access"] as? String else {
             return false
@@ -33,10 +34,28 @@ final class User {
         self.tokenLifeTime = Date().timeIntervalSince1970
         return true
     }
-    
-    
-    public func refreshAccessIfNeeded() {
-        
+    // a function that takes in a boolean saying wether the token is good or not
+    typealias RefreshCompletion = (Bool) -> ()
+    public func refreshAccessIfNeeded(completion: @escaping RefreshCompletion) {
+        if accessTokenNeedsRefresh() {
+            let refreshURL = ApiUrls.Urls.Refresh.url()
+            Alamofire.request(refreshURL, parameters: ["refresh": User.instance.refreshToken], encoding: URLEncoding.default)
+            .validate().responseJSON(completionHandler: { response in
+                debugPrint("request: \(response.request!)")
+                debugPrint("response: \(response)")
+                debugPrint("error: \(String(describing: response.error))")
+                if let json = response.result.value as? [String: Any] {
+                    User.instance.accessToken = json["access"] as? String
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                    return
+                }
+            })
+        }
+        completion(true)
+        return
     }
     
     private func accessTokenNeedsRefresh() -> Bool {
