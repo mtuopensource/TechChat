@@ -45,8 +45,10 @@ final class User {
                 debugPrint("response: \(response)")
                 debugPrint("error: \(String(describing: response.error))")
                 if let json = response.result.value as? [String: Any] {
-                    User.instance.accessToken = json["access"] as? String
+                    self.accessToken = json["access"] as? String
+                    self.tokenLifeTime = Date().timeIntervalSince1970
                     completion(true)
+                    return 
                 }
                 else {
                     completion(false)
@@ -58,7 +60,7 @@ final class User {
         return
     }
     
-    private func accessTokenNeedsRefresh() -> Bool {
+    func accessTokenNeedsRefresh() -> Bool {
         let today = Date().timeIntervalSince1970
         return (today - tokenLifeTime) > (LIFE_TIME)
     }

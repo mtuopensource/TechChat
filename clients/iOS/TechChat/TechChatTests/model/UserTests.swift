@@ -35,6 +35,14 @@ class UserTests: XCTestCase {
         })
     }
     
+    // test that the token is valid if it was refreshed
+    func testRefreshMakesTokenValid() {
+        User.instance.refreshToken = self.refresh
+        User.instance.refreshAccessIfNeeded(completion: { success in
+            XCTAssertTrue(User.instance.accessTokenNeedsRefresh() )
+        })
+    }
+    
 
 
 }
