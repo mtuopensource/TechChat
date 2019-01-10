@@ -21,14 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <include layout="@layout/post_activity_content"
+        />
+
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create_post_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_add_white_36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="createPost">
 
     </android.support.design.widget.FloatingActionButton>
 

@@ -84,7 +84,9 @@ public class BoardsActivity extends BaseInternetActivity implements NavigationVi
             @Override
             public void onClick(View child, int childPosition) {
                 Board board = adapter.getBoardFrom(childPosition);
-                Toast.makeText(BoardsActivity.this, board.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent moveToPosts = new Intent(getApplicationContext(), PostActivity.class);
+                moveToPosts.putExtra("board_id", board.getId());
+                startActivity(moveToPosts);
             }
         }));
 

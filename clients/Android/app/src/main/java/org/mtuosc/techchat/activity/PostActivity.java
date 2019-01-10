@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import org.mtuosc.techchat.R;
+import org.mtuosc.techchat.models.Board;
 
 public class PostActivity extends AppCompatActivity {
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,10 @@ public class PostActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar  =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        int board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
+        // make some api call
 
 
 
@@ -65,5 +73,9 @@ public class PostActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void createPost(View view) {
+        Toast.makeText(this,"Create A Post", Toast.LENGTH_LONG).show();
     }
 }
