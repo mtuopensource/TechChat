@@ -10,11 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_husky_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.AppBarOverlay">
         <activity
-            android:name=".activity.ThreadsActivity"
+            android:name=".activity.PostActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.BoardsActivity">
+
+        </activity>
         <activity
             android:name=".activity.BoardsActivity"
             android:label="@string/app_name"
