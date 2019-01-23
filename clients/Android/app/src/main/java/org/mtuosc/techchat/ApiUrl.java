@@ -4,6 +4,7 @@ package org.mtuosc.techchat;
  * Created by ryan on 11/28/17.
  * This will specify the urls for the api back end.
  * This will allow the whole application to easily change url patterns
+ * NOTE: all urls must end with /
  */
 
 public class ApiUrl {
@@ -15,5 +16,8 @@ public class ApiUrl {
     public static final String VERIFY = "/api/token/verify/";
     public static final String SIGN_UP = "/api/users/";
 
+    public String BOARD_POSTS(int board_id) {
+        return GET_BOARDS + board_id + "/posts/";
+    }
 
 }
