@@ -1,4 +1,4 @@
-django==1.11.19
+django==1.11
 djangorestframework
 djangorestframework_simplejwt
 psycopg2-binary
