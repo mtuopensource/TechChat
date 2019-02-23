@@ -17,6 +17,15 @@ public class Post implements Parcelable {
     private int author;
     private int id;
 
+    public Post(int board_id, Date timestamp, String title, String content, int author, int id) {
+        this.board_id = board_id;
+        this.timestamp = timestamp;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.id = id;
+    }
+
     protected Post(Parcel in) {
         board_id = in.readInt();
         title = in.readString();
@@ -59,5 +68,30 @@ public class Post implements Parcelable {
         parcel.writeInt(author);
         parcel.writeInt(id);
         parcel.writeString(timestamp.toString());
+    }
+
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public String getTimestampString() {
+        return timestamp.toString();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public int getId() {
+        return id;
     }
 }
