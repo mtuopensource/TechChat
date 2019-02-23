@@ -1,4 +1,6 @@
-# TechChat
+# TechChat 
+![](https://github.com/mtuopensource/TechChat/blob/master/cover.png)
+
 [![Build Status](http://heroku-badge.herokuapp.com/?app=open-source-at-mtu-tech-chat&root=api/&style=flat)](https://open-source-at-mtu-tech-chat.herokuapp.com/web/) <br />
 Open source replacement for BarkBoard.
 
