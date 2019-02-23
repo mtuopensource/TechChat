@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="tc-action-box tc-thread">
+    <h1 class="mdc-typography--display1 tc-thread-title">
+      {{ thread.title }}
+    </h1>
+    <p class="mdc-typography--text">
+      {{ thread.content }}
+    </p>
+  </div>
+  <form id="reply-form" class="tc-form" method="post">
+    {% csrf_token %}
+    <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--upgraded" data-mdc-auto-init="MDCTextField">
+      <textarea name="content" class="mdc-text-field__input" rows="4" required></textarea>
+      <label for="content" class="mdc-text-field__label">Post a Comment</label>
+    </div>
+    <br />
+    <button class="mdc-button mdc-button--raised tc-raised-secondary" type="submit" form="reply-form" value="Submit">Reply</button>
+  </form>
+  <div class="tc-action-box tc-posts">
+    {% if thread.posts %}
+      <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
+        {% for post in thread.posts %}
+          <li class="mdc-list-item tc-post">
+            <span class="mdc-list-item__text">
+              <span class="mdc-typography--title">
+                {{ post.author_friendly.username }}
+                <span class="mdc-typography--caption">
+                  {{ post.date_created_friendly }}
+                </span>
+                <br />
+              </span>
+              <span class="mdc-typography--body1">
+                {{ post.content }}
+              </span>
+            </span>
+          </li>
+          {% if not forloop.last %}
+            <hr />
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <span id="last"></span>
+    {% else %}
+      <h1 class="mdc-typography--display1 tc-no-posts">There's nothing here!</h1>
+    {% endif %}
+  </div>
+{% endblock %}

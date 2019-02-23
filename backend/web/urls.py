@@ -1,6 +1,15 @@
-from django.conf.urls import url, include
-from web.views import board
+from django.conf.urls import url
+from django.urls import path
+
+from web.views import index, board, thread, createthread, login, logout
+
+app_name = 'web'
 
 urlpatterns = [
-    url(r'^board/(?P<id>\d+)/$', board, name="Board"),
+    path('', index, name="Home"),
+    path('board/<id>/', board, name='Board'),
+    path('login/', login, name='Login'),
+    path('logout/', logout, name='Logout'),
+    path('thread/<id>/', thread, name='Thread'),
+    path('create-thread', createthread, name='Create Thread'),
 ]
