@@ -16,7 +16,7 @@ public class ApiUrl {
     public static final String VERIFY = "/api/token/verify/";
     public static final String SIGN_UP = "/api/users/";
 
-    public String BOARD_POSTS(int board_id) {
+    public static String BOARD_POSTS(int board_id) {
         return GET_BOARDS + board_id + "/posts/";
     }
 
