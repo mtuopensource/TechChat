@@ -3,17 +3,28 @@ package org.mtuosc.techchat.activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.mtuosc.techchat.R;
-import org.mtuosc.techchat.models.Board;
+import com.goebl.david.Response;
 
-public class PostActivity extends AppCompatActivity {
+import org.json.JSONArray;
+import org.mtuosc.techchat.R;
+import org.mtuosc.techchat.UserData;
+import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
+import org.mtuosc.techchat.asynctasks.GetPostsForBoard;
+import org.mtuosc.techchat.models.Board;
+import org.mtuosc.techchat.models.PostAdapter;
+
+public class PostActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONArray>> {
     private Board board;
+    private RecyclerView postList;
+    private PostAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +38,19 @@ public class PostActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
+        postList = findViewById(R.id.post_list);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        postList.setLayoutManager(llm);
+
         int board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
+        adapter = new PostAdapter();
+        postList.setAdapter(adapter);
         // make some api call
+        GetPostsForBoard apiCall = new GetPostsForBoard(board_id, UserData.getInstance().getAccessToken(),
+                adapter,this);
+        apiCall.execute();
 
 
 
@@ -77,5 +99,11 @@ public class PostActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Toast.makeText(this,"Create A Post", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void taskCompleted(Response<JSONArray> result) {
+
+        postList.setAdapter(adapter);
     }
 }
