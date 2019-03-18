@@ -1,5 +1,6 @@
 package org.mtuosc.techchat.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
 
 import com.goebl.david.Response;
 
@@ -18,11 +19,11 @@ import org.mtuosc.techchat.R;
 import org.mtuosc.techchat.UserData;
 import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 import org.mtuosc.techchat.asynctasks.GetPostsForBoard;
-import org.mtuosc.techchat.models.Board;
+
 import org.mtuosc.techchat.models.PostAdapter;
 
 public class PostActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONArray>> {
-    private Board board;
+    private int board_id;
     private RecyclerView postList;
     private PostAdapter adapter;
 
@@ -44,7 +45,7 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         postList.setLayoutManager(llm);
 
-        int board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
+        board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
         adapter = new PostAdapter();
         postList.setAdapter(adapter);
         // make some api call
@@ -98,7 +99,9 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
     }
 
     public void createPost(View view) {
-        Toast.makeText(this,"Create A Post", Toast.LENGTH_LONG).show();
+        Intent createPost = new Intent(getApplicationContext(), CreatePostActivity.class);
+        createPost.putExtra("board_id", board_id);
+        startActivity(createPost);
     }
 
     @Override
