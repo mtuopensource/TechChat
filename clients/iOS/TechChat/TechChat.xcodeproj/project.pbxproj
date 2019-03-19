@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		252A8C0E98AF1D13B01B8F7D /* libPods-TechChatUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AC64907292D0A6C5ED4157 /* libPods-TechChatUITests.a */; };
 		4AEC2EAFB6A45E7129D4C88F /* Pods_TechChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CAD590CA6B35A00239EF88 /* Pods_TechChat.framework */; };
+		9413F74E2240311A00279B41 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F74D2240311A00279B41 /* PostTableViewController.swift */; };
+		9413F74F2240311A00279B41 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F74D2240311A00279B41 /* PostTableViewController.swift */; };
+		9413F7502240311A00279B41 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F74D2240311A00279B41 /* PostTableViewController.swift */; };
+		9413F752224032F900279B41 /* CreatePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F751224032F900279B41 /* CreatePostController.swift */; };
+		9413F753224032F900279B41 /* CreatePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F751224032F900279B41 /* CreatePostController.swift */; };
+		9413F754224032F900279B41 /* CreatePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9413F751224032F900279B41 /* CreatePostController.swift */; };
 		9428A6CA21CEDE9300A1A909 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946BCAFE21A0906C00A5F9C7 /* Urls.swift */; };
 		94339143219E553F0000AE56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339142219E553F0000AE56 /* AppDelegate.swift */; };
 		94339145219E553F0000AE56 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94339144219E553F0000AE56 /* LoginController.swift */; };
@@ -63,6 +69,8 @@
 		49E5BF044DB0E4A09B78F520 /* Pods-TechChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TechChat/Pods-TechChat.release.xcconfig"; sourceTree = "<group>"; };
 		687BD48267FE1D17E2A81D1B /* Pods-TechChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TechChatTests/Pods-TechChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E623B28F5D4AA26F9C88289 /* Pods-TechChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TechChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TechChatTests/Pods-TechChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		9413F74D2240311A00279B41 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
+		9413F751224032F900279B41 /* CreatePostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostController.swift; sourceTree = "<group>"; };
 		9433913F219E553F0000AE56 /* TechChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94339142219E553F0000AE56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94339144219E553F0000AE56 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -203,6 +211,8 @@
 				94ACFA7221AE0E140063C02F /* BoardTableViewCell.swift */,
 				94339144219E553F0000AE56 /* LoginController.swift */,
 				94ACFA7421AE0F170063C02F /* BoardTableViewController.swift */,
+				9413F74D2240311A00279B41 /* PostTableViewController.swift */,
+				9413F751224032F900279B41 /* CreatePostController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -459,9 +469,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				94ACFA7521AE0F170063C02F /* BoardTableViewController.swift in Sources */,
+				9413F74E2240311A00279B41 /* PostTableViewController.swift in Sources */,
 				94ACFA7321AE0E140063C02F /* BoardTableViewCell.swift in Sources */,
 				946BCB0221A09CCA00A5F9C7 /* User.swift in Sources */,
 				946BCAFF21A0906C00A5F9C7 /* Urls.swift in Sources */,
+				9413F752224032F900279B41 /* CreatePostController.swift in Sources */,
 				94ACFA7721AE12790063C02F /* Board.swift in Sources */,
 				94339145219E553F0000AE56 /* LoginController.swift in Sources */,
 				94339143219E553F0000AE56 /* AppDelegate.swift in Sources */,
@@ -475,8 +487,10 @@
 				946BCB0321A09CCA00A5F9C7 /* User.swift in Sources */,
 				9474A9F421CED514009FCF59 /* LoginController.swift in Sources */,
 				9474A9F621CED524009FCF59 /* Board.swift in Sources */,
+				9413F753224032F900279B41 /* CreatePostController.swift in Sources */,
 				94E5525021D1E7500019CEE5 /* AppDelegate.swift in Sources */,
 				9428A6CA21CEDE9300A1A909 /* Urls.swift in Sources */,
+				9413F74F2240311A00279B41 /* PostTableViewController.swift in Sources */,
 				9474A9F921CED55D009FCF59 /* UserTests.swift in Sources */,
 				9474A9F321CED511009FCF59 /* BoardTableViewCell.swift in Sources */,
 				9474A9F521CED517009FCF59 /* BoardTableViewController.swift in Sources */,
@@ -491,8 +505,10 @@
 				94E5525421D1E7900019CEE5 /* BoardTableViewController.swift in Sources */,
 				94E5525121D1E7510019CEE5 /* AppDelegate.swift in Sources */,
 				94339163219E55410000AE56 /* TechChatUITests.swift in Sources */,
+				9413F754224032F900279B41 /* CreatePostController.swift in Sources */,
 				94E5525221D1E77D0019CEE5 /* BoardTableViewCell.swift in Sources */,
 				94E5524C21D1E59F0019CEE5 /* LoginUITests.swift in Sources */,
+				9413F7502240311A00279B41 /* PostTableViewController.swift in Sources */,
 				94E5524E21D1E7480019CEE5 /* Board.swift in Sources */,
 				94E5525321D1E7800019CEE5 /* LoginController.swift in Sources */,
 				94E5524D21D1E73E0019CEE5 /* User.swift in Sources */,
