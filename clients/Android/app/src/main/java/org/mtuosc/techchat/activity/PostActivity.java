@@ -2,6 +2,7 @@ package org.mtuosc.techchat.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,10 +23,11 @@ import org.mtuosc.techchat.asynctasks.GetPostsForBoard;
 
 import org.mtuosc.techchat.models.PostAdapter;
 
-public class PostActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONArray>> {
+public class PostActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONArray>>{
     private static int board_id;
     private RecyclerView postList;
     private PostAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
 
 
         postList = findViewById(R.id.post_list);
-        postList.setHasFixedSize(true);
+        postList.setHasFixedSize(false);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         postList.setLayoutManager(llm);
@@ -48,15 +50,27 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
         if (board_id <= 0) // may cause the posts not to reload
             board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
         adapter = new PostAdapter();
-        postList.setAdapter(adapter);
+
         // make some api call
+        updatePosts();
+
+
+        swipeRefreshLayout = findViewById(R.id.post_swipe_layout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updatePosts();
+            }
+        });
+    }
+
+
+    public void updatePosts() {
+        adapter.flushPosts();
         GetPostsForBoard apiCall = new GetPostsForBoard(board_id, UserData.getInstance().getAccessToken(),
                 adapter,this);
         apiCall.execute();
-
-
-
-
     }
 
     @Override
@@ -107,7 +121,10 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
 
     @Override
     public void taskCompleted(Response<JSONArray> result) {
-
         postList.setAdapter(adapter);
+        this.swipeRefreshLayout.setRefreshing(false);
     }
+
+
+
 }

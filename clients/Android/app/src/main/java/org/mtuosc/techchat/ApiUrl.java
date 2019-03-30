@@ -15,6 +15,8 @@ public class ApiUrl {
     public static final String REFRESH = "/api/token/refresh/";
     public static final String VERIFY = "/api/token/verify/";
     public static final String SIGN_UP = "/api/users/";
+    public static final String CREATE_POSTS = "/api/posts/";
+
 
     public static String BOARD_POSTS(int board_id) {
         return GET_BOARDS + board_id + "/posts/";
