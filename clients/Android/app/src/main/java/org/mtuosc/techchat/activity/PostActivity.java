@@ -23,7 +23,7 @@ import org.mtuosc.techchat.asynctasks.GetPostsForBoard;
 import org.mtuosc.techchat.models.PostAdapter;
 
 public class PostActivity extends AppCompatActivity implements AsyncApiResponse<Response<JSONArray>> {
-    private int board_id;
+    private static int board_id;
     private RecyclerView postList;
     private PostAdapter adapter;
 
@@ -45,7 +45,8 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         postList.setLayoutManager(llm);
 
-        board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
+        if (board_id <= 0) // may cause the posts not to reload
+            board_id = Integer.valueOf(getIntent().getStringExtra("board_id"));
         adapter = new PostAdapter();
         postList.setAdapter(adapter);
         // make some api call
