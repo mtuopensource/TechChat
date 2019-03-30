@@ -49,6 +49,11 @@ public class CreatePostActivity extends BaseInternetActivity implements AsyncApi
     public void makePost(View view) {
         String title = titletextview.getText().toString();
         String content = contenttextview.getText().toString();
+        if (title.isEmpty()) {
+            titletextview.setError("title cannot be blank");
+            return;
+        }
+
         CreatePost apicall = new CreatePost(title, content, board_id, this);
         apicall.execute();
 
