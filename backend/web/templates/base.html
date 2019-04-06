@@ -5,64 +5,65 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>TechChat</title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@0.31.0/dist/material-components-web.min.css">
+    <script src="//cdn.muicss.com/mui-0.9.41/webcomponents/mui-webcomponents.js"></script>
+    <link href="//cdn.muicss.com/mui-0.9.41/extra/mui-rem.min.css" rel="stylesheet" type="text/css" />
+    
     <link rel="stylesheet" type="text/css" href="{% static 'app.css' %}">
   </head>
   <body class="mdc-typography">
-    <header class="mdc-toolbar mdc-toolbar--fixed">
-      <div class="mdc-toolbar__row">
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <span class="mdc-toolbar__title catalog-title">
+    <header>
+      <div>
+        <section >
+          <span>
             {% block title %}
               TechChat
             {% endblock %}
           </span>
         </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Refresh this page" alt="Download" onclick="window.location.reload(true);">refresh</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="My profile" alt="More">person</a>
-          <a href="/web/logout" class="material-icons mdc-toolbar__icon" aria-label="Logout" alt="More">exit_to_app</a>
+        <section>
+          <a href="#" aria-label="Refresh this page" alt="Download" onclick="window.location.reload(true);">refresh</a>
+          <a href="#"  aria-label="My profile" alt="More">person</a>
+          <a href="/web/logout"  aria-label="Logout" alt="More">exit_to_app</a>
         </section>
       </div>
     </header>
-    <main id="main" class="mdc-toolbar-fixed-adjust">
-      <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
+    <main id="main" >
+      <div >
+        <div >
+          <div >
             {% block content %}
             {% endblock %}
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <a href="/web/create-thread" class="mdc-button mdc-button--raised tc-raised-secondary tc-full">Create a Thread</a>
-            <div class="mdc-list-group">
-              <h3 class="mdc-list-group__subheader">Threads</h3>
-              <ul class="mdc-list mdc-list--avatar-list tc-action-box">
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__graphic">
-                    <i class="material-icons">access_time</i>
+          <div >
+            <a href="/web/create-thread" >Create a Thread</a>
+            <div>
+              <h3 >Threads</h3>
+              <ul >
+                <li >
+                  <span >
+                    <i >access_time</i>
                   </span>
                   Recently Viewed
-                  <span class="mdc-list-item__meta">99</span>
+                  <span >99</span>
                 </li>
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__graphic">
-                    <i class="material-icons" aria-hidden="true">bookmark</i>
+                <li >
+                  <span >
+                    <i  aria-hidden="true">bookmark</i>
                   </span>
                   Bookmarks
-                  <span class="mdc-list-item__meta">99</span>
+                  <span >99</span>
                 </li>
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__graphic">
-                    <i class="material-icons" aria-hidden="true">feedback</i>
+                <li >
+                  <span >
+                    <i aria-hidden="true">feedback</i>
                   </span>
                   Send Feedback
                 </li>
               </ul>
-              <h3 class="mdc-list-group__subheader">Boards</h3>
-              <div class="mdc-list tc-action-box">
+              <h3 >Boards</h3>
+              <div >
                 {% for board in boards_list %}
-                <a href="/web/board/{{ board.id }}/" class="mdc-list-item">
+                <a href="/web/board/{{ board.id }}/" >
                   {{ board.title }}
                 </a>
                 {% endfor %}
@@ -73,10 +74,10 @@
       </div>
     </main>
     {% if snackbar %}
-      <div id="tc-snackbar" class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true" data-mdc-auto-init="MDCSnackbar">
-        <div class="mdc-snackbar__text"></div>
-        <div class="mdc-snackbar__action-wrapper">
-          <button type="button" class="mdc-snackbar__action-button"></button>
+      <div aria-live="assertive" aria-atomic="true" aria-hidden="true" >
+        <div ></div>
+        <div >
+          <button type="button" ></button>
         </div>
       </div>
     {% endif %}
