@@ -3,3 +3,4 @@ djangorestframework
 djangorestframework_simplejwt
 psycopg2-binary
 dj-database-url
+requests
