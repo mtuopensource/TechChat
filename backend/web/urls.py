@@ -5,7 +5,7 @@ from web.views.IndexView import index, board, thread, createthread, login, logou
 app_name = 'web'
 
 urlpatterns = [
-    url(r'^/$', index, name="Home"),
+    url(r'$', index, name="Home"),
     url(r'board/([0-9]+)/$', board, name='Board'),
     url(r'login/$', login, name='Login'),
     url(r'logout/$', logout, name='Logout'),
