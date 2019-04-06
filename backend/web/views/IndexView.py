@@ -17,7 +17,6 @@ def login(request):
 
 @check_authentication
 def logout(request, client=None):
-    client.post('/api/users/logout/')
     request.session.flush()
     return redirect('/web/login/')
 
