@@ -1,6 +1,5 @@
 import json
 from django.test import Client
-from api.response import SUCCESS
 from django.shortcuts import render, redirect
 
 def get_client(request):
@@ -48,11 +47,11 @@ def create_thread(client, board, thread_title, thread_content):
 
 def authenticate(request, username, password):
     client = Client()
-    response = client.post('/api/users/login/', {
-        'email':    username,
+    response = client.post('/api/token/', {
+        'username':    username,
         'password': password
     })
-    if response.status_code == SUCCESS.status_code:
+    if response.status_code == 200:
         request.session['techchat_cookies'] = client.cookies.output(header='', sep=';') # TODO Constants
         request.session.modified = True
         return redirect('/web/')

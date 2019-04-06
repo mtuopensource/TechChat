@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.test import Client
 from api.views.BoardViewSet import BoardViewSet
-from api.response import SUCCESS
 from django.template.loader import render_to_string
 
 from .Helper import *
