@@ -51,4 +51,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void addPost(Post post) {
         posts.add(post);
     }
+
+    public void flushPosts() {posts = new ArrayList<Post>();}
 }

@@ -6,8 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <android.support.v7.widget.Toolbar
@@ -15,14 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/white"
-            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"/>
+            app:titleTextColor="@color/white" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/post_activity_content"
-        />
+    <include
+        layout="@layout/post_activity_content"
+        android:layout_width="match_parent"
+        android:layout_height="720dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/create_post_button"
@@ -33,7 +41,8 @@
         android:src="@drawable/ic_add_white_36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="createPost">
+        android:onClick="createPost"
+        >
 
     </android.support.design.widget.FloatingActionButton>
 
