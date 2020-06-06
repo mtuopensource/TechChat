@@ -11,9 +11,16 @@ import android.widget.TextView;
 import org.mtuosc.techchat.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private ArrayList<Post> posts = new ArrayList<>();
+
+    public static final int NEWEST = 0;
+    public static final int OLDEST = 1;
+    public static final int TRENDING = 2;
+
 
     @NonNull
     @Override
@@ -53,4 +60,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public void flushPosts() {posts = new ArrayList<Post>();}
+
+    public void sortPosts(int sortBy) {
+        switch (sortBy) {
+            case NEWEST: {
+                Collections.sort(posts, new Comparator<Post>() {
+                    @Override
+                    public int compare(Post post, Post t1) {
+                        return post.getTimestamp().compareTo(t1.getTimestamp());
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            }
+            case OLDEST: {
+                Collections.sort(posts, new Comparator<Post>() {
+                    @Override
+                    public int compare(Post post, Post t1) {
+                        return post.getTimestamp().compareTo(t1.getTimestamp()) * -1;
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            }
+        }
+    }
 }
