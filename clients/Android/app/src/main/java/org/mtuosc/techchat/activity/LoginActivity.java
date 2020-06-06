@@ -120,9 +120,14 @@ public class LoginActivity extends BaseInternetActivity implements AsyncApiRespo
             try {
                 String refreshToken = tokenJSON.getString("refresh");
                 String accessToken = tokenJSON.getString("access");
+                String email = emailTextWrapper.getEditText().getText().toString();
+                String password = passwordTextWrapper.getEditText().getText().toString();
+                
                 UserData user = UserData.getInstance();
                 user.setRefreshToken(refreshToken);
                 user.setAccessToken(accessToken);
+                user.setUsername(email);
+                user.setPassword(password);
                 dataStorage.saveUserData(user);
 
 

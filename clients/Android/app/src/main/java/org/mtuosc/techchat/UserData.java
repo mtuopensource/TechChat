@@ -9,6 +9,8 @@ import org.mtuosc.techchat.asynctasks.AsyncApiResponse;
 public class UserData implements AsyncApiResponse<String> {
     private String refreshToken;
     private String accessToken;
+    private String username;
+    private String password;
     private long lastAccessTokenRefresh = Long.MIN_VALUE; // time the access token was generated
     private static UserData data = new UserData();
     private static long ACCESS_TOKEN_LIFETIME = 1200000; // 2 minutes in milliseconds
@@ -50,4 +52,19 @@ public class UserData implements AsyncApiResponse<String> {
         this.lastAccessTokenRefresh = System.currentTimeMillis();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
