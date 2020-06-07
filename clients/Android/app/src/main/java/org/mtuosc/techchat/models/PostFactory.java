@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class PostFactory {
-    private static DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy",Locale.ENGLISH);
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd",Locale.ENGLISH);
 
     public static Post createPostFromJSON(JSONObject json) throws JSONException {
         int id = json.getInt("id");

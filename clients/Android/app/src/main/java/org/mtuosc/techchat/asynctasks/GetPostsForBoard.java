@@ -35,8 +35,7 @@ public class GetPostsForBoard extends AsyncTask<Void, Void, Response<JSONArray>>
     protected Response<JSONArray> doInBackground(Void... voids) {
         Response<JSONArray> response = getPostsFromServer();
         JSONArray postInJSON = response.getBody();
-        int numberOfPostToLoad = 10;
-        for (int i = 0; i < numberOfPostToLoad; i++) {
+        for (int i = 0; i < postInJSON.length(); i++) {
             try {
                 Post post = PostFactory.createPostFromJSON(postInJSON.getJSONObject(i));
                 adapter.addPost(post);

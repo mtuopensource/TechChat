@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -76,7 +77,8 @@ public class Post implements Parcelable {
     }
 
     public String getTimestampString() {
-        return timestamp.toString();
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/YYYY", Locale.getDefault());
+        return sf.format(timestamp);
     }
 
     public String getTitle() {
