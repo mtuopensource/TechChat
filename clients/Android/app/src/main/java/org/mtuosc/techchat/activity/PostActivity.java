@@ -94,12 +94,14 @@ public class PostActivity extends AppCompatActivity implements AsyncApiResponse<
                 if (! item.isChecked()) {
                     // call the sort function
                     item.setChecked(true);
+                    adapter.sortPosts(PostAdapter.NEWEST);
                 }
                 break;
             case R.id.menu_sort_oldest:
                 if (! item.isChecked()) {
-                    // call the sort function
+
                     item.setChecked(true);
+                    adapter.sortPosts(PostAdapter.OLDEST);
                 }
                 break;
             case R.id.menu_sort_trending:
